@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_buddy/common/colors_style.dart';
+import 'package:healthy_buddy/ui/sports_list_page.dart';
 
 class StartPage extends StatelessWidget{
   @override
@@ -88,6 +89,11 @@ class StartPage extends StatelessWidget{
                       ],
                     ),
                   ),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context){
+                      return SportsListPage();
+                    }));
+                  },
                 ),
                 SizedBox(height: 20.0,),
                 InkWell(
