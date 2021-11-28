@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_buddy/common/colors_style.dart';
+import 'package:healthy_buddy/common/navigation.dart';
+import 'package:healthy_buddy/ui/detail_page.dart';
+import 'package:healthy_buddy/ui/sports_list_page.dart';
 import 'package:healthy_buddy/ui/start_page.dart';
 
 void main() => runApp(MyApp());
 
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
-class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'HealthyBuddy',
-      theme: ThemeData(),
-      home: StartPage(),
-    );
+        title: 'HealthyLifeBuddy',
+        theme: ThemeData(scaffoldBackgroundColor: backgroundColor),
+        initialRoute: StartPage.routeName,
+        routes: {
+          StartPage.routeName: (context) => const StartPage(),
+          Navigation.routeName: (context) => const Navigation(),
+          SportsListPage.routeName: (context) => const SportsListPage(),
+          DetailPage.routeName: (context) => const DetailPage(),
+        });
   }
-
 }
