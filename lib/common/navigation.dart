@@ -25,11 +25,14 @@ class _NavigationState extends State<Navigation> {
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.black45,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home Page'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home ',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            label: 'Favorite Page',
-          )
+            label: 'Favorite',
+          ),
         ],
         currentIndex: _selectedPage,
         selectedItemColor: Colors.blueAccent,
