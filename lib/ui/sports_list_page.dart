@@ -54,87 +54,82 @@ class SportsListPage extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, i) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, DetailPage.routeName);
-                      },
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(200),
-                                    child: Image.network(
-                                      'https://images.unsplash.com/photo-1474546652694-a33dd8161d66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1184&q=80',
-                                      width: 65,
-                                      height: 65,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: SizedBox(
-                                      width: 225,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 8.0, bottom: 4.0),
-                                            child: Text(
-                                              "Nama tempat",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: textTheme.subtitle1?.apply(
-                                                  color: onSurfaceColor),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 8.0),
-                                            child: Text(
-                                              "Dummy detail promosi, deskripsi deskripsi deskripsi",
-                                              maxLines: 3,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: textTheme.caption?.apply(
-                                                  color: onSurfaceColor),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 8.0,
-                                  horizontal: 16.0,
-                                ),
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    "Ambil",
-                                    style: textTheme.button
-                                        ?.apply(color: onPrimaryVariantColor),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: primaryVariantColor,
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(200),
+                                  child: Image.network(
+                                    'https://images.unsplash.com/photo-1474546652694-a33dd8161d66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1184&q=80',
+                                    width: 65,
+                                    height: 65,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: SizedBox(
+                                    width: 225,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 8.0, bottom: 4.0),
+                                          child: Text(
+                                            "Nama tempat",
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: textTheme.subtitle1
+                                                ?.apply(color: onSurfaceColor),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 8.0),
+                                          child: Text(
+                                            "Dummy detail promosi, deskripsi deskripsi deskripsi",
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: textTheme.caption
+                                                ?.apply(color: onSurfaceColor),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                                horizontal: 16.0,
                               ),
-                            ],
-                          ),
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: Text(
+                                  "Ambil",
+                                  style: textTheme.button
+                                      ?.apply(color: onPrimaryVariantColor),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: primaryVariantColor,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -154,9 +149,15 @@ class SportsListPage extends StatelessWidget {
                   final SportsVenuesData sports = sportsVenueList[i];
                   return InkWell(
                     onTap: () {
-                      Navigator.pushNamed(
+                      Navigator.push(
                         context,
-                        DetailPage.routeName,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return DetailPage(
+                              sports: sports,
+                            );
+                          },
+                        ),
                       );
                     },
                     child: Padding(
