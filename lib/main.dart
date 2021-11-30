@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_buddy/common/colors_style.dart';
 import 'package:healthy_buddy/common/navigation.dart';
+import 'package:healthy_buddy/model/sport_venues_data.dart';
 import 'package:healthy_buddy/ui/detail_page.dart';
 import 'package:healthy_buddy/ui/sports_list_page.dart';
 import 'package:healthy_buddy/ui/start_page.dart';
@@ -20,7 +21,9 @@ class MyApp extends StatelessWidget {
           StartPage.routeName: (context) => const StartPage(),
           Navigation.routeName: (context) => const Navigation(),
           SportsListPage.routeName: (context) => const SportsListPage(),
-          DetailPage.routeName: (context) => const DetailPage(),
+          DetailPage.routeName: (context) =>
+              DetailPage(
+              sports: ModalRoute.of(context)?.settings.arguments as SportsVenuesData),
         });
   }
 }
