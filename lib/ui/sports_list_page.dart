@@ -16,7 +16,7 @@ class SportsListPage extends StatelessWidget {
           return InkWell(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return DetailPage();
+                return DetailPage(sports: sports,);
               }));
             },
             child: Card(
