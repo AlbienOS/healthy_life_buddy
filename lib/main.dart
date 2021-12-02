@@ -25,7 +25,9 @@ class MyApp extends StatelessWidget {
           DetailPage.routeName: (context) => DetailPage(
               sports: ModalRoute.of(context)?.settings.arguments
                   as SportsVenuesData),
-          BookingPage.routeName: (context) => const BookingPage(),
+          BookingPage.routeName: (context) => BookingPage(
+              sports: ModalRoute.of(context)?.settings.arguments
+              as SportsVenuesData),
         });
   }
 }
