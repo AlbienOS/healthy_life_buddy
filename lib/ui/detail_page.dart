@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:healthy_buddy/model/sport_venues_data.dart';
-import 'package:share/share.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:healthy_buddy/common/colors_style.dart';
+import 'package:healthy_buddy/model/sport_venues_data.dart';
+import 'package:healthy_buddy/ui/booking_page.dart';
 
 class DetailPage extends StatelessWidget {
   static const routeName = '/DetailPage';
@@ -95,29 +96,31 @@ class DetailPage extends StatelessWidget {
               ),
               Container(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Row(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      sports.description,
-                      style: GoogleFonts.montserrat(
-                        fontSize: 13,
-                        fontWeight: FontWeight.normal,
+                    children: [
+                      Text(
+                        sports.description,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 13,
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(height: 50,),
+              SizedBox(
+                height: 50,
+              ),
               Container(
                 height: 150,
                 width: 350,
                 decoration: BoxDecoration(
                     color: Colors.grey,
-                    borderRadius: BorderRadius.circular(10.0)
-                ),
+                    borderRadius: BorderRadius.circular(10.0)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -126,11 +129,12 @@ class DetailPage extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(sports.discInfo,
+                          child: Text(
+                            sports.discInfo,
                             style: GoogleFonts.montserrat(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold, color: Colors.white
-                            ),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ),
                       ],
@@ -141,59 +145,16 @@ class DetailPage extends StatelessWidget {
                         height: 45,
                         width: 120,
                         decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Center(
-                          child: Text('MEMBER',
-                            style: GoogleFonts.montserrat(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold, color: Colors.white
-                          ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 100),
-              Container(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('HARGA', style: GoogleFonts.montserrat(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold, color: Colors.black
-                          ),
-                          ),
-                          Text('RP. ${sports.price}', style: GoogleFonts.montserrat(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold, color: Colors.black
-                          ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        height: 50,
-                        width: 400,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: primaryVariantColor,
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Center(
-                          child: Text('PESAN',
+                          child: Text(
+                            'MEMBER',
                             style: GoogleFonts.montserrat(
                                 fontSize: 16,
-                                fontWeight: FontWeight.bold, color: Colors.white
-                            ),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ),
                       ),
@@ -203,6 +164,68 @@ class DetailPage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 80,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'HARGA',
+                  style: GoogleFonts.montserrat(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
+                Text(
+                  'RP. ${sports.price}',
+                  style: GoogleFonts.montserrat(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    InkWell(
+                      child: Container(
+                        height: 50,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          color: primaryVariantColor,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'PESAN',
+                            style: GoogleFonts.montserrat(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return BookingPage(
+                            sports: sports,
+                          );
+                        }));
+                      },
+                    ),
+                  ],
+                )
+              ],
+            )
+          ],
         ),
       ),
     );
