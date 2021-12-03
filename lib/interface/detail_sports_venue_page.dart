@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
+import 'package:healthy_life_buddy/interface/booking_sports_revenue_page.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 
 class DetailSportsRevenuePage extends StatelessWidget {
@@ -210,15 +211,14 @@ class DetailSportsRevenuePage extends StatelessWidget {
                           ),
                         ),
                       ),
-
-                      // onTap: () {
-                      //   Navigator.push(context,
-                      //       MaterialPageRoute(builder: (context) {
-                      //     return BookingPage(
-                      //       sports: sports,
-                      //     );
-                      //   }));
-                      // },
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return BookingSportsRevenuePage(
+                            sportsVenueData: sportsVenueData,
+                          );
+                        }));
+                      },
                     ),
                   ],
                 )
