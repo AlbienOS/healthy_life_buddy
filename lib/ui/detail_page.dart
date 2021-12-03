@@ -60,7 +60,7 @@ class DetailPage extends StatelessWidget {
                               ),
                               onPressed: () {},
                             ),
-                          ),
+                          ),  
                         ],
                       ),
                     ),
