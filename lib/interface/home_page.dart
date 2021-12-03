@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
-import 'package:healthy_life_buddy/interface/detail_sports_revenue_page.dart';
+import 'package:healthy_life_buddy/interface/detail_sports_venue_page.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 import 'package:healthy_life_buddy/provider/sports_venue_provider.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
                 final sportsVenueData = snapshot.sportsVenue;
                 return Expanded(
                   flex: 3,
-                  child: ListOfSportsRevenues(sportsVenueData: sportsVenueData),
+                  child: ListOfSportsVenues(sportsVenueData: sportsVenueData),
                 );
               }),
             ],
@@ -94,8 +94,8 @@ class Headline extends StatelessWidget {
   }
 }
 
-class ListOfSportsRevenues extends StatelessWidget {
-  const ListOfSportsRevenues({
+class ListOfSportsVenues extends StatelessWidget {
+  const ListOfSportsVenues({
     Key? key,
     required this.sportsVenueData,
   }) : super(key: key);
@@ -113,7 +113,7 @@ class ListOfSportsRevenues extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return DetailSportsRevenuePage(
+                  return DetailSportsVenuePage(
                     sportsVenueData: sportsVenueData[i],
                   );
                 },

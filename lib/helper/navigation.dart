@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_life_buddy/interface/favorite_sports_revenue_page.dart';
+import 'package:healthy_life_buddy/interface/article_page.dart';
+import 'package:healthy_life_buddy/interface/favorite_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
+import 'package:healthy_life_buddy/interface/profile_page.dart';
+import 'package:healthy_life_buddy/interface/search_sports_venue_page.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -14,6 +17,9 @@ class _NavigationState extends State<Navigation> {
   List<Widget> listPage = [
     const HomePage(),
     const FavoritePage(),
+    const SearchSportsVenue(),
+    const ArticlePage(),
+    const ProfilePage(),
   ];
 
   int _selectedPage = 0;
@@ -32,6 +38,18 @@ class _NavigationState extends State<Navigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: 'Favorite',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.article),
+            label: 'Article',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedPage,

@@ -5,19 +5,32 @@ import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 import 'package:healthy_life_buddy/widget/date_picker_widget.dart';
 import 'package:healthy_life_buddy/widget/time_picker.dart';
 
-class BookingSportsRevenuePage extends StatefulWidget {
+class BookingSportsVenuePage extends StatefulWidget {
   static const routeName = '/BookingSportsRevnuePage';
-  const BookingSportsRevenuePage({Key? key, required this.sportsVenueData})
+  const BookingSportsVenuePage({Key? key, required this.sportsVenueData})
       : super(key: key);
 
   final SportsVeneu sportsVenueData;
 
   @override
-  State<BookingSportsRevenuePage> createState() =>
-      _BookingSportsRevenuePageState();
+  State<BookingSportsVenuePage> createState() => _BookingSportsVenuePageState();
 }
 
-class _BookingSportsRevenuePageState extends State<BookingSportsRevenuePage> {
+class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
+  String changePrice = '';
+
+  void fullPay() {
+    setState(() {
+      changePrice = 'dummy';
+    });
+  }
+
+  void dpPay() {
+    setState(() {
+      changePrice = 'dummy';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +89,7 @@ class _BookingSportsRevenuePageState extends State<BookingSportsRevenuePage> {
                               hintText: "Nama",
                               border: InputBorder.none,
                             ),
+                            keyboardType: TextInputType.name,
                           ),
                         ),
                       ],
@@ -99,6 +113,7 @@ class _BookingSportsRevenuePageState extends State<BookingSportsRevenuePage> {
                               hintText: "Alamat",
                               border: InputBorder.none,
                             ),
+                            keyboardType: TextInputType.streetAddress,
                           ),
                         ),
                       ],
@@ -122,6 +137,7 @@ class _BookingSportsRevenuePageState extends State<BookingSportsRevenuePage> {
                               hintText: "No. Telepon",
                               border: InputBorder.none,
                             ),
+                            keyboardType: TextInputType.phone,
                           ),
                         ),
                       ],
@@ -129,6 +145,86 @@ class _BookingSportsRevenuePageState extends State<BookingSportsRevenuePage> {
                   ),
                   DatePicker(),
                   TimePicker(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 10.0),
+                        child: Text(
+                          'PEMBAYARAN',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Container(
+                              height: 50,
+                              width: 150,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(25.0)),
+                                  ),
+                                ),
+                                child: Text(
+                                  'BAYAR PENUH',
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  fullPay();
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Container(
+                              height: 50,
+                              width: 160,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(25.0)),
+                                  ),
+                                ),
+                                child: Text(
+                                  'BAYAR DIMUKA',
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  dpPay();
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ],
@@ -150,7 +246,7 @@ class _BookingSportsRevenuePageState extends State<BookingSportsRevenuePage> {
                       color: Colors.black),
                 ),
                 Text(
-                  'RP. dummyPrice',
+                  changePrice,
                   style: GoogleFonts.montserrat(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

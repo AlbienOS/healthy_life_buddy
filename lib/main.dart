@@ -2,9 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/helper/navigation.dart';
-import 'package:healthy_life_buddy/interface/detail_sports_revenue_page.dart';
+import 'package:healthy_life_buddy/interface/booking_sports_venue_page.dart';
+import 'package:healthy_life_buddy/interface/detail_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
 import 'package:healthy_life_buddy/interface/welcome_page.dart';
+import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 import 'package:healthy_life_buddy/provider/sports_venue_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +39,12 @@ class MyApp extends StatelessWidget {
         WelcomePage.routeName: (context) => const WelcomePage(),
         Navigation.routeName: (context) => const Navigation(),
         HomePage.routeName: (context) => const HomePage(),
+        DetailSportsVenuePage.routeName: (context) => DetailSportsVenuePage(
+            sportsVenueData:
+                ModalRoute.of(context)?.settings.arguments as SportsVeneu),
+        BookingSportsVenuePage.routeName: (context) => BookingSportsVenuePage(
+            sportsVenueData:
+                ModalRoute.of(context)?.settings.arguments as SportsVeneu),
       },
     );
   }
