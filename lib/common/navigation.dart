@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_buddy/ui/article_page.dart';
 import 'package:healthy_buddy/ui/favorite_page.dart';
+import 'package:healthy_buddy/ui/profile_page.dart';
+import 'package:healthy_buddy/ui/search_page.dart';
 import 'package:healthy_buddy/ui/sports_list_page.dart';
 
 class Navigation extends StatefulWidget {
@@ -13,7 +16,10 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   List<Widget> listPage = [
     const SportsListPage(),
+    const SearchPage(),
+    const ArticlePage(),
     const FavoritePage(),
+    const ProfilePage(),
   ];
 
   int _selectedPage = 0;
@@ -30,8 +36,20 @@ class _NavigationState extends State<Navigation> {
             label: 'Home ',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.article),
+            label: 'Article',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: 'Favorite',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedPage,

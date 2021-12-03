@@ -16,6 +16,20 @@ class BookingPage extends StatefulWidget {
 }
 
 class _BookingPageState extends State<BookingPage> {
+
+  String changePrice = '';
+
+  void fullPay(){
+    setState(() {
+      changePrice = '${widget.sports.price}';
+    });
+  }
+  void dpPay(){
+    setState(() {
+      changePrice = '${widget.sports.dpPrice}';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +85,7 @@ class _BookingPageState extends State<BookingPage> {
                               hintText: "Nama",
                               border: InputBorder.none,
                             ),
+                            keyboardType: TextInputType.name,
                           ),
                         ),
                       ],
@@ -93,6 +108,7 @@ class _BookingPageState extends State<BookingPage> {
                               hintText: "Alamat",
                               border: InputBorder.none,
                             ),
+                            keyboardType: TextInputType.streetAddress,
                           ),
                         ),
                       ],
@@ -115,6 +131,7 @@ class _BookingPageState extends State<BookingPage> {
                               hintText: "No. Telepon",
                               border: InputBorder.none,
                             ),
+                            keyboardType: TextInputType.phone,
                           ),
                         ),
                       ],
@@ -122,6 +139,78 @@ class _BookingPageState extends State<BookingPage> {
                   ),
                   DatePicker(),
                   TimePicker(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                      child: Text('PEMBAYARAN',
+                        style: GoogleFonts.montserrat(
+                        fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Container(
+                              height: 50,
+                              width: 150,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty
+                                      .all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25.0)
+                                    ),
+                                  ),
+                                ),
+                                child: Text('BAYAR PENUH',
+                                  style: GoogleFonts.montserrat(
+                                  fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: (){
+                                  fullPay();
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Container(
+                              height: 50,
+                              width: 160,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty
+                                      .all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25.0)
+                                    ),
+                                  ),
+                                ),
+                                child: Text('BAYAR DIMUKA',
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: (){
+                                  dpPay();
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ],
@@ -143,7 +232,7 @@ class _BookingPageState extends State<BookingPage> {
                       color: Colors.black),
                 ),
                 Text(
-                  'RP. ${widget.sports.price}',
+                  changePrice,
                   style: GoogleFonts.montserrat(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
