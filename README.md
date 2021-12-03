@@ -1,4 +1,4 @@
-# healthy_buddy
+# healthy_life_buddy
 
 A new Flutter project.
 

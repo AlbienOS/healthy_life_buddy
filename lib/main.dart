@@ -1,33 +1,43 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:healthy_buddy/common/colors_style.dart';
-import 'package:healthy_buddy/common/navigation.dart';
-import 'package:healthy_buddy/model/sport_venues_data.dart';
-import 'package:healthy_buddy/ui/booking_page.dart';
-import 'package:healthy_buddy/ui/detail_page.dart';
-import 'package:healthy_buddy/ui/sports_list_page.dart';
-import 'package:healthy_buddy/ui/start_page.dart';
+import 'package:healthy_life_buddy/common/color_style.dart';
+import 'package:healthy_life_buddy/helper/navigation.dart';
+import 'package:healthy_life_buddy/interface/detail_sports_revenue_page.dart';
+import 'package:healthy_life_buddy/interface/home_page.dart';
+import 'package:healthy_life_buddy/interface/welcome_page.dart';
+import 'package:healthy_life_buddy/provider/sports_venue_provider.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => SportsVenueProvider(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'HealthyLifeBuddy',
-        theme: ThemeData(scaffoldBackgroundColor: backgroundColor),
-        initialRoute: StartPage.routeName,
-        routes: {
-          StartPage.routeName: (context) => const StartPage(),
-          Navigation.routeName: (context) => const Navigation(),
-          SportsListPage.routeName: (context) => const SportsListPage(),
-          DetailPage.routeName: (context) => DetailPage(
-              sports: ModalRoute.of(context)?.settings.arguments
-                  as SportsVenuesData),
-          BookingPage.routeName: (context) => BookingPage(
-              sports: ModalRoute.of(context)?.settings.arguments
-              as SportsVenuesData),
-        });
+      title: 'HealthyLifeBuddy',
+      theme: ThemeData(scaffoldBackgroundColor: backgroundColor),
+      initialRoute: WelcomePage.routeName,
+      routes: {
+        WelcomePage.routeName: (context) => const WelcomePage(),
+        Navigation.routeName: (context) => const Navigation(),
+        HomePage.routeName: (context) => const HomePage(),
+      },
+    );
   }
 }

@@ -1,17 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:healthy_buddy/common/colors_style.dart';
-import 'package:healthy_buddy/model/sport_venues_data.dart';
-import 'package:healthy_buddy/ui/booking_page.dart';
+import 'package:healthy_life_buddy/common/color_style.dart';
+import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 
-class DetailPage extends StatelessWidget {
-  static const routeName = '/DetailPage';
+class DetailSportsRevenuePage extends StatelessWidget {
+  static const routeName = '/DetailSportsRevenuePage';
+  const DetailSportsRevenuePage({Key? key, required this.sportsVenueData})
+      : super(key: key);
 
-  final SportsVenuesData sports;
-
-  DetailPage({required this.sports});
+  final SportsVeneu sportsVenueData;
 
   @override
   Widget build(BuildContext context) {
@@ -74,14 +72,14 @@ class DetailPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        sports.name,
+                        sportsVenueData.name,
                         style: GoogleFonts.montserrat(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       RatingBarIndicator(
-                        rating: sports.rate,
+                        rating: sportsVenueData.rate,
                         itemBuilder: (context, index) => Icon(
                           Icons.star,
                           color: Colors.amber,
@@ -102,7 +100,7 @@ class DetailPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        sports.description,
+                        sportsVenueData.description,
                         style: GoogleFonts.montserrat(
                           fontSize: 13,
                           fontWeight: FontWeight.normal,
@@ -130,7 +128,7 @@ class DetailPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            sports.discInfo,
+                            sportsVenueData.discountInfo,
                             style: GoogleFonts.montserrat(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -181,7 +179,7 @@ class DetailPage extends StatelessWidget {
                       color: Colors.black),
                 ),
                 Text(
-                  'RP. ${sports.price}',
+                  'RP. ${sportsVenueData.rentalCosts}',
                   style: GoogleFonts.montserrat(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -212,14 +210,15 @@ class DetailPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return BookingPage(
-                            sports: sports,
-                          );
-                        }));
-                      },
+
+                      // onTap: () {
+                      //   Navigator.push(context,
+                      //       MaterialPageRoute(builder: (context) {
+                      //     return BookingPage(
+                      //       sports: sports,
+                      //     );
+                      //   }));
+                      // },
                     ),
                   ],
                 )

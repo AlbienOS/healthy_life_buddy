@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_buddy/ui/favorite_page.dart';
-import 'package:healthy_buddy/ui/sports_list_page.dart';
+import 'package:healthy_life_buddy/interface/favorite_sports_revenue_page.dart';
+import 'package:healthy_life_buddy/interface/home_page.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
-  static const routeName = '/NavigationPage';
+  static const routeName = '/Navigation';
 
   @override
   _NavigationState createState() => _NavigationState();
@@ -12,7 +12,7 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   List<Widget> listPage = [
-    const SportsListPage(),
+    const HomePage(),
     const FavoritePage(),
   ];
 

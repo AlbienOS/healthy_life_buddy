@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_buddy/common/colors_style.dart';
-import 'package:healthy_buddy/common/navigation.dart';
-import 'package:healthy_buddy/common/text_style.dart';
+import 'package:healthy_life_buddy/common/color_style.dart';
+import 'package:healthy_life_buddy/common/text_style.dart';
+import 'package:healthy_life_buddy/helper/navigation.dart';
 
-class StartPage extends StatelessWidget {
-  const StartPage({Key? key}) : super(key: key);
-  static const routeName = '/StartPage';
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({Key? key}) : super(key: key);
+  static const routeName = '/WelcomePage';
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,8 @@ class StartPage extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 16.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 16.0),
                               child: Text(
                                 'Kamu dapat mencari dan memesan \ntempat olahraga sesuai keinginan \ndan kebutuhanmu di sini',
                                 style: textTheme.subtitle1
