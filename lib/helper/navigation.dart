@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_buddy/ui/article_page.dart';
-import 'package:healthy_buddy/ui/favorite_page.dart';
-import 'package:healthy_buddy/ui/profile_page.dart';
-import 'package:healthy_buddy/ui/search_page.dart';
-import 'package:healthy_buddy/ui/sports_list_page.dart';
+import 'package:healthy_life_buddy/interface/article_page.dart';
+import 'package:healthy_life_buddy/interface/favorite_sports_venue_page.dart';
+import 'package:healthy_life_buddy/interface/home_page.dart';
+import 'package:healthy_life_buddy/interface/profile_page.dart';
+import 'package:healthy_life_buddy/interface/search_sports_venue_page.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
-  static const routeName = '/NavigationPage';
+  static const routeName = '/Navigation';
 
   @override
   _NavigationState createState() => _NavigationState();
@@ -15,10 +15,10 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   List<Widget> listPage = [
-    const SportsListPage(),
-    const SearchPage(),
-    const ArticlePage(),
+    const HomePage(),
     const FavoritePage(),
+    const SearchSportsVenue(),
+    const ArticlePage(),
     const ProfilePage(),
   ];
 
@@ -36,16 +36,16 @@ class _NavigationState extends State<Navigation> {
             label: 'Home ',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorite',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.article),
             label: 'Article',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorite',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

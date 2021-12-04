@@ -1,6 +1,6 @@
 {
-    "name": "healthy_buddy",
-    "short_name": "healthy_buddy",
+    "name": "healthy_life_buddy",
+    "short_name": "healthy_life_buddy",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

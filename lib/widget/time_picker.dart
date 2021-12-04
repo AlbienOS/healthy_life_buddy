@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:healthy_buddy/common/colors_style.dart';
+import 'package:healthy_life_buddy/common/color_style.dart';
 
-class TimePicker extends StatefulWidget{
+class TimePicker extends StatefulWidget {
   @override
   State<TimePicker> createState() => _TimePickerState();
 }
@@ -10,10 +10,10 @@ class TimePicker extends StatefulWidget{
 class _TimePickerState extends State<TimePicker> {
   TimeOfDay? time;
 
-  String getTimeText(){
-    if(time == null){
+  String getTimeText() {
+    if (time == null) {
       return 'Pilih Waktu';
-    }else{
+    } else {
       final hours = time!.hour.toString().padLeft(2, '0');
       final minutes = time!.minute.toString().padLeft(2, '0');
 
@@ -44,9 +44,8 @@ class _TimePickerState extends State<TimePicker> {
               child: Center(
                 child: Text(
                   getTimeText(),
-                  style: GoogleFonts.montserrat(
-                      fontSize: 16,
-                      color: Colors.black),
+                  style:
+                      GoogleFonts.montserrat(fontSize: 16, color: Colors.black),
                 ),
               ),
             ),
@@ -61,14 +60,12 @@ class _TimePickerState extends State<TimePicker> {
             ),
             child: ElevatedButton(
                 style: ButtonStyle(
-                    shape: MaterialStateProperty
-                        .all<RoundedRectangleBorder>
-                      (RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    )
-                ),
-                onPressed: (){
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                )),
+                onPressed: () {
                   pickedTime(context);
                 },
                 child: Icon(Icons.access_time)),
@@ -77,13 +74,14 @@ class _TimePickerState extends State<TimePicker> {
       ),
     );
   }
-  Future pickedTime(BuildContext context) async{
+
+  Future pickedTime(BuildContext context) async {
     final selectedTime = TimeOfDay(hour: 11, minute: 0);
     final newTimePicked = await showTimePicker(
       context: context,
       initialTime: time ?? selectedTime,
     );
-    if(newTimePicked == null) return;
+    if (newTimePicked == null) return;
     setState(() => time = newTimePicked);
   }
 }

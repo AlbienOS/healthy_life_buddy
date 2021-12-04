@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "957036738426",
+    "project_id": "healthy-life-buddy-6a89e",
+    "storage_bucket": "healthy-life-buddy-6a89e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957036738426:android:76be1b847cbb2b2f3648c3",
+        "android_client_info": {
+          "package_name": "com.healthy_life_buddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957036738426-i7f67fbuhll8tf3c9tk7ks7rvsk53ucu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS7VCUMeNE8MC2TaNfuczpQ7icS51j2xw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957036738426-i7f67fbuhll8tf3c9tk7ks7rvsk53ucu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:healthy_buddy/common/colors_style.dart';
-import 'package:healthy_buddy/model/sport_venues_data.dart';
-import 'package:healthy_buddy/widget/date_picker_widget.dart';
-import 'package:healthy_buddy/widget/time_picker_widget.dart';
+import 'package:healthy_life_buddy/common/color_style.dart';
+import 'package:healthy_life_buddy/model/sports_venue_model.dart';
+import 'package:healthy_life_buddy/widget/date_picker_widget.dart';
+import 'package:healthy_life_buddy/widget/time_picker.dart';
 
-class BookingPage extends StatefulWidget {
-  static const routeName = '/BookingPage';
-  final SportsVenuesData sports;
+class BookingSportsVenuePage extends StatefulWidget {
+  static const routeName = '/BookingSportsRevnuePage';
+  const BookingSportsVenuePage({Key? key, required this.sportsVenueData})
+      : super(key: key);
 
-  BookingPage({required this.sports});
+  final SportsVeneu sportsVenueData;
 
   @override
-  State<BookingPage> createState() => _BookingPageState();
+  State<BookingSportsVenuePage> createState() => _BookingSportsVenuePageState();
 }
 
-class _BookingPageState extends State<BookingPage> {
-
+class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
   String changePrice = '';
 
-  void fullPay(){
+  void fullPay() {
     setState(() {
-      changePrice = '${widget.sports.price}';
+      changePrice = 'dummy';
     });
   }
-  void dpPay(){
+
+  void dpPay() {
     setState(() {
-      changePrice = '${widget.sports.dpPrice}';
+      changePrice = 'dummy';
     });
   }
 
@@ -38,33 +39,35 @@ class _BookingPageState extends State<BookingPage> {
           child: Column(
             children: [
               SafeArea(
-                  child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.arrow_back,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
                           ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Text('PESAN TEMPAT OLAHRAGA',
-                            style: GoogleFonts.montserrat(
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          'PESAN TEMPAT OLAHRAGA',
+                          style: GoogleFonts.montserrat(
                             fontSize: 16,
-                            fontWeight: FontWeight.bold,),
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                ),
               ),
               Column(
                 children: [
@@ -81,7 +84,8 @@ class _BookingPageState extends State<BookingPage> {
                           ),
                           child: TextField(
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 8.0),
                               hintText: "Nama",
                               border: InputBorder.none,
                             ),
@@ -104,7 +108,8 @@ class _BookingPageState extends State<BookingPage> {
                           ),
                           child: TextField(
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 8.0),
                               hintText: "Alamat",
                               border: InputBorder.none,
                             ),
@@ -127,7 +132,8 @@ class _BookingPageState extends State<BookingPage> {
                           ),
                           child: TextField(
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 8.0),
                               hintText: "No. Telepon",
                               border: InputBorder.none,
                             ),
@@ -142,15 +148,17 @@ class _BookingPageState extends State<BookingPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-                      child: Text('PEMBAYARAN',
-                        style: GoogleFonts.montserrat(
-                        fontSize: 14,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 10.0),
+                        child: Text(
+                          'PEMBAYARAN',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 14,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
                   ),
                   Column(
                     children: [
@@ -158,50 +166,56 @@ class _BookingPageState extends State<BookingPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
                             child: Container(
                               height: 50,
                               width: 150,
                               child: ElevatedButton(
                                 style: ButtonStyle(
-                                  shape: MaterialStateProperty
-                                      .all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25.0)
-                                    ),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(25.0)),
                                   ),
                                 ),
-                                child: Text('BAYAR PENUH',
+                                child: Text(
+                                  'BAYAR PENUH',
                                   style: GoogleFonts.montserrat(
-                                  fontSize: 14,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                onPressed: (){
+                                onPressed: () {
                                   fullPay();
                                 },
                               ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
                             child: Container(
                               height: 50,
                               width: 160,
                               child: ElevatedButton(
                                 style: ButtonStyle(
-                                  shape: MaterialStateProperty
-                                      .all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25.0)
-                                    ),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(25.0)),
                                   ),
                                 ),
-                                child: Text('BAYAR DIMUKA',
+                                child: Text(
+                                  'BAYAR DIMUKA',
                                   style: GoogleFonts.montserrat(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                onPressed: (){
+                                onPressed: () {
                                   dpPay();
                                 },
                               ),
@@ -263,8 +277,7 @@ class _BookingPageState extends State<BookingPage> {
                           ),
                         ),
                       ),
-                      onTap: () {
-                      },
+                      onTap: () {},
                     ),
                   ],
                 )

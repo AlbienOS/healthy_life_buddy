@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:healthy_buddy/common/colors_style.dart';
+import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:intl/intl.dart';
 
-class DatePicker extends StatefulWidget{
+class DatePicker extends StatefulWidget {
   @override
   State<DatePicker> createState() => _DatePickerState();
 }
@@ -12,9 +12,9 @@ class _DatePickerState extends State<DatePicker> {
   DateTime? dateTime;
 
   String getDateText() {
-    if(dateTime == null){
+    if (dateTime == null) {
       return 'Pilih Tanggal';
-    }else{
+    } else {
       return DateFormat('dd/MM/yyyy').format(dateTime!);
     }
   }
@@ -42,9 +42,8 @@ class _DatePickerState extends State<DatePicker> {
               child: Center(
                 child: Text(
                   getDateText(),
-                  style: GoogleFonts.montserrat(
-                      fontSize: 16,
-                      color: Colors.black),
+                  style:
+                      GoogleFonts.montserrat(fontSize: 16, color: Colors.black),
                 ),
               ),
             ),
@@ -59,14 +58,12 @@ class _DatePickerState extends State<DatePicker> {
             ),
             child: ElevatedButton(
                 style: ButtonStyle(
-                    shape: MaterialStateProperty
-                        .all<RoundedRectangleBorder>
-                      (RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    )
-                ),
-                onPressed: (){
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                )),
+                onPressed: () {
                   pickedDate(context);
                 },
                 child: Icon(Icons.calendar_today)),
@@ -76,7 +73,7 @@ class _DatePickerState extends State<DatePicker> {
     );
   }
 
-  Future pickedDate(BuildContext context) async{
+  Future pickedDate(BuildContext context) async {
     final selectedDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
@@ -84,7 +81,7 @@ class _DatePickerState extends State<DatePicker> {
       firstDate: DateTime(DateTime.now().year - 1),
       lastDate: DateTime(DateTime.now().year + 1),
     );
-    if(newDate == null) return;
+    if (newDate == null) return;
 
     setState(() => dateTime = newDate);
   }
