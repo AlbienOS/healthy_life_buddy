@@ -11,7 +11,6 @@ class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -263,7 +262,7 @@ class Promotion extends StatelessWidget {
                                 padding: const EdgeInsets.only(
                                     top: 8.0, bottom: 4.0),
                                 child: Text(
-                                  "Nama tempat",
+                                  "Nama promosi",
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: textTheme.subtitle1
@@ -273,7 +272,7 @@ class Promotion extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: Text(
-                                  "Dummy detail promosi, deskripsi deskripsi deskripsi yang sangat panjang bangett sampe gabisa cukup di card karena saking panjangnya",
+                                  "Dummy text untuk detail promosi. Dummy text untuk detail promosi. Dummy text untuk detail promosi. Dummy text untuk detail promosi. Dummy text untuk detail promosi.",
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
                                   style: textTheme.caption
