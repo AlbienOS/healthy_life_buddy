@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
+import 'package:healthy_life_buddy/common/state.dart';
+import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/model/user_model.dart';
 
 class AuthProvider with ChangeNotifier {
@@ -7,16 +9,24 @@ class AuthProvider with ChangeNotifier {
     fetchUserData();
   }
 
-  late int _state;
+  late CurrentState _state;
   late UserData? _userData;
 
   UserData? get userData => _userData;
-  int get state => _state;
+  CurrentState get state => _state;
 
   fetchUserData() async {
-    _state = 0;
+    _state = CurrentState.isLoading;
     notifyListeners();
-    _userData = await getUserData(auth.currentUser!.uid);
-    notifyListeners();
+    try {
+      _userData = await getUserData(auth.currentUser!.uid);
+      if (_userData != null) {
+        _state = CurrentState.isSuccsess;
+        notifyListeners();
+      }
+    } catch (e) {
+      _state = CurrentState.isError;
+      notifyListeners();
+    }
   }
 }
