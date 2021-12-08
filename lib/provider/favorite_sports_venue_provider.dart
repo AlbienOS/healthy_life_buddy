@@ -1,46 +1,62 @@
 import 'package:flutter/cupertino.dart';
+import 'package:healthy_life_buddy/api/auth_api.dart';
+import 'package:healthy_life_buddy/api/favorite_sports_venue_api.dart';
 import 'package:healthy_life_buddy/api/sports_venue_api.dart';
-import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
+import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/model/favorite_sports_venue_data_model.dart';
-import 'package:healthy_life_buddy/model/favorite_sports_venue_model.dart';
-import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 
 class FavoriteSportsVeneuProvider with ChangeNotifier {
-  final String userId;
-
-  FavoriteSportsVeneuProvider({required this.userId}) {
+  FavoriteSportsVeneuProvider() {
     fetchFavoriteSportsVenueList();
   }
 
+  late CurrentState _state;
   List<FavoriteSportsVenueData> _favoriteSportsVenueList = [];
-  late int _state;
 
+  CurrentState get state => _state;
   List<FavoriteSportsVenueData> get favoriteSportsVenue =>
       _favoriteSportsVenueList;
-  int get state => _state;
 
   fetchFavoriteSportsVenueList() async {
-    _state = 0;
+    _state = CurrentState.isLoading;
     notifyListeners();
-    final favoriteSportsVenueList = await getFavoriteSportsVenueId(userId);
-    if (favoriteSportsVenueList.isNotEmpty) {
-      _state = 1;
-
-      for (var element in favoriteSportsVenueList) {
-        final data = await getFavoriteSportsVenueData(element.sportsVenueId)
-            .then((value) => _favoriteSportsVenueList.add(value));
+    try {
+      final favoriteSportsVenueList =
+          await getFavoriteSportsVenueId(auth.currentUser!.uid);
+      if (favoriteSportsVenueList.isNotEmpty) {
+        _state = CurrentState.hasData;
+        for (var element in favoriteSportsVenueList) {
+          final data = await getFavoriteSportsVenueData(element.sportsVenueId)
+              .then((value) => _favoriteSportsVenueList.add(value));
+        }
+        notifyListeners();
+      } else if (favoriteSportsVenueList.isEmpty) {
+        _state = CurrentState.noData;
+        notifyListeners();
       }
-      notifyListeners();
-    } else {
-      _state = 2;
+    } catch (e) {
+      _state = CurrentState.isError;
+      print(e.toString());
       notifyListeners();
     }
   }
 
-  addFavoriteSportsVenueList() async {
-    _state = 0;
+  setFavoriteSportsVenueStatus(String sportsVenueId) async {
+    _state = CurrentState.isLoading;
+    notifyListeners();
     try {
-      addFavorite(userId);
-    } catch (e) {}
+      final favoriteStatus = await getFavoriteStatus(sportsVenueId);
+      if (favoriteStatus == true) {
+        deleteFavorite(sportsVenueId);
+      } else {
+        addFavorite(sportsVenueId);
+      }
+      _state = CurrentState.isSuccsess;
+      notifyListeners();
+    } catch (e) {
+      _state = CurrentState.isError;
+      print(e.toString());
+      notifyListeners();
+    }
   }
 }

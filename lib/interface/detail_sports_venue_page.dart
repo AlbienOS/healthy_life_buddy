@@ -7,6 +7,7 @@ import 'package:healthy_life_buddy/interface/booking_sports_venue_page.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 import 'package:healthy_life_buddy/provider/detail_sports_venue_provider.dart';
+import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
 import 'package:provider/provider.dart';
 
 class DetailSportsVenuePage extends StatelessWidget {
@@ -36,9 +37,9 @@ class DetailSportsVenuePage extends StatelessWidget {
                       SportsVenueImage(
                           imageUrl: sportsVenueData.imageUrl, size: size),
                       Row(
-                        children: const [
-                          FavoriteButton(),
-                          ShareButton(),
+                        children: [
+                          FavoriteButton(sportsVenueId: sportsVenueData.id),
+                          const ShareButton(),
                         ],
                       ),
                       Padding(
@@ -357,9 +358,12 @@ class BackButton extends StatelessWidget {
 }
 
 class FavoriteButton extends StatelessWidget {
-  const FavoriteButton({
+  FavoriteButton({
     Key? key,
+    required this.sportsVenueId,
   }) : super(key: key);
+
+  String sportsVenueId;
 
   @override
   Widget build(BuildContext context) {
@@ -372,12 +376,21 @@ class FavoriteButton extends StatelessWidget {
         child: SizedBox(
           width: 50,
           height: 50,
-          child: IconButton(
-            icon: const Icon(
-              Icons.favorite_outline,
-              color: primaryColor,
+          child: ChangeNotifierProvider<FavoriteSportsVeneuProvider>(
+            create: (context) => FavoriteSportsVeneuProvider(),
+            child: Consumer<FavoriteSportsVeneuProvider>(
+              builder: (BuildContext context, value, Widget? child) {
+                return IconButton(
+                  icon: const Icon(
+                    Icons.favorite_outline,
+                    color: primaryColor,
+                  ),
+                  onPressed: () {
+                    value.setFavoriteSportsVenueStatus(sportsVenueId);
+                  },
+                );
+              },
             ),
-            onPressed: () {},
           ),
         ),
         decoration: BoxDecoration(

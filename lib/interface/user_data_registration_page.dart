@@ -4,8 +4,6 @@ import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
 
-enum Gender { pria, wanita }
-
 class UserDataRegistrationPage extends StatefulWidget {
   const UserDataRegistrationPage({Key? key}) : super(key: key);
 
@@ -20,7 +18,7 @@ class _UserDataRegistrationPageState extends State<UserDataRegistrationPage> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _phoneNumber = TextEditingController();
 
-  Gender? _gender;
+  String? _gender;
 
   @override
   void dispose() {
@@ -75,9 +73,9 @@ class _UserDataRegistrationPageState extends State<UserDataRegistrationPage> {
                     style: textTheme.subtitle1?.apply(color: onBackgroundColor),
                   ),
                 ),
-                RadioListTile<Gender>(
+                RadioListTile<String>(
                   title: const Text('Pria'),
-                  value: Gender.pria,
+                  value: "Pria",
                   groupValue: _gender,
                   onChanged: (value) {
                     setState(() {
@@ -85,9 +83,9 @@ class _UserDataRegistrationPageState extends State<UserDataRegistrationPage> {
                     });
                   },
                 ),
-                RadioListTile<Gender>(
+                RadioListTile<String>(
                   title: const Text('Wanitia'),
-                  value: Gender.wanita,
+                  value: "Wanita",
                   groupValue: _gender,
                   onChanged: (value) {
                     setState(() {
