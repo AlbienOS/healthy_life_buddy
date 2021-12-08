@@ -5,6 +5,7 @@ import 'package:healthy_life_buddy/helper/navigation.dart';
 import 'package:healthy_life_buddy/interface/booking_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/detail_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
+import 'package:healthy_life_buddy/interface/login_page.dart';
 import 'package:healthy_life_buddy/interface/welcome_page.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 import 'package:healthy_life_buddy/provider/sports_venue_provider.dart';
@@ -34,14 +35,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'HealthyLifeBuddy',
       theme: ThemeData(scaffoldBackgroundColor: backgroundColor),
-      initialRoute: WelcomePage.routeName,
+      initialRoute: LoginPage.routeName,
       routes: {
         WelcomePage.routeName: (context) => const WelcomePage(),
+        LoginPage.routeName: (context) => const LoginPage(),
         Navigation.routeName: (context) => const Navigation(),
         HomePage.routeName: (context) => const HomePage(),
         DetailSportsVenuePage.routeName: (context) => DetailSportsVenuePage(
-            sportsVenueData:
-                ModalRoute.of(context)?.settings.arguments as SportsVeneu),
+            sportsVenueId:
+                ModalRoute.of(context)?.settings.arguments as String),
         BookingSportsVenuePage.routeName: (context) => BookingSportsVenuePage(
             sportsVenueData:
                 ModalRoute.of(context)?.settings.arguments as SportsVeneu),

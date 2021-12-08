@@ -4,168 +4,188 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/interface/booking_sports_venue_page.dart';
+import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';
+import 'package:healthy_life_buddy/provider/detail_sports_venue_provider.dart';
+import 'package:provider/provider.dart';
 
 class DetailSportsVenuePage extends StatelessWidget {
   static const routeName = '/DetailSportsVenuePage';
-  const DetailSportsVenuePage({Key? key, required this.sportsVenueData})
+  const DetailSportsVenuePage({Key? key, required this.sportsVenueId})
       : super(key: key);
 
-  final SportsVeneu sportsVenueData;
+  final String sportsVenueId;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const BackButton(),
-                SportsVenueImage(sportsVenueData: sportsVenueData, size: size),
-                Row(
-                  children: const [
-                    FavoriteButton(),
-                    ShareButton(),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 8.0,
-                  ),
-                  child: SportsVenueDetail(sportsVenueData: sportsVenueData),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 8.0),
-                  child: SportsVenuePromotion(sportsVenueData: sportsVenueData),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Costs Detail",
-                            style: textTheme.headline6?.apply(
-                              color: onSurfaceColor,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    "Rental Costs",
-                                    style: textTheme.bodyText2?.apply(
-                                      color: onSurfaceColor,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Text(
-                                    ': ${sportsVenueData.rentalCosts}',
-                                    style: textTheme.bodyText2?.apply(
-                                      color: onSurfaceColor,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "Discount",
-                                  style: textTheme.bodyText2?.apply(
-                                    color: onSurfaceColor,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Text(
-                                  ': Dummy_Discount',
-                                  style: textTheme.bodyText2?.apply(
-                                    color: onSurfaceColor,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    "Total",
-                                    style: textTheme.bodyText2?.apply(
-                                      color: onSurfaceColor,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Text(
-                                    ': Dummy_Total',
-                                    style: textTheme.bodyText2?.apply(
-                                      color: onSurfaceColor,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TextButton(
-                                  child: Text(
-                                    "Pesan",
-                                    style: textTheme.button?.apply(
-                                      color: onPrimaryColor,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return BookingSportsVenuePage(
-                                              sportsVenueData: sportsVenueData);
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  style: TextButton.styleFrom(
-                                    backgroundColor: primaryColor,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+    return ChangeNotifierProvider<DetailSportsVeneueProvider>(
+      create: (context) =>
+          DetailSportsVeneueProvider(sportsVenueId: sportsVenueId),
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Consumer<DetailSportsVeneueProvider>(
+              builder: (BuildContext context, value, Widget? child) {
+                if (value.state == 1) {
+                  final sportsVenueData = value.detailSportsVenue;
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const BackButton(),
+                      SportsVenueImage(
+                          imageUrl: sportsVenueData.imageUrl, size: size),
+                      Row(
+                        children: const [
+                          FavoriteButton(),
+                          ShareButton(),
                         ],
                       ),
-                    ),
-                  ),
-                ),
-              ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 8.0,
+                        ),
+                        child: SportsVenueDetail(
+                            detailSportsVenueData: sportsVenueData),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                        child: SportsVenuePromotion(
+                            detailSportsVenueData: sportsVenueData),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Costs Detail",
+                                  style: textTheme.headline6?.apply(
+                                    color: onSurfaceColor,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          "Rental Costs",
+                                          style: textTheme.bodyText2?.apply(
+                                            color: onSurfaceColor,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(
+                                          ': ${sportsVenueData.rentalCosts}',
+                                          style: textTheme.bodyText2?.apply(
+                                            color: onSurfaceColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        "Discount",
+                                        style: textTheme.bodyText2?.apply(
+                                          color: onSurfaceColor,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        ': Dummy_Discount',
+                                        style: textTheme.bodyText2?.apply(
+                                          color: onSurfaceColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          "Total",
+                                          style: textTheme.bodyText2?.apply(
+                                            color: onSurfaceColor,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(
+                                          ': Dummy_Total',
+                                          style: textTheme.bodyText2?.apply(
+                                            color: onSurfaceColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: TextButton(
+                                        child: Text(
+                                          "Pesan",
+                                          style: textTheme.button?.apply(
+                                            color: onPrimaryColor,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) {
+                                          //       return BookingSportsVenuePage(
+                                          //           sportsVenueData:
+                                          //               sportsVenueData);
+                                          //     },
+                                          //   ),
+                                          // );
+                                        },
+                                        style: TextButton.styleFrom(
+                                          backgroundColor: primaryColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
             ),
           ),
         ),
@@ -177,10 +197,10 @@ class DetailSportsVenuePage extends StatelessWidget {
 class SportsVenuePromotion extends StatelessWidget {
   const SportsVenuePromotion({
     Key? key,
-    required this.sportsVenueData,
+    required this.detailSportsVenueData,
   }) : super(key: key);
 
-  final SportsVeneu sportsVenueData;
+  final DetailSportsVeneu detailSportsVenueData;
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +214,7 @@ class SportsVenuePromotion extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
             child: Text(
-              sportsVenueData.discountInfo,
+              detailSportsVenueData.discountInfo,
               style: textTheme.subtitle1?.apply(color: onSurfaceColor),
             ),
           ),
@@ -230,10 +250,10 @@ class SportsVenuePromotion extends StatelessWidget {
 class SportsVenueDetail extends StatelessWidget {
   const SportsVenueDetail({
     Key? key,
-    required this.sportsVenueData,
+    required this.detailSportsVenueData,
   }) : super(key: key);
 
-  final SportsVeneu sportsVenueData;
+  final DetailSportsVeneu detailSportsVenueData;
 
   @override
   Widget build(BuildContext context) {
@@ -247,13 +267,13 @@ class SportsVenueDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              sportsVenueData.name,
+              detailSportsVenueData.name,
               style: textTheme.headline5?.apply(color: onBackgroundColor),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: RatingBarIndicator(
-                rating: sportsVenueData.rate,
+                rating: detailSportsVenueData.rate,
                 itemBuilder: (context, index) => const Icon(
                   Icons.star,
                   color: Colors.amber,
@@ -264,7 +284,7 @@ class SportsVenueDetail extends StatelessWidget {
               ),
             ),
             Text(
-              sportsVenueData.description,
+              detailSportsVenueData.description,
               style: textTheme.bodyText2?.apply(color: onBackgroundColor),
             ),
           ],
@@ -277,11 +297,11 @@ class SportsVenueDetail extends StatelessWidget {
 class SportsVenueImage extends StatelessWidget {
   const SportsVenueImage({
     Key? key,
-    required this.sportsVenueData,
+    required this.imageUrl,
     required this.size,
   }) : super(key: key);
 
-  final SportsVeneu sportsVenueData;
+  final String imageUrl;
   final Size size;
 
   @override
@@ -291,7 +311,7 @@ class SportsVenueImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(30),
         child: Image.network(
-          sportsVenueData.imageUrl,
+          imageUrl,
           height: 400,
           width: size.width,
           fit: BoxFit.cover,

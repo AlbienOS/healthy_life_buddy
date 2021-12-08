@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SportsVeneu {
+class FavoriteSportsVenueData {
   late String id;
   late String name;
   late String imageUrl;
@@ -8,7 +8,8 @@ class SportsVeneu {
   late int rentalCosts;
   late double rate;
 
-  SportsVeneu.fromObject(QueryDocumentSnapshot<Map<String, dynamic>> data) {
+  FavoriteSportsVenueData.fromObject(
+      DocumentSnapshot<Map<String, dynamic>> data) {
     id = data.id;
     name = data['name'];
     imageUrl = data['imageUrl'];

@@ -3,6 +3,7 @@ import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/interface/detail_sports_venue_page.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';
+import 'package:healthy_life_buddy/provider/auth_provider.dart';
 import 'package:healthy_life_buddy/provider/sports_venue_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,7 @@ class HomePage extends StatelessWidget {
   static const routeName = '/HomePage';
   const HomePage({Key? key}) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -47,27 +49,35 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: Image.network(
-              'https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-              width: 45,
-              height: 45,
-              fit: BoxFit.cover,
+    return ChangeNotifierProvider(
+      create: (context) => AuthProvider(),
+      child: Consumer<AuthProvider>(
+        builder: (context, snapshot, _) {
+          final userData = snapshot.userData;
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.network(
+                    'https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+                    width: 45,
+                    height: 45,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    "Hello, ${userData?.name}",
+                    style: textTheme.headline6?.apply(color: onBackgroundColor),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              "Hello, Jimmy",
-              style: textTheme.headline6?.apply(color: onBackgroundColor),
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
@@ -113,7 +123,7 @@ class ListOfSportsVenues extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) {
                   return DetailSportsVenuePage(
-                    sportsVenueData: sportsVenueData[i],
+                    sportsVenueId: sportsVenueData[i].id,
                   );
                 },
               ),
