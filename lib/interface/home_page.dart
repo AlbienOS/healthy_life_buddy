@@ -4,6 +4,7 @@ import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/interface/detail_sports_venue_page.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
+import 'package:healthy_life_buddy/provider/favorite_status_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/sports_venue_provider.dart';
 import 'package:healthy_life_buddy/widget/user_profile_widget.dart';
 import 'package:provider/provider.dart';
@@ -79,10 +80,7 @@ class ListOfSportsVenues extends StatelessWidget {
               itemCount: sportsVenueData.length,
               itemBuilder: (context, i) {
                 return InkWell(
-                  onTap: () async {
-                    await Provider.of<FavoriteSportsVeneuProvider>(context,
-                            listen: false)
-                        .getFavoriteCurrentStatus(sportsVenueData[i].id);
+                  onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(

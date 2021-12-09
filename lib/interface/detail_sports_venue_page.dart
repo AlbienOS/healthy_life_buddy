@@ -9,6 +9,7 @@ import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 import 'package:healthy_life_buddy/provider/detail_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
+import 'package:healthy_life_buddy/provider/favorite_status_sports_venue_provider.dart';
 import 'package:provider/provider.dart';
 
 class DetailSportsVenuePage extends StatelessWidget {
@@ -21,9 +22,17 @@ class DetailSportsVenuePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return ChangeNotifierProvider<DetailSportsVeneueProvider>(
-      create: (context) =>
-          DetailSportsVeneueProvider(sportsVenueId: sportsVenueId),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<DetailSportsVeneueProvider>(
+          create: (context) =>
+              DetailSportsVeneueProvider(sportsVenueId: sportsVenueId),
+        ),
+        ChangeNotifierProvider(
+          create: (context) =>
+              FavoriteStatusSportsVenueProvider(sportsVenueId: sportsVenueId),
+        )
+      ],
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -377,7 +386,7 @@ class FavoriteButton extends StatelessWidget {
         child: SizedBox(
           width: 50,
           height: 50,
-          child: Consumer<FavoriteSportsVeneuProvider>(
+          child: Consumer<FavoriteStatusSportsVenueProvider>(
             builder: (BuildContext context, value, Widget? child) {
               final iconState = value.iconState;
               return IconButton(
@@ -385,8 +394,11 @@ class FavoriteButton extends StatelessWidget {
                   iconState,
                   color: primaryColor,
                 ),
-                onPressed: () {
-                  value.setFavoriteSportsVenueStatus(sportsVenueId);
+                onPressed: () async {
+                  await value.setFavoriteSportsVenueStatus();
+                  Provider.of<FavoriteSportsVeneuProvider>(context,
+                          listen: false)
+                      .fetchFavoriteSportsVenueList();
                 },
               );
             },

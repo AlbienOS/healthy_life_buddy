@@ -11,11 +11,9 @@ class FavoriteSportsVeneuProvider with ChangeNotifier {
     fetchFavoriteSportsVenueList();
   }
 
-  late IconData _iconState;
   late CurrentState _state;
   List<FavoriteSportsVenueData> _favoriteSportsVenueList = [];
 
-  IconData get iconState => _iconState;
   CurrentState get state => _state;
   List<FavoriteSportsVenueData> get favoriteSportsVenue =>
       _favoriteSportsVenueList;
@@ -44,45 +42,6 @@ class FavoriteSportsVeneuProvider with ChangeNotifier {
       }
     } catch (e) {
       print("error");
-      _state = CurrentState.isError;
-      print(e.toString());
-      notifyListeners();
-    }
-  }
-
-  getFavoriteCurrentStatus(String sportsVenueId) async {
-    _state = CurrentState.isLoading;
-    notifyListeners();
-    try {
-      final favoriteStatus = await getFavoriteStatus(sportsVenueId);
-      if (favoriteStatus == true) {
-        _iconState = Icons.favorite;
-      } else {
-        _iconState = Icons.favorite_border_outlined;
-      }
-      _state = CurrentState.isSuccsess;
-      notifyListeners();
-    } catch (e) {
-      _state = CurrentState.isError;
-      print(e.toString());
-    }
-  }
-
-  setFavoriteSportsVenueStatus(String sportsVenueId) async {
-    _state = CurrentState.isLoading;
-    notifyListeners();
-    try {
-      final favoriteStatus = await getFavoriteStatus(sportsVenueId);
-      if (favoriteStatus == true) {
-        deleteFavorite(sportsVenueId);
-      } else {
-        addFavorite(sportsVenueId);
-      }
-      getFavoriteCurrentStatus(sportsVenueId);
-      _state = CurrentState.isSuccsess;
-      fetchFavoriteSportsVenueList();
-      notifyListeners();
-    } catch (e) {
       _state = CurrentState.isError;
       print(e.toString());
       notifyListeners();
