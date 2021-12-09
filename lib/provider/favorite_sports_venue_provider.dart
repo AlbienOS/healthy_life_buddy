@@ -21,12 +21,15 @@ class FavoriteSportsVeneuProvider with ChangeNotifier {
       _favoriteSportsVenueList;
 
   fetchFavoriteSportsVenueList() async {
+    print("loading data");
     _state = CurrentState.isLoading;
     notifyListeners();
     try {
       final favoriteSportsVenueList =
           await getFavoriteSportsVenueId(auth.currentUser!.uid);
+
       if (favoriteSportsVenueList.isNotEmpty) {
+        print("ada data");
         _state = CurrentState.hasData;
         _favoriteSportsVenueList = [];
         for (var element in favoriteSportsVenueList) {
@@ -35,10 +38,12 @@ class FavoriteSportsVeneuProvider with ChangeNotifier {
         }
         notifyListeners();
       } else if (favoriteSportsVenueList.isEmpty) {
+        print("ga ada data");
         _state = CurrentState.noData;
         notifyListeners();
       }
     } catch (e) {
+      print("error");
       _state = CurrentState.isError;
       print(e.toString());
       notifyListeners();
