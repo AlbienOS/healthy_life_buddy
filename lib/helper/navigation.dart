@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/interface/article_page.dart';
 import 'package:healthy_life_buddy/interface/favorite_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
@@ -33,7 +33,7 @@ class _NavigationState extends State<Navigation> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home ',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
