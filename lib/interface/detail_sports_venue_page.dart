@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/interface/booking_sports_venue_page.dart';
+import 'package:healthy_life_buddy/interface/member_sports_page.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 import 'package:healthy_life_buddy/provider/detail_sports_venue_provider.dart';
@@ -243,7 +244,11 @@ class SportsVenuePromotion extends StatelessWidget {
                         color: onPrimaryColor,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return MemberPage();
+                      }));
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: primaryColor,
                     ),
