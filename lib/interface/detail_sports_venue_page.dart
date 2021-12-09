@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
+import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/interface/booking_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/member_sports_page.dart';
@@ -245,7 +246,8 @@ class SportsVenuePromotion extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
                         return MemberPage();
                       }));
                     },
@@ -393,19 +395,31 @@ class FavoriteButton extends StatelessWidget {
           height: 50,
           child: Consumer<FavoriteStatusSportsVenueProvider>(
             builder: (BuildContext context, value, Widget? child) {
-              final iconState = value.iconState;
-              return IconButton(
-                icon: Icon(
-                  iconState,
-                  color: primaryColor,
-                ),
-                onPressed: () async {
-                  await value.setFavoriteSportsVenueStatus();
-                  Provider.of<FavoriteSportsVeneuProvider>(context,
-                          listen: false)
-                      .fetchFavoriteSportsVenueList();
-                },
-              );
+              if (value.state == CurrentState.isLoading) {
+                return IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.favorite_border_outlined,
+                    color: primaryColor,
+                  ),
+                );
+              } else if (value.state == CurrentState.isSuccsess) {
+                final iconState = value.iconState;
+                return IconButton(
+                  icon: Icon(
+                    iconState,
+                    color: primaryColor,
+                  ),
+                  onPressed: () async {
+                    await value.setFavoriteSportsVenueStatus();
+                    Provider.of<FavoriteSportsVeneuProvider>(context,
+                            listen: false)
+                        .fetchFavoriteSportsVenueList();
+                  },
+                );
+              } else {
+                return Text("error");
+              }
             },
           ),
         ),

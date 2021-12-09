@@ -15,6 +15,7 @@ class FavoriteStatusSportsVenueProvider with ChangeNotifier {
 
   late CurrentState _state;
   CurrentState get state => _state;
+
   getFavoriteCurrentStatus() async {
     _state = CurrentState.isLoading;
     notifyListeners();
