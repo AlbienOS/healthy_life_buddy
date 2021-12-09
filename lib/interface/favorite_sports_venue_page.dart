@@ -52,7 +52,9 @@ class ListOfFavoriteSportsVenues extends StatelessWidget {
                 itemCount: favoriteSportsVenueData.length,
                 itemBuilder: (context, i) {
                   return InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      await snapshot.getFavoriteCurrentStatus(
+                          favoriteSportsVenueData[i].id);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
