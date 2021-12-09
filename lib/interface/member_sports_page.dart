@@ -233,7 +233,7 @@ class _MemberPageState extends State<MemberPage> {
                           ),
                         ),
                         child: Text(
-                          'BAYAR',
+                          'MEMBER',
                           style: GoogleFonts.montserrat(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
