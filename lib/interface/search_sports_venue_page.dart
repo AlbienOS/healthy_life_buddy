@@ -238,7 +238,7 @@ class _SearchSportsVenueState extends State<SearchSportsVenue> {
                       onTap: (){
                         var query = data as QueryDocumentSnapshot<Map<String, dynamic>>;
                         Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return DetailSportsVenuePage(sportsVenueData: SportsVeneu.fromObject(query));
+                          return DetailSportsVenuePage(sportsVenueId: SportsVeneu.fromObject(query));
                         }));
                       },
                     );

@@ -6,6 +6,7 @@ class SportsVeneu {
   late String imageUrl;
   late String location;
   late int rentalCosts;
+  late int downPayment;
   late double rate;
 
   SportsVeneu.fromObject(QueryDocumentSnapshot<Map<String, dynamic>> data) {
@@ -14,6 +15,7 @@ class SportsVeneu {
     imageUrl = data['imageUrl'];
     location = data['location'];
     rentalCosts = data['rentalCosts'];
+    downPayment = data['downPayment'];
     rate = data['rate'].toDouble();
   }
 }
