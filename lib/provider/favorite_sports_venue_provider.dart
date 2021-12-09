@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/api/favorite_sports_venue_api.dart';
 import 'package:healthy_life_buddy/api/sports_venue_api.dart';
@@ -10,9 +11,11 @@ class FavoriteSportsVeneuProvider with ChangeNotifier {
     fetchFavoriteSportsVenueList();
   }
 
+  late IconData _iconState;
   late CurrentState _state;
   List<FavoriteSportsVenueData> _favoriteSportsVenueList = [];
 
+  IconData get iconState => _iconState;
   CurrentState get state => _state;
   List<FavoriteSportsVenueData> get favoriteSportsVenue =>
       _favoriteSportsVenueList;
@@ -25,9 +28,10 @@ class FavoriteSportsVeneuProvider with ChangeNotifier {
           await getFavoriteSportsVenueId(auth.currentUser!.uid);
       if (favoriteSportsVenueList.isNotEmpty) {
         _state = CurrentState.hasData;
+        _favoriteSportsVenueList = [];
         for (var element in favoriteSportsVenueList) {
-          final data = await getFavoriteSportsVenueData(element.sportsVenueId)
-              .then((value) => _favoriteSportsVenueList.add(value));
+          final data = await getFavoriteSportsVenueData(element.sportsVenueId);
+          _favoriteSportsVenueList.add(data);
         }
         notifyListeners();
       } else if (favoriteSportsVenueList.isEmpty) {
@@ -41,6 +45,24 @@ class FavoriteSportsVeneuProvider with ChangeNotifier {
     }
   }
 
+  getFavoriteCurrentStatus(String sportsVenueId) async {
+    _state = CurrentState.isLoading;
+    notifyListeners();
+    try {
+      final favoriteStatus = await getFavoriteStatus(sportsVenueId);
+      if (favoriteStatus == true) {
+        _iconState = Icons.favorite;
+      } else {
+        _iconState = Icons.favorite_border_outlined;
+      }
+      _state = CurrentState.isSuccsess;
+      notifyListeners();
+    } catch (e) {
+      _state = CurrentState.isError;
+      print(e.toString());
+    }
+  }
+
   setFavoriteSportsVenueStatus(String sportsVenueId) async {
     _state = CurrentState.isLoading;
     notifyListeners();
@@ -51,7 +73,9 @@ class FavoriteSportsVeneuProvider with ChangeNotifier {
       } else {
         addFavorite(sportsVenueId);
       }
+      getFavoriteCurrentStatus(sportsVenueId);
       _state = CurrentState.isSuccsess;
+      fetchFavoriteSportsVenueList();
       notifyListeners();
     } catch (e) {
       _state = CurrentState.isError;

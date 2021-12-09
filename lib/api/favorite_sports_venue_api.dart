@@ -61,7 +61,6 @@ Future<void> deleteFavorite(String sportsVenueId) {
       .collection('users')
       .doc(auth.currentUser!.uid)
       .collection('favorite_sports_venues');
-  ;
   return favorite_sports_venues
       .doc(sportsVenueId)
       .delete()

@@ -376,21 +376,19 @@ class FavoriteButton extends StatelessWidget {
         child: SizedBox(
           width: 50,
           height: 50,
-          child: ChangeNotifierProvider<FavoriteSportsVeneuProvider>(
-            create: (context) => FavoriteSportsVeneuProvider(),
-            child: Consumer<FavoriteSportsVeneuProvider>(
-              builder: (BuildContext context, value, Widget? child) {
-                return IconButton(
-                  icon: const Icon(
-                    Icons.favorite_outline,
-                    color: primaryColor,
-                  ),
-                  onPressed: () {
-                    value.setFavoriteSportsVenueStatus(sportsVenueId);
-                  },
-                );
-              },
-            ),
+          child: Consumer<FavoriteSportsVeneuProvider>(
+            builder: (BuildContext context, value, Widget? child) {
+              final iconState = value.iconState;
+              return IconButton(
+                icon: Icon(
+                  iconState,
+                  color: primaryColor,
+                ),
+                onPressed: () {
+                  value.setFavoriteSportsVenueStatus(sportsVenueId);
+                },
+              );
+            },
           ),
         ),
         decoration: BoxDecoration(
