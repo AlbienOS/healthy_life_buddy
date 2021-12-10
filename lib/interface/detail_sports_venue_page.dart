@@ -174,16 +174,15 @@ class DetailSportsVenuePage extends StatelessWidget {
                                           ),
                                         ),
                                         onPressed: () {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) {
-                                          //       return BookingSportsVenuePage(
-                                          //           sportsVenueData:
-                                          //               sportsVenueData);
-                                          //     },
-                                          //   ),
-                                          // );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return BookingSportsVenuePage(
+                                                    sportsVenueData: sportsVenueData);
+                                              },
+                                            ),
+                                          );
                                         },
                                         style: TextButton.styleFrom(
                                           backgroundColor: primaryColor,

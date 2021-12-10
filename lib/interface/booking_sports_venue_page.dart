@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
+import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 import 'package:healthy_life_buddy/widget/date_picker_widget.dart';
 import 'package:healthy_life_buddy/widget/time_picker.dart';
@@ -11,9 +12,7 @@ class BookingSportsVenuePage extends StatefulWidget {
   const BookingSportsVenuePage({Key? key, required this.sportsVenueData})
       : super(key: key);
 
-  final SportsVeneu sportsVenueData;
-
-
+  final DetailSportsVeneu sportsVenueData;
 
   @override
   State<BookingSportsVenuePage> createState() => _BookingSportsVenuePageState();

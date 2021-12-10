@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
                 ModalRoute.of(context)?.settings.arguments as String),
         BookingSportsVenuePage.routeName: (context) => BookingSportsVenuePage(
             sportsVenueData:
-                ModalRoute.of(context)?.settings.arguments as SportsVeneu),
+                ModalRoute.of(context)?.settings.arguments as DetailSportsVeneu),
       },
     );
   }
