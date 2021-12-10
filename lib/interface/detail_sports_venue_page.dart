@@ -229,9 +229,13 @@ class SportsVenuePromotion extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
-            child: Text(
-              detailSportsVenueData.discountInfo,
-              style: textTheme.subtitle1?.apply(color: onSurfaceColor),
+            child: Center(
+              child: Text(
+                'BUAT MEMBER',
+                style: GoogleFonts.montserrat(
+                  fontSize: 16,
+                ),
+              ),
             ),
           ),
           Row(
@@ -243,7 +247,7 @@ class SportsVenuePromotion extends StatelessWidget {
                       left: 16.0, right: 16.0, bottom: 16.0, top: 8),
                   child: TextButton(
                     child: Text(
-                      "Ambil",
+                      "BUAT",
                       style: textTheme.button?.apply(
                         color: onPrimaryColor,
                       ),

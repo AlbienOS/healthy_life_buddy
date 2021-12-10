@@ -214,7 +214,7 @@ class _MemberPageState extends State<MemberPage> {
         ),
       ),
       bottomNavigationBar: SizedBox(
-        height: 80,
+        height: 50,
         child: Column(
           children: [
             Row(
@@ -242,6 +242,116 @@ class _MemberPageState extends State<MemberPage> {
                           ),
                         ),
                         onPressed: () {
+                          showDialog(context: context, builder: (context){
+                            if(nameResult.isEmpty){
+                              return AlertDialog(
+                                title: Text('Semua Kolom Harus Terisi'),
+                                actions: [
+                                  TextButton(
+                                    child: Text("Oke"),
+                                    onPressed:  () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            } else if(addressResult.isEmpty){
+                              return AlertDialog(
+                                title: Text('Semua Kolom Harus Terisi'),
+                                actions: [
+                                  TextButton(
+                                    child: Text("Oke"),
+                                    onPressed:  () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            } else if(telephoneResult.isEmpty){
+                              return AlertDialog(
+                                title: Text('Semua Kolom Harus Terisi'),
+                                actions: [
+                                  TextButton(
+                                    child: Text("Oke"),
+                                    onPressed:  () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            }else{
+                              return AlertDialog(
+                                title: Center(
+                                    child: Text('KONFIRMASI')
+                                ),
+                                content: Container(
+                                  height: 300,
+                                  width: 400,
+                                  child:  SingleChildScrollView(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(Icons.person),
+                                            Text('        : ${nameResult}'),
+                                          ],
+                                        ),
+                                        Divider(thickness: 2.0),
+                                        SizedBox(height: 10.0),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.add_location),
+                                            Text('        : ${addressResult}'),
+                                          ],
+                                        ),
+                                        Divider(thickness: 2.0),
+                                        SizedBox(height: 10.0),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.contact_phone),
+                                            Text('        : ${telephoneResult}'),
+                                          ],
+                                        ),
+                                        Divider(thickness: 2.0),
+                                        SizedBox(height: 10.0),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.date_range),
+                                            Text('        : ' + getDateText()),
+                                          ],
+                                        ),
+                                        Divider(thickness: 2.0),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: Text("Cancel"),
+                                    onPressed:  () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text("Oke"),
+                                    onPressed:  () {
+                                      Navigator.pop(context);
+                                      final snackBar = SnackBar(
+                                        content: Text('Pemesanan Berhasil!'),
+                                        action: SnackBarAction(label: 'ULANGI',
+                                            onPressed: (){
+                                            }
+                                        ),
+                                      );
+                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    },
+                                  ),
+                                ],
+
+                              );
+                            }
+                          });
                         },
                       ),
                     ),
