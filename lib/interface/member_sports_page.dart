@@ -33,182 +33,184 @@ class _MemberPageState extends State<MemberPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(
-                        'PESAN TEMPAT OLAHRAGA',
-                        style: GoogleFonts.montserrat(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                         ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          'PESAN TEMPAT OLAHRAGA',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 350,
-                        padding: EdgeInsets.symmetric(vertical: 8.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            contentPadding:
-                            EdgeInsets.symmetric(horizontal: 8.0),
-                            hintText: "Nama",
-                            border: InputBorder.none,
-                          ),
-                          keyboardType: TextInputType.name,
-                          onSubmitted: (String res){
-                            setState(() {
-                              nameResult = res;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 350,
-                        padding: EdgeInsets.symmetric(vertical: 8.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            contentPadding:
-                            EdgeInsets.symmetric(horizontal: 8.0),
-                            hintText: "Alamat",
-                            border: InputBorder.none,
-                          ),
-                          keyboardType: TextInputType.streetAddress,
-                          onSubmitted: (String res){
-                            setState(() {
-                              addressResult = res;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 350,
-                        padding: EdgeInsets.symmetric(vertical: 8.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            contentPadding:
-                            EdgeInsets.symmetric(horizontal: 8.0),
-                            hintText: "No. Telepon",
-                            border: InputBorder.none,
-                          ),
-                          keyboardType: TextInputType.phone,
-                          onSubmitted: (String res){
-                            setState(() {
-                              telephoneResult = res;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 250,
-                        padding: EdgeInsets.symmetric(vertical: 8.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Container(
-                          height: 60,
-                          width: 250,
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 350,
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(10.0),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Center(
-                            child: Text(
-                              getDateText(),
-                              style:
-                              GoogleFonts.montserrat(fontSize: 16, color: Colors.black),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              contentPadding:
+                              EdgeInsets.symmetric(horizontal: 8.0),
+                              hintText: "Nama",
+                              border: InputBorder.none,
+                            ),
+                            keyboardType: TextInputType.name,
+                            onSubmitted: (String res){
+                              setState(() {
+                                nameResult = res;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 350,
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              contentPadding:
+                              EdgeInsets.symmetric(horizontal: 8.0),
+                              hintText: "Alamat",
+                              border: InputBorder.none,
+                            ),
+                            keyboardType: TextInputType.streetAddress,
+                            onSubmitted: (String res){
+                              setState(() {
+                                addressResult = res;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 350,
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              contentPadding:
+                              EdgeInsets.symmetric(horizontal: 8.0),
+                              hintText: "No. Telepon",
+                              border: InputBorder.none,
+                            ),
+                            keyboardType: TextInputType.phone,
+                            onSubmitted: (String res){
+                              setState(() {
+                                telephoneResult = res;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 250,
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Container(
+                            height: 60,
+                            width: 250,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Center(
+                              child: Text(
+                                getDateText(),
+                                style:
+                                GoogleFonts.montserrat(fontSize: 16, color: Colors.black),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(width: 30),
-                      Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          color: primaryVariantColor,
-                          borderRadius: BorderRadius.circular(20.0),
+                        SizedBox(width: 30),
+                        Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: primaryVariantColor,
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  )),
+                              onPressed: () {
+                                pickedDate(context);
+                              },
+                              child: Icon(Icons.calendar_today)),
                         ),
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                )),
-                            onPressed: () {
-                              pickedDate(context);
-                            },
-                            child: Icon(Icons.calendar_today)),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: SizedBox(
