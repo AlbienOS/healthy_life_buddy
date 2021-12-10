@@ -13,6 +13,7 @@ import 'package:healthy_life_buddy/provider/detail_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/favorite_status_sports_venue_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 
 class DetailSportsVenuePage extends StatelessWidget {
   static const routeName = '/DetailSportsVenuePage';
@@ -51,7 +52,10 @@ class DetailSportsVenuePage extends StatelessWidget {
                       Row(
                         children: [
                           FavoriteButton(sportsVenueId: sportsVenueData.id),
-                          const ShareButton(),
+                          ShareButton(
+                            name: sportsVenueData.name,
+                            location: sportsVenueData.location,
+                          ),
                         ],
                       ),
                       Padding(
@@ -433,9 +437,11 @@ class FavoriteButton extends StatelessWidget {
 }
 
 class ShareButton extends StatelessWidget {
-  const ShareButton({
-    Key? key,
-  }) : super(key: key);
+  ShareButton({Key? key, required this.name, required this.location})
+      : super(key: key);
+
+  String name;
+  String location;
 
   @override
   Widget build(BuildContext context) {
@@ -452,7 +458,11 @@ class ShareButton extends StatelessWidget {
               Icons.share,
               color: primaryColor,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Share.share(
+                  "Ayo berolahraga bersama di ${name} yang berlokasi di ${location}",
+                  subject: "Undangan berolahraga di {$name}");
+            },
           ),
         ),
         decoration: BoxDecoration(
