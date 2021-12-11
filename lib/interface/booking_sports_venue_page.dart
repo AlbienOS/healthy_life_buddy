@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
-import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
-import 'package:healthy_life_buddy/model/sports_venue_model.dart';
-import 'package:healthy_life_buddy/provider/booking_provider.dart';
-import 'package:healthy_life_buddy/widget/date_picker_widget.dart';
-import 'package:healthy_life_buddy/widget/time_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
+
 
 class BookingSportsVenuePage extends StatefulWidget {
   static const routeName = '/BookingSportsRevnuePage';

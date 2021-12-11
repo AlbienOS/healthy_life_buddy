@@ -6,6 +6,7 @@ import 'package:healthy_life_buddy/interface/booking_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/detail_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
 import 'package:healthy_life_buddy/interface/login_page.dart';
+import 'package:healthy_life_buddy/interface/member_sports_page.dart';
 import 'package:healthy_life_buddy/interface/welcome_page.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';

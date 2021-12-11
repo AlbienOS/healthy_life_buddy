@@ -1,15 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
+import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:intl/intl.dart';
+import 'package:healthy_life_buddy/api/auth_api.dart';
 
 class MemberPage extends StatefulWidget{
   static const routeName = '/MemberSportsPage';
   @override
   State<MemberPage> createState() => _MemberPageState();
+
+
 }
 
 class _MemberPageState extends State<MemberPage> {
+  CollectionReference member = FirebaseFirestore
+      .instance
+      .collection('users').doc(auth.currentUser!.uid).collection('member');
+
   int changePrice = 0;
 
   String nameResult = '';
@@ -57,7 +66,7 @@ class _MemberPageState extends State<MemberPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
-                          'PESAN TEMPAT OLAHRAGA',
+                          'MEMBER TEMPAT OLAHRAGA',
                           style: GoogleFonts.montserrat(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -282,7 +291,7 @@ class _MemberPageState extends State<MemberPage> {
                             }else{
                               return AlertDialog(
                                 title: Center(
-                                    child: Text('KONFIRMASI')
+                                    child: Text('KONFIRMASI MEMBER')
                                 ),
                                 content: Container(
                                   height: 300,
@@ -335,10 +344,16 @@ class _MemberPageState extends State<MemberPage> {
                                   ),
                                   TextButton(
                                     child: Text("Oke"),
-                                    onPressed:  () {
+                                    onPressed:  () async {
+                                      await member.add({
+                                        'name' : nameResult,
+                                        'address' : addressResult,
+                                        'telephone' : telephoneResult,
+                                        'date' : getDateText(),
+                                      }).then((value) => print('Membership Success'));
                                       Navigator.pop(context);
                                       final snackBar = SnackBar(
-                                        content: Text('Pemesanan Berhasil!'),
+                                        content: Text('Pembuatan Member Berhasil!'),
                                         action: SnackBarAction(label: 'ULANGI',
                                             onPressed: (){
                                             }
