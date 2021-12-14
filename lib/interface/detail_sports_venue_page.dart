@@ -179,7 +179,8 @@ class DetailSportsVenuePage extends StatelessWidget {
                                             MaterialPageRoute(
                                               builder: (context) {
                                                 return BookingSportsVenuePage(
-                                                    sportsVenueData: sportsVenueData);
+                                                    sportsVenueData:
+                                                        sportsVenueData);
                                               },
                                             ),
                                           );
@@ -382,12 +383,12 @@ class BackButton extends StatelessWidget {
 }
 
 class FavoriteButton extends StatelessWidget {
-  FavoriteButton({
+  const FavoriteButton({
     Key? key,
     required this.sportsVenueId,
   }) : super(key: key);
 
-  String sportsVenueId;
+  final String sportsVenueId;
 
   @override
   Widget build(BuildContext context) {
@@ -425,7 +426,7 @@ class FavoriteButton extends StatelessWidget {
                   },
                 );
               } else {
-                return Text("error");
+                return const Text("error");
               }
             },
           ),
@@ -440,11 +441,11 @@ class FavoriteButton extends StatelessWidget {
 }
 
 class ShareButton extends StatelessWidget {
-  ShareButton({Key? key, required this.name, required this.location})
+  const ShareButton({Key? key, required this.name, required this.location})
       : super(key: key);
 
-  String name;
-  String location;
+  final String name;
+  final String location;
 
   @override
   Widget build(BuildContext context) {

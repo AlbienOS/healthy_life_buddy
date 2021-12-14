@@ -4,6 +4,7 @@ import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
+import 'package:healthy_life_buddy/widget/headline_widget.dart';
 import 'package:healthy_life_buddy/widget/user_profile_widget.dart';
 import 'package:provider/provider.dart';
 import 'detail_sports_venue_page.dart';
@@ -21,6 +22,7 @@ class FavoritePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               UserProfile(),
+              Headline(text: "Your Favorite Sports Venue"),
               ListOfFavoriteSportsVenues(),
             ],
           ),

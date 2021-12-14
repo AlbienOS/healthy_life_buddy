@@ -6,6 +6,7 @@ import 'package:healthy_life_buddy/interface/detail_sports_venue_page.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/favorite_status_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/sports_venue_provider.dart';
+import 'package:healthy_life_buddy/widget/headline_widget.dart';
 import 'package:healthy_life_buddy/widget/user_profile_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -35,26 +36,6 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class Headline extends StatelessWidget {
-  const Headline({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16.0, bottom: 8.0, left: 8.0),
-      child: Text(
-        text,
-        style: textTheme.headline6?.apply(color: onBackgroundColor),
       ),
     );
   }
