@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
+import 'package:healthy_life_buddy/interface/home_page.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:intl/intl.dart';
 
@@ -576,7 +577,10 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                                           'time' : getTimeText(),
                                           'cost' : changePrice,
                                         }).then((value) => print('Booking Added'));
-                                        Navigator.pop(context);
+                                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                                          return HomePage();  
+
+                                        }));
                                         final snackBar = SnackBar(
                                           content: Text('Pemesanan Berhasil!'),
                                           action: SnackBarAction(label: 'ULANGI',
