@@ -12,6 +12,8 @@ import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 import 'package:healthy_life_buddy/provider/detail_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/favorite_status_sports_venue_provider.dart';
+import 'package:healthy_life_buddy/widget/back_button.dart';
+import 'package:healthy_life_buddy/widget/share_button.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
@@ -46,15 +48,23 @@ class DetailSportsVenuePage extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const BackButton(),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 8.0,
+                        ),
+                        child: CustomBackButton(),
+                      ),
                       SportsVenueImage(
                           imageUrl: sportsVenueData.imageUrl, size: size),
                       Row(
                         children: [
                           FavoriteButton(sportsVenueId: sportsVenueData.id),
                           ShareButton(
-                            name: sportsVenueData.name,
-                            location: sportsVenueData.location,
+                            text:
+                                'Ayo berolahraga bersama di ${sportsVenueData.name} yang berlokasi di ${sportsVenueData.location}',
+                            subjectText:
+                                "Undangan berolahraga di {$sportsVenueData.name}",
                           ),
                         ],
                       ),
@@ -347,41 +357,6 @@ class SportsVenueImage extends StatelessWidget {
   }
 }
 
-class BackButton extends StatelessWidget {
-  const BackButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 8.0,
-      ),
-      child: Container(
-        child: SizedBox(
-          width: 50,
-          height: 50,
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: onSurfaceColor,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
-          color: surfaceColor,
-        ),
-      ),
-    );
-  }
-}
-
 class FavoriteButton extends StatelessWidget {
   const FavoriteButton({
     Key? key,
@@ -428,44 +403,6 @@ class FavoriteButton extends StatelessWidget {
               } else {
                 return const Text("error");
               }
-            },
-          ),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
-          color: surfaceColor,
-        ),
-      ),
-    );
-  }
-}
-
-class ShareButton extends StatelessWidget {
-  const ShareButton({Key? key, required this.name, required this.location})
-      : super(key: key);
-
-  final String name;
-  final String location;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 8.0,
-      ),
-      child: Container(
-        child: SizedBox(
-          width: 50,
-          height: 50,
-          child: IconButton(
-            icon: const Icon(
-              Icons.share,
-              color: primaryColor,
-            ),
-            onPressed: () {
-              Share.share(
-                  "Ayo berolahraga bersama di ${name} yang berlokasi di ${location}",
-                  subject: "Undangan berolahraga di {$name}");
             },
           ),
         ),

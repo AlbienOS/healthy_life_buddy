@@ -58,8 +58,7 @@ class ListOfArticles extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return DetailArticlePage(
-                              articleId: articleData[i].id);
+                          return DetailArticlePage(articleData: articleData[i]);
                         },
                       ),
                     );
