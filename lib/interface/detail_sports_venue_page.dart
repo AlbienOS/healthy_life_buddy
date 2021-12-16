@@ -93,12 +93,8 @@ class DetailSportsVenuePage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Costs Detail",
-                                  style: textTheme.headline6?.apply(
-                                    color: onSurfaceColor,
-                                  ),
-                                ),
+                                Text("Costs Detail",
+                                    style: textTheme.headline6),
                                 Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 8.0),
@@ -106,21 +102,14 @@ class DetailSportsVenuePage extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         flex: 1,
-                                        child: Text(
-                                          "Rental Costs",
-                                          style: textTheme.bodyText2?.apply(
-                                            color: onSurfaceColor,
-                                          ),
-                                        ),
+                                        child: Text("Rental Costs",
+                                            style: textTheme.bodyText2),
                                       ),
                                       Expanded(
                                         flex: 2,
                                         child: Text(
-                                          ': ${sportsVenueData.rentalCosts}',
-                                          style: textTheme.bodyText2?.apply(
-                                            color: onSurfaceColor,
-                                          ),
-                                        ),
+                                            ': ${sportsVenueData.rentalCosts}',
+                                            style: textTheme.bodyText2),
                                       ),
                                     ],
                                   ),
@@ -129,21 +118,13 @@ class DetailSportsVenuePage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       flex: 1,
-                                      child: Text(
-                                        "Discount",
-                                        style: textTheme.bodyText2?.apply(
-                                          color: onSurfaceColor,
-                                        ),
-                                      ),
+                                      child: Text("Discount",
+                                          style: textTheme.bodyText2),
                                     ),
                                     Expanded(
                                       flex: 2,
-                                      child: Text(
-                                        ': Dummy_Discount',
-                                        style: textTheme.bodyText2?.apply(
-                                          color: onSurfaceColor,
-                                        ),
-                                      ),
+                                      child: Text(': Dummy_Discount',
+                                          style: textTheme.bodyText2),
                                     ),
                                   ],
                                 ),
@@ -154,21 +135,13 @@ class DetailSportsVenuePage extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         flex: 1,
-                                        child: Text(
-                                          "Total",
-                                          style: textTheme.bodyText2?.apply(
-                                            color: onSurfaceColor,
-                                          ),
-                                        ),
+                                        child: Text("Total",
+                                            style: textTheme.bodyText2),
                                       ),
                                       Expanded(
                                         flex: 2,
-                                        child: Text(
-                                          ': Dummy_Total',
-                                          style: textTheme.bodyText2?.apply(
-                                            color: onSurfaceColor,
-                                          ),
-                                        ),
+                                        child: Text(': Dummy_Total',
+                                            style: textTheme.bodyText2),
                                       ),
                                     ],
                                   ),
@@ -177,12 +150,8 @@ class DetailSportsVenuePage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: TextButton(
-                                        child: Text(
-                                          "Pesan",
-                                          style: textTheme.button?.apply(
-                                            color: onPrimaryColor,
-                                          ),
-                                        ),
+                                        child: Text("Pesan",
+                                            style: textTheme.button),
                                         onPressed: () {
                                           Navigator.push(
                                             context,
@@ -257,12 +226,7 @@ class SportsVenuePromotion extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 16.0, right: 16.0, bottom: 16.0, top: 8),
                   child: TextButton(
-                    child: Text(
-                      "BUAT",
-                      style: textTheme.button?.apply(
-                        color: onPrimaryColor,
-                      ),
-                    ),
+                    child: Text("BUAT", style: textTheme.button),
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
@@ -302,10 +266,7 @@ class SportsVenueDetail extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              detailSportsVenueData.name,
-              style: textTheme.headline5?.apply(color: onBackgroundColor),
-            ),
+            Text(detailSportsVenueData.name, style: textTheme.headline5),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: RatingBarIndicator(
@@ -319,10 +280,7 @@ class SportsVenueDetail extends StatelessWidget {
                 direction: Axis.horizontal,
               ),
             ),
-            Text(
-              detailSportsVenueData.description,
-              style: textTheme.bodyText2?.apply(color: onBackgroundColor),
-            ),
+            Text(detailSportsVenueData.description, style: textTheme.bodyText2),
           ],
         ),
       ),

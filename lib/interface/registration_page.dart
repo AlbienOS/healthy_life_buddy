@@ -45,10 +45,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 32.0, bottom: 8.0),
-                  child: Text(
-                    "Registration",
-                    style: textTheme.headline5?.apply(color: onBackgroundColor),
-                  ),
+                  child: Text("Registration", style: textTheme.headline5),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -78,12 +75,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   child: SizedBox(
                     width: 150,
                     child: TextButton(
-                      child: Text(
-                        "Lanjut",
-                        style: textTheme.button?.apply(
-                          color: onPrimaryColor,
-                        ),
-                      ),
+                      child: Text("Lanjut", style: textTheme.button),
                       onPressed: () async {
                         if (_emailController.text.isNotEmpty &&
                             _passwordController.text ==
@@ -113,21 +105,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   child: Column(
                     children: [
                       Center(
-                        child: Text(
-                          "Sudah punya akun?",
-                          textAlign: TextAlign.center,
-                          style: textTheme.subtitle1
-                              ?.apply(color: onBackgroundColor),
-                        ),
+                        child: Text("Sudah punya akun?",
+                            textAlign: TextAlign.center,
+                            style: textTheme.subtitle1),
                       ),
                       Center(
                         child: InkWell(
                           child: Text(
                             "Login Sekarang!",
                             textAlign: TextAlign.center,
-                            style: textTheme.subtitle1?.apply(
-                                color: primaryColor,
-                                decoration: TextDecoration.underline),
+                            style: textTheme.subtitle1
+                                ?.apply(decoration: TextDecoration.underline),
                           ),
                           onTap: () {
                             Navigator.push(

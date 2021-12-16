@@ -1,8 +1,8 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/interface/article_page.dart';
 import 'package:healthy_life_buddy/interface/favorite_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
-import 'package:healthy_life_buddy/interface/profile_page.dart';
+import 'package:healthy_life_buddy/interface/setting_page.dart';
 import 'package:healthy_life_buddy/interface/search_sports_venue_page.dart';
 
 class Navigation extends StatefulWidget {
@@ -19,7 +19,7 @@ class _NavigationState extends State<Navigation> {
     const FavoritePage(),
     const SearchSportsVenue(),
     const ArticlePage(),
-    const ProfilePage(),
+    const SettingPage(),
   ];
 
   int _selectedPage = 0;
@@ -29,7 +29,7 @@ class _NavigationState extends State<Navigation> {
     return Scaffold(
       body: listPage[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
-        unselectedItemColor: Colors.black45,
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -48,8 +48,8 @@ class _NavigationState extends State<Navigation> {
             label: 'Article',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.settings),
+            label: 'Setting',
           ),
         ],
         currentIndex: _selectedPage,

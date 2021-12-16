@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
-import 'package:healthy_life_buddy/helper/navigation.dart';
+import 'package:healthy_life_buddy/helper/navigation_helper.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -45,13 +45,11 @@ class WelcomePage extends StatelessWidget {
                             RichText(
                               text: TextSpan(
                                 text: 'Cari & pesan tempat olahraga \ndi ',
-                                style: textTheme.headline5
-                                    ?.apply(color: onBackgroundColor),
+                                style: textTheme.headline5,
                                 children: <TextSpan>[
                                   TextSpan(
                                       text: 'Healthy Life Buddy',
-                                      style: textTheme.headline5
-                                          ?.apply(color: primaryColor)),
+                                      style: textTheme.headline5),
                                 ],
                               ),
                             ),
@@ -60,8 +58,7 @@ class WelcomePage extends StatelessWidget {
                                   const EdgeInsets.symmetric(vertical: 16.0),
                               child: Text(
                                 'Kamu dapat mencari dan memesan \ntempat olahraga sesuai keinginan \ndan kebutuhanmu di sini',
-                                style: textTheme.subtitle1
-                                    ?.apply(color: onBackgroundColor),
+                                style: textTheme.subtitle1,
                               ),
                             ),
                           ],

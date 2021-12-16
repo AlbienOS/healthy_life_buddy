@@ -80,7 +80,7 @@ class _SearchSportsVenueState extends State<SearchSportsVenue> {
                       Align(
                         alignment: Alignment.center,
                         child: Column(
-                          children: [
+                          children: const [
                             SizedBox(
                               height: 100.0,
                             ),
@@ -179,25 +179,17 @@ class _SearchSportsVenueState extends State<SearchSportsVenue> {
                                     horizontal: 8.0,
                                     vertical: 8.0,
                                   ),
-                                  child: Text(
-                                    name,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: textTheme.headline6?.apply(
-                                      color: onSurfaceColor,
-                                    ),
-                                  ),
+                                  child: Text(name,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: textTheme.headline6),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0,
                                   ),
-                                  child: Text(
-                                    "Rp. ${cost}",
-                                    style: textTheme.subtitle1?.apply(
-                                      color: onSurfaceColor,
-                                    ),
-                                  ),
+                                  child: Text("Rp. ${cost}",
+                                      style: textTheme.subtitle1),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -213,12 +205,8 @@ class _SearchSportsVenueState extends State<SearchSportsVenue> {
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 8.0,
                                         ),
-                                        child: Text(
-                                          rate.toString(),
-                                          style: textTheme.subtitle1?.apply(
-                                            color: onSurfaceColor,
-                                          ),
-                                        ),
+                                        child: Text(rate.toString(),
+                                            style: textTheme.subtitle1),
                                       ),
                                       const Icon(
                                         Icons.location_pin,
@@ -229,14 +217,10 @@ class _SearchSportsVenueState extends State<SearchSportsVenue> {
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 8.0,
                                           ),
-                                          child: Text(
-                                            location,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: textTheme.subtitle1?.apply(
-                                              color: onSurfaceColor,
-                                            ),
-                                          ),
+                                          child: Text(location,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: textTheme.subtitle1),
                                         ),
                                       ),
                                     ],

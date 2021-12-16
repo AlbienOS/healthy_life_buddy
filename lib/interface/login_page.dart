@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
-import 'package:healthy_life_buddy/helper/navigation.dart';
+import 'package:healthy_life_buddy/helper/navigation_helper.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
 import 'package:healthy_life_buddy/interface/registration_page.dart';
 
@@ -38,35 +38,52 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.only(top: 32.0, bottom: 8.0),
                   child: Text(
                     "Login",
-                    style: textTheme.headline5?.apply(color: onBackgroundColor),
+                    style: textTheme.headline5,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: TextField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'email'),
+                  padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+                  child: Text(
+                    "Email",
+                    style: textTheme.subtitle1,
+                  ),
+                ),
+                TextField(
+                  controller: _emailController,
+                  style: const TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+                  child: Text(
+                    "Password",
+                    style: textTheme.subtitle1,
                   ),
                 ),
                 TextField(
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'password'),
+                  style: TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Center(
                     child: SizedBox(
                       width: 150,
-                      child: TextButton(
-                        child: Text(
-                          "Login",
-                          style: textTheme.button?.apply(
-                            color: onPrimaryColor,
-                          ),
-                        ),
+                      child: ElevatedButton(
                         onPressed: () async {
                           final loginResult = await login(
                               _emailController.text, _passwordController.text);
@@ -77,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                             print("login failed");
                           }
                         },
+                        child: Text("Login", style: textTheme.button),
                         style: TextButton.styleFrom(
                           backgroundColor: primaryColor,
                         ),
@@ -89,12 +107,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       Center(
-                        child: Text(
-                          "Belum punya akun?",
-                          textAlign: TextAlign.center,
-                          style: textTheme.subtitle1
-                              ?.apply(color: onBackgroundColor),
-                        ),
+                        child: Text("Belum punya akun?",
+                            textAlign: TextAlign.center,
+                            style: textTheme.subtitle1),
                       ),
                       Center(
                         child: InkWell(

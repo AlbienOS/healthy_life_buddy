@@ -81,10 +81,7 @@ class ArticleContent extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                articleData.title,
-                style: textTheme.headline5?.apply(color: onBackgroundColor),
-              ),
+              child: Text(articleData.title, style: textTheme.headline5),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -99,11 +96,8 @@ class ArticleContent extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          articleData.author,
-                          style: textTheme.subtitle1
-                              ?.apply(color: onBackgroundColor),
-                        ),
+                        child: Text(articleData.author,
+                            style: textTheme.subtitle1),
                       ),
                     ],
                   ),
@@ -114,14 +108,13 @@ class ArticleContent extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      DateFormat('dd-MM-yyyy')
-                          .format(
-                            DateTime.fromMillisecondsSinceEpoch(
-                                articleData.createAt.millisecondsSinceEpoch),
-                          )
-                          .toString(),
-                      style: textTheme.caption?.apply(color: onSurfaceColor),
-                    ),
+                        DateFormat('dd-MM-yyyy')
+                            .format(
+                              DateTime.fromMillisecondsSinceEpoch(
+                                  articleData.createAt.millisecondsSinceEpoch),
+                            )
+                            .toString(),
+                        style: textTheme.caption),
                   ),
                 ],
               ),
@@ -140,10 +133,7 @@ class ArticleContent extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                articleData.content,
-                style: textTheme.caption?.apply(color: onSurfaceColor),
-              ),
+              child: Text(articleData.content, style: textTheme.caption),
             ),
           ],
         ),

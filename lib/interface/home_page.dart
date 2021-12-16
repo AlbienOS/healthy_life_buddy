@@ -107,9 +107,7 @@ class ListOfSportsVenues extends StatelessWidget {
                                     sportsVenueData[i].name,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: textTheme.headline6?.apply(
-                                      color: onSurfaceColor,
-                                    ),
+                                    style: textTheme.headline6,
                                   ),
                                 ),
                                 Padding(
@@ -117,11 +115,8 @@ class ListOfSportsVenues extends StatelessWidget {
                                     horizontal: 8.0,
                                   ),
                                   child: Text(
-                                    "Rp. ${sportsVenueData[i].rentalCosts}",
-                                    style: textTheme.subtitle1?.apply(
-                                      color: onSurfaceColor,
-                                    ),
-                                  ),
+                                      "Rp. ${sportsVenueData[i].rentalCosts}",
+                                      style: textTheme.subtitle1),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -138,11 +133,8 @@ class ListOfSportsVenues extends StatelessWidget {
                                           horizontal: 8.0,
                                         ),
                                         child: Text(
-                                          sportsVenueData[i].rate.toString(),
-                                          style: textTheme.subtitle1?.apply(
-                                            color: onSurfaceColor,
-                                          ),
-                                        ),
+                                            sportsVenueData[i].rate.toString(),
+                                            style: textTheme.subtitle1),
                                       ),
                                       const Icon(
                                         Icons.location_pin,
@@ -154,13 +146,10 @@ class ListOfSportsVenues extends StatelessWidget {
                                             horizontal: 8.0,
                                           ),
                                           child: Text(
-                                            sportsVenueData[i].location,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: textTheme.subtitle1?.apply(
-                                              color: onSurfaceColor,
-                                            ),
-                                          ),
+                                              sportsVenueData[i].location,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: textTheme.subtitle1),
                                         ),
                                       ),
                                     ],
@@ -223,25 +212,20 @@ class Promotion extends StatelessWidget {
                             children: [
                               const Icon(Icons.attach_money,
                                   color: primaryColor),
-                              Text(
-                                "Promo Member Gor Mars",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: textTheme.subtitle2
-                                    ?.apply(color: onSurfaceColor),
-                              ),
+                              Text("Promo Member Gor Mars",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: textTheme.subtitle2),
                             ],
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Text(
-                            "Promo diskon 75% untuk daftar member di GOR Mars.",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style:
-                                textTheme.caption?.apply(color: onSurfaceColor),
-                          ),
+                              "Promo diskon 75% untuk daftar member di GOR Mars.",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: textTheme.caption),
                         ),
                       ],
                     ),

@@ -36,11 +36,8 @@ class UserProfile extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      "Hello, ${userData?.name}",
-                      style:
-                          textTheme.headline6?.apply(color: onBackgroundColor),
-                    ),
+                    child: Text("Hello, ${userData?.name}",
+                        style: textTheme.headline6),
                   ),
                 ],
               ),

@@ -99,11 +99,8 @@ class ListOfArticles extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8.0),
-                                      child: Text(
-                                        articleData[i].title,
-                                        style: textTheme.headline6
-                                            ?.apply(color: onSurfaceColor),
-                                      ),
+                                      child: Text(articleData[i].title,
+                                          style: textTheme.headline6),
                                     ),
                                     Row(
                                       children: [
@@ -121,24 +118,19 @@ class ListOfArticles extends StatelessWidget {
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 8.0),
-                                          child: Text(
-                                            articleData[i].author,
-                                            style: textTheme.caption
-                                                ?.apply(color: onSurfaceColor),
-                                          ),
+                                          child: Text(articleData[i].author,
+                                              style: textTheme.caption),
                                         ),
                                         Text(
-                                          DateFormat('dd-MM-yyyy')
-                                              .format(
-                                                DateTime.fromMillisecondsSinceEpoch(
-                                                    articleData[i]
-                                                        .createAt
-                                                        .millisecondsSinceEpoch),
-                                              )
-                                              .toString(),
-                                          style: textTheme.caption
-                                              ?.apply(color: onSurfaceColor),
-                                        ),
+                                            DateFormat('dd-MM-yyyy')
+                                                .format(
+                                                  DateTime.fromMillisecondsSinceEpoch(
+                                                      articleData[i]
+                                                          .createAt
+                                                          .millisecondsSinceEpoch),
+                                                )
+                                                .toString(),
+                                            style: textTheme.caption),
                                       ],
                                     ),
                                     Padding(
@@ -146,8 +138,7 @@ class ListOfArticles extends StatelessWidget {
                                           vertical: 8.0),
                                       child: Text(
                                         articleData[i].content,
-                                        style: textTheme.caption
-                                            ?.apply(color: onSurfaceColor),
+                                        style: textTheme.caption,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),

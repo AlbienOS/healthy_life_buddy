@@ -93,25 +93,18 @@ class ListOfFavoriteSportsVenues extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0,
                                   ),
-                                  child: Text(
-                                    favoriteSportsVenueData[i].name,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: textTheme.headline6?.apply(
-                                      color: onSurfaceColor,
-                                    ),
-                                  ),
+                                  child: Text(favoriteSportsVenueData[i].name,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: textTheme.headline6),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0,
                                   ),
                                   child: Text(
-                                    "Rp. ${favoriteSportsVenueData[i].rentalCosts}",
-                                    style: textTheme.subtitle1?.apply(
-                                      color: onSurfaceColor,
-                                    ),
-                                  ),
+                                      "Rp. ${favoriteSportsVenueData[i].rentalCosts}",
+                                      style: textTheme.subtitle1),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -128,13 +121,10 @@ class ListOfFavoriteSportsVenues extends StatelessWidget {
                                           horizontal: 8.0,
                                         ),
                                         child: Text(
-                                          favoriteSportsVenueData[i]
-                                              .rate
-                                              .toString(),
-                                          style: textTheme.subtitle1?.apply(
-                                            color: onSurfaceColor,
-                                          ),
-                                        ),
+                                            favoriteSportsVenueData[i]
+                                                .rate
+                                                .toString(),
+                                            style: textTheme.subtitle1),
                                       ),
                                       const Icon(
                                         Icons.location_pin,
@@ -146,13 +136,11 @@ class ListOfFavoriteSportsVenues extends StatelessWidget {
                                             horizontal: 8.0,
                                           ),
                                           child: Text(
-                                            favoriteSportsVenueData[i].location,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: textTheme.subtitle1?.apply(
-                                              color: onSurfaceColor,
-                                            ),
-                                          ),
+                                              favoriteSportsVenueData[i]
+                                                  .location,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: textTheme.subtitle1),
                                         ),
                                       ),
                                     ],

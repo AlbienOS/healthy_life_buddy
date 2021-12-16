@@ -50,7 +50,7 @@ class _UserDataRegistrationPageState extends State<UserDataRegistrationPage> {
                   padding: const EdgeInsets.only(top: 32.0, bottom: 8.0),
                   child: Text(
                     "User Info",
-                    style: textTheme.headline5?.apply(color: onBackgroundColor),
+                    style: textTheme.headline5,
                   ),
                 ),
                 Padding(
@@ -70,7 +70,7 @@ class _UserDataRegistrationPageState extends State<UserDataRegistrationPage> {
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Text(
                     "Gender",
-                    style: textTheme.subtitle1?.apply(color: onBackgroundColor),
+                    style: textTheme.subtitle1,
                   ),
                 ),
                 RadioListTile<String>(
