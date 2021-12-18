@@ -44,6 +44,11 @@ dependencies:
   provider: ^6.0.1
   firebase_auth: ^3.3.0
   share_plus: ^3.0.4
+  flutter_local_notifications: ^9.1.5
+  rxdart: ^0.27.3
+  android_alarm_manager: ^2.0.2
+  timezone: ^0.8.0
+  flutter_native_timezone: ^2.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
+import 'package:healthy_life_buddy/interface/second_page.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:intl/intl.dart';
+import 'package:healthy_life_buddy/utils/notif_helper.dart';
 
 
 class BookingSportsVenuePage extends StatefulWidget {
@@ -27,12 +30,16 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
       .doc(auth.currentUser!.uid)
       .collection('booking');
 
+  // late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
   int changePrice = 0;
   String nameResult = '';
   String addressResult = '';
   String telephoneResult = '';
   DateTime? dateTime;
   TimeOfDay? time;
+  final notification = FlutterLocalNotificationsPlugin();
+
 
   void fullPay() {
     setState(() {
@@ -50,7 +57,7 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
     if (dateTime == null) {
       return 'Pilih Tanggal';
     } else {
-      return DateFormat('dd/MM/yyyy').format(dateTime!);
+      return DateFormat('yyyy-MM-dd').format(dateTime!);
     }
   }
 
@@ -64,6 +71,51 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
       return '$hours.$minutes';
     }
   }
+
+  // @override
+  // void initState(){
+  //   super.initState();
+  //   var initializationSettingsAndroid =
+  //   AndroidInitializationSettings('app_icon');
+  //   var initializationSettings = InitializationSettings(
+  //       android: initializationSettingsAndroid);
+  //   flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  //
+  // }
+
+  // Future scheduleTime(DateTime times) async{
+  //   var time  = DateTime(times.year, times.month, times.day, times.hour, times.minute);
+  //
+  //   var scheduleNotificationDateTime = DateTime.now().add(Duration(seconds: 5));
+  //
+  //   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  //     "1",
+  //     "channel_healthy",);
+  //   NotificationDetails platformChannelSpecifics = NotificationDetails(
+  //     android: androidPlatformChannelSpecifics,);
+  //   await flutterLocalNotificationsPlugin.schedule(1, 'schedule title', 'schedule body', scheduleNotificationDateTime, platformChannelSpecifics);
+  // }
+
+  @override
+  void initState(){
+    super.initState();
+
+    NotificationHelper.init(initScheduled: true);
+    listenNotify();
+  }
+  void listenNotify() => NotificationHelper.onNotification.listen(onClicked);
+
+  void onClicked(String? payload) =>
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)
+      => SecondPage(payload: payload)));
+  // @override
+  // void initState(){
+  //   super initState();
+  //   NotificationHelper.init(initScheduled: true);
+  //   liste
+  // }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -569,6 +621,11 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                                     TextButton(
                                       child: Text("Oke"),
                                       onPressed:  () async {
+                                        NotificationHelper.showScheduledNotify(
+                                          title: 'PENGINGAT PESANAN!!',
+                                          body: 'Jangan lupa untuk datang ya $nameResult ',
+                                          scheduledDate: DateTime.parse(getDateText()).add(Duration(seconds: 5)),
+                                        );
                                         await booking.add({
                                           'name' : nameResult,
                                           'address' : addressResult,
@@ -585,10 +642,12 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                                           content: Text('Pemesanan Berhasil!'),
                                           action: SnackBarAction(label: 'ULANGI',
                                               onPressed: (){
+
                                               }
                                           ),
                                         );
                                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                                       },
                                     ),
                                   ],
@@ -616,10 +675,18 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
       initialDate: dateTime ?? selectedDate,
       firstDate: DateTime(DateTime.now().year - 1),
       lastDate: DateTime(DateTime.now().year + 1),
+      selectableDayPredicate: (day){
+        if((day.isAfter(DateTime.now().subtract(Duration(days: 1))))&&
+            (day.isBefore(DateTime.now().add(Duration(days: 6))))){
+          return true;
+        }
+        return false;
+      }
     );
     if (newDate == null) return;
 
     setState(() => dateTime = newDate);
+    // scheduleTime(DateTime.fromMillisecondsSinceEpoch(newDate.millisecondsSinceEpoch));
   }
 
   Future pickedTime(BuildContext context) async {
@@ -631,6 +698,7 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
     if (newTimePicked == null) return;
     setState(() => time = newTimePicked);
   }
+
 }
 
 

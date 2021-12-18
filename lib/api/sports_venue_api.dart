@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
-import 'package:healthy_life_buddy/model/favorite_sports_venue_data_model.dart';
-import 'package:healthy_life_buddy/model/favorite_sports_venue_model.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';
-import 'package:healthy_life_buddy/model/user_model.dart';
+
 
 Future<List<SportsVeneu>> getSportsVenue() async {
   final snapshot =
