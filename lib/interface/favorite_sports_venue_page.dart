@@ -4,7 +4,9 @@ import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
+import 'package:healthy_life_buddy/widget/error_state_message.dart';
 import 'package:healthy_life_buddy/widget/headline_widget.dart';
+import 'package:healthy_life_buddy/widget/no_data_state_message.dart';
 import 'package:healthy_life_buddy/widget/user_profile_widget.dart';
 import 'package:provider/provider.dart';
 import 'detail_sports_venue_page.dart';
@@ -44,7 +46,8 @@ class ListOfFavoriteSportsVenues extends StatelessWidget {
         final favoriteSportsVenueData = snapshot.favoriteSportsVenue;
         var currentState = snapshot.state;
         if (currentState == CurrentState.isLoading) {
-          return const CircularProgressIndicator();
+          return const Expanded(
+              child: Center(child: CircularProgressIndicator()));
         } else if (currentState == CurrentState.hasData) {
           return Expanded(
             flex: 3,
@@ -93,18 +96,29 @@ class ListOfFavoriteSportsVenues extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0,
                                   ),
-                                  child: Text(favoriteSportsVenueData[i].name,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: textTheme.headline6),
+                                  child: Text(
+                                    favoriteSportsVenueData[i].name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: textTheme.headline6?.apply(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
+                                    ),
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0,
                                   ),
                                   child: Text(
-                                      "Rp. ${favoriteSportsVenueData[i].rentalCosts}",
-                                      style: textTheme.subtitle1),
+                                    "Rp. ${favoriteSportsVenueData[i].rentalCosts}",
+                                    style: textTheme.subtitle1?.apply(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
+                                    ),
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -112,23 +126,32 @@ class ListOfFavoriteSportsVenues extends StatelessWidget {
                                   ),
                                   child: Row(
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.star_rate,
-                                        color: primaryColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 8.0,
                                         ),
                                         child: Text(
-                                            favoriteSportsVenueData[i]
-                                                .rate
-                                                .toString(),
-                                            style: textTheme.subtitle1),
+                                          favoriteSportsVenueData[i]
+                                              .rate
+                                              .toString(),
+                                          style: textTheme.subtitle1?.apply(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurface,
+                                          ),
+                                        ),
                                       ),
-                                      const Icon(
+                                      Icon(
                                         Icons.location_pin,
-                                        color: primaryColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                       ),
                                       Expanded(
                                         child: Padding(
@@ -136,11 +159,15 @@ class ListOfFavoriteSportsVenues extends StatelessWidget {
                                             horizontal: 8.0,
                                           ),
                                           child: Text(
-                                              favoriteSportsVenueData[i]
-                                                  .location,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: textTheme.subtitle1),
+                                            favoriteSportsVenueData[i].location,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: textTheme.subtitle1?.apply(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSurface,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -158,9 +185,13 @@ class ListOfFavoriteSportsVenues extends StatelessWidget {
             ),
           );
         } else if (currentState == CurrentState.noData) {
-          return Text("no data");
+          return const Expanded(
+            child: NoDataStateMessage(),
+          );
         } else {
-          return Text("error");
+          return const Expanded(
+            child: ErrorStateMessage(),
+          );
         }
       },
     );

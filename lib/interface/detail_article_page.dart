@@ -36,15 +36,15 @@ class DetailArticlePage extends StatelessWidget {
                       child: Container(
                         child: IconButton(
                           onPressed: () {},
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.thumb_up_outlined,
-                            color: primaryColor,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                         width: 50,
                         height: 50,
                         decoration: BoxDecoration(
-                            color: surfaceColor,
+                            color: Theme.of(context).colorScheme.surface,
                             borderRadius: BorderRadius.circular(100)),
                       ),
                     ),
@@ -81,7 +81,11 @@ class ArticleContent extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(articleData.title, style: textTheme.headline5),
+              child: Text(
+                articleData.title,
+                style: textTheme.headline5
+                    ?.apply(color: Theme.of(context).colorScheme.onSurface),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -96,25 +100,34 @@ class ArticleContent extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(articleData.author,
-                            style: textTheme.subtitle1),
+                        child: Text(
+                          articleData.author,
+                          style: textTheme.subtitle1?.apply(
+                              color: Theme.of(context).colorScheme.onSurface),
+                        ),
                       ),
                     ],
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Text(" | "),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: Text(
+                      " | ",
+                      style: textTheme.subtitle1?.apply(
+                          color: Theme.of(context).colorScheme.onSurface),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                        DateFormat('dd-MM-yyyy')
-                            .format(
-                              DateTime.fromMillisecondsSinceEpoch(
-                                  articleData.createAt.millisecondsSinceEpoch),
-                            )
-                            .toString(),
-                        style: textTheme.caption),
+                      DateFormat('dd-MM-yyyy')
+                          .format(
+                            DateTime.fromMillisecondsSinceEpoch(
+                                articleData.createAt.millisecondsSinceEpoch),
+                          )
+                          .toString(),
+                      style: textTheme.caption?.apply(
+                          color: Theme.of(context).colorScheme.onSurface),
+                    ),
                   ),
                 ],
               ),
@@ -133,7 +146,11 @@ class ArticleContent extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(articleData.content, style: textTheme.caption),
+              child: Text(
+                articleData.content,
+                style: textTheme.caption
+                    ?.apply(color: Theme.of(context).colorScheme.onSurface),
+              ),
             ),
           ],
         ),

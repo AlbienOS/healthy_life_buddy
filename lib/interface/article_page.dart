@@ -99,8 +99,13 @@ class ListOfArticles extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8.0),
-                                      child: Text(articleData[i].title,
-                                          style: textTheme.headline6),
+                                      child: Text(
+                                        articleData[i].title,
+                                        style: textTheme.headline6?.apply(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurface),
+                                      ),
                                     ),
                                     Row(
                                       children: [
@@ -118,19 +123,28 @@ class ListOfArticles extends StatelessWidget {
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 8.0),
-                                          child: Text(articleData[i].author,
-                                              style: textTheme.caption),
+                                          child: Text(
+                                            articleData[i].author,
+                                            style: textTheme.caption?.apply(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface),
+                                          ),
                                         ),
                                         Text(
-                                            DateFormat('dd-MM-yyyy')
-                                                .format(
-                                                  DateTime.fromMillisecondsSinceEpoch(
-                                                      articleData[i]
-                                                          .createAt
-                                                          .millisecondsSinceEpoch),
-                                                )
-                                                .toString(),
-                                            style: textTheme.caption),
+                                          DateFormat('dd-MM-yyyy')
+                                              .format(
+                                                DateTime.fromMillisecondsSinceEpoch(
+                                                    articleData[i]
+                                                        .createAt
+                                                        .millisecondsSinceEpoch),
+                                              )
+                                              .toString(),
+                                          style: textTheme.caption?.apply(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSurface),
+                                        ),
                                       ],
                                     ),
                                     Padding(
@@ -138,7 +152,10 @@ class ListOfArticles extends StatelessWidget {
                                           vertical: 8.0),
                                       child: Text(
                                         articleData[i].content,
-                                        style: textTheme.caption,
+                                        style: textTheme.caption?.apply(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurface),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),

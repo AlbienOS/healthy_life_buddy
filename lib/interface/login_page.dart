@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
-import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/helper/navigation_helper.dart';
-import 'package:healthy_life_buddy/interface/home_page.dart';
 import 'package:healthy_life_buddy/interface/registration_page.dart';
+import 'package:healthy_life_buddy/widget/app_headline.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/LoginPage';
@@ -27,118 +26,189 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Text(
-                    'Healthy Life \nBuddy',
-                    style: textTheme.headline5?.apply(color: primaryColor),
-                  ),
-                ),
+                const AppHeadline(),
                 Padding(
                   padding: const EdgeInsets.only(top: 32.0, bottom: 8.0),
                   child: Text(
                     "Login",
-                    style: textTheme.headline5,
+                    style: textTheme.headline5?.apply(
+                        color: Theme.of(context).colorScheme.onBackground),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
-                  child: Text(
-                    "Email",
-                    style: textTheme.subtitle1,
-                  ),
-                ),
-                TextField(
-                  controller: _emailController,
-                  style: const TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
-                  child: Text(
-                    "Password",
-                    style: textTheme.subtitle1,
-                  ),
-                ),
-                TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Center(
-                    child: SizedBox(
-                      width: 150,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          final loginResult = await login(
-                              _emailController.text, _passwordController.text);
-                          if (loginResult != null) {
-                            Navigator.pushReplacementNamed(
-                                context, Navigation.routeName);
-                          } else {
-                            print("login failed");
-                          }
-                        },
-                        child: Text("Login", style: textTheme.button),
-                        style: TextButton.styleFrom(
-                          backgroundColor: primaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Column(
-                    children: [
-                      Center(
-                        child: Text("Belum punya akun?",
-                            textAlign: TextAlign.center,
-                            style: textTheme.subtitle1),
-                      ),
-                      Center(
-                        child: InkWell(
-                          child: Text(
-                            "Daftar Sekarang!",
-                            textAlign: TextAlign.center,
-                            style: textTheme.subtitle1?.apply(
-                                color: primaryColor,
-                                decoration: TextDecoration.underline),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const RegistrationPage();
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const TextFieldLabel(label: 'Email'),
+                EmailTextField(emailController: _emailController),
+                const TextFieldLabel(label: 'Password'),
+                PasswordTextField(passwordController: _passwordController),
+                LoginButton(
+                    emailController: _emailController,
+                    passwordController: _passwordController),
+                const RegistrationButton(),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class LoginButton extends StatelessWidget {
+  const LoginButton({
+    Key? key,
+    required TextEditingController emailController,
+    required TextEditingController passwordController,
+  })  : _emailController = emailController,
+        _passwordController = passwordController,
+        super(key: key);
+
+  final TextEditingController _emailController;
+  final TextEditingController _passwordController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Center(
+        child: SizedBox(
+          width: 150,
+          child: ElevatedButton(
+            onPressed: () async {
+              final loginResult =
+                  await login(_emailController.text, _passwordController.text);
+              if (loginResult != null) {
+                Navigator.pushReplacementNamed(context, Navigation.routeName);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Email atau password salah",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.error)),
+                  ),
+                );
+              }
+            },
+            child: Text(
+              "Login",
+              style: textTheme.button
+                  ?.apply(color: Theme.of(context).colorScheme.onPrimary),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PasswordTextField extends StatelessWidget {
+  const PasswordTextField({
+    Key? key,
+    required TextEditingController passwordController,
+  })  : _passwordController = passwordController,
+        super(key: key);
+
+  final TextEditingController _passwordController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: _passwordController,
+      obscureText: true,
+      style: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+    );
+  }
+}
+
+class EmailTextField extends StatelessWidget {
+  const EmailTextField({
+    Key? key,
+    required TextEditingController emailController,
+  })  : _emailController = emailController,
+        super(key: key);
+
+  final TextEditingController _emailController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: _emailController,
+      style: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+    );
+  }
+}
+
+class RegistrationButton extends StatelessWidget {
+  const RegistrationButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Column(
+        children: [
+          Center(
+            child: Text("Belum memiliki akun?",
+                textAlign: TextAlign.center,
+                style: textTheme.subtitle1
+                    ?.apply(color: Theme.of(context).colorScheme.onBackground)),
+          ),
+          Center(
+            child: InkWell(
+              child: Text(
+                "Daftar Sekarang",
+                textAlign: TextAlign.center,
+                style: textTheme.subtitle1?.apply(
+                    color: Theme.of(context).colorScheme.primary,
+                    decoration: TextDecoration.underline),
+              ),
+              onTap: () {
+                Navigator.pushReplacementNamed(
+                  context,
+                  RegistrationPage.routeName,
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TextFieldLabel extends StatelessWidget {
+  const TextFieldLabel({
+    Key? key,
+    required this.label,
+  }) : super(key: key);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+      child: Text(
+        label,
+        style: textTheme.subtitle1
+            ?.apply(color: Theme.of(context).colorScheme.onBackground),
       ),
     );
   }

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
-import 'package:healthy_life_buddy/interface/home_page.dart';
+import 'package:healthy_life_buddy/helper/navigation_helper.dart';
+import 'package:healthy_life_buddy/widget/app_headline.dart';
 
 class UserDataRegistrationPage extends StatefulWidget {
+  static const routeName = '/UserDataRegistrationPage';
   const UserDataRegistrationPage({Key? key}) : super(key: key);
 
   @override
@@ -16,16 +18,22 @@ class _UserDataRegistrationPageState extends State<UserDataRegistrationPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _phoneNumber = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   String? _gender;
+  @override
+  void initState() {
+    _gender = "Pria";
+    super.initState();
+  }
 
   @override
   void dispose() {
     _nameController.dispose();
     _ageController.dispose();
     _addressController.dispose();
-    _phoneNumber.dispose();
+    _phoneNumberController.dispose();
     super.dispose();
   }
 
@@ -39,117 +47,244 @@ class _UserDataRegistrationPageState extends State<UserDataRegistrationPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Text(
-                    'Healthy Life \nBuddy',
-                    style: textTheme.headline5?.apply(color: primaryColor),
-                  ),
-                ),
+                const AppHeadline(),
                 Padding(
                   padding: const EdgeInsets.only(top: 32.0, bottom: 8.0),
                   child: Text(
                     "User Info",
-                    style: textTheme.headline5,
+                    style: textTheme.headline5?.apply(
+                        color: Theme.of(context).colorScheme.onBackground),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: TextFormField(
-                    controller: _nameController,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'nama'),
-                  ),
-                ),
-                TextFormField(
-                  controller: _ageController,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'umur'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Text(
-                    "Gender",
-                    style: textTheme.subtitle1,
-                  ),
-                ),
-                RadioListTile<String>(
-                  title: const Text('Pria'),
-                  value: "Pria",
-                  groupValue: _gender,
-                  onChanged: (value) {
-                    setState(() {
-                      _gender = value;
-                    });
-                  },
-                ),
-                RadioListTile<String>(
-                  title: const Text('Wanitia'),
-                  value: "Wanita",
-                  groupValue: _gender,
-                  onChanged: (value) {
-                    setState(() {
-                      _gender = value!;
-                    });
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: TextFormField(
-                    controller: _addressController,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'tempat tinggal'),
-                  ),
-                ),
-                TextFormField(
-                  controller: _phoneNumber,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'no hp'),
-                ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: SizedBox(
-                      width: 150,
-                      child: TextButton(
-                        child: Text(
-                          "Daftar",
-                          style: textTheme.button?.apply(
-                            color: onPrimaryColor,
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const TextFormFieldLabel(label: 'Nama'),
+                      NameTextFormField(nameController: _nameController),
+                      const TextFormFieldLabel(label: 'Umur'),
+                      AgeTextFormField(ageController: _ageController),
+                      const TextFormFieldLabel(label: 'Gender'),
+                      genderRadioButton(context),
+                      const TextFormFieldLabel(label: 'Tempat Tinggal'),
+                      AddressTextFormField(
+                          addressController: _addressController),
+                      const TextFormFieldLabel(label: 'No HP'),
+                      PhoneNumberTextFormField(
+                          phoneNumberController: _phoneNumberController),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          child: SizedBox(
+                            width: 150,
+                            child: TextButton(
+                              child: Text(
+                                "Daftar",
+                                style: textTheme.button?.apply(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground),
+                              ),
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  await userDataRegistration(
+                                      _nameController.text,
+                                      int.parse(_ageController.text),
+                                      _gender.toString(),
+                                      _addressController.text,
+                                      _phoneNumberController.text);
+                                  Navigator.pushReplacementNamed(
+                                      context, Navigation.routeName);
+                                }
+                              },
+                              style: TextButton.styleFrom(
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.primary),
+                            ),
                           ),
                         ),
-                        onPressed: () async {
-                          if (_nameController.text.isNotEmpty) {
-                            await userDataRegistration(
-                                _nameController.text,
-                                int.parse(_ageController.text),
-                                _gender.toString(),
-                                _addressController.text,
-                                _phoneNumber.text);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return HomePage();
-                                },
-                              ),
-                            );
-                          } else {
-                            print('fill the text field');
-                          }
-                        },
-                        style: TextButton.styleFrom(
-                          backgroundColor: primaryColor,
-                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Theme genderRadioButton(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        unselectedWidgetColor: Theme.of(context).colorScheme.surface,
+      ),
+      child: Column(
+        children: [
+          RadioListTile<String>(
+            title: const Text('Pria'),
+            value: "Pria",
+            groupValue: _gender,
+            onChanged: (value) {
+              setState(
+                () {
+                  _gender = value;
+                },
+              );
+            },
+            activeColor: Theme.of(context).colorScheme.primary,
+          ),
+          RadioListTile<String>(
+            title: const Text('Wanitia'),
+            value: "Wanita",
+            groupValue: _gender,
+            onChanged: (value) {
+              setState(
+                () {
+                  _gender = value!;
+                },
+              );
+            },
+            activeColor: Theme.of(context).colorScheme.primary,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PhoneNumberTextFormField extends StatelessWidget {
+  const PhoneNumberTextFormField({
+    Key? key,
+    required TextEditingController phoneNumberController,
+  })  : _phoneNumberController = phoneNumberController,
+        super(key: key);
+
+  final TextEditingController _phoneNumberController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      validator: (val) =>
+          val == null || val.isEmpty ? "Mohon untuk mengisi form ini" : null,
+      controller: _phoneNumberController,
+      keyboardType: TextInputType.phone,
+      style: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+    );
+  }
+}
+
+class AddressTextFormField extends StatelessWidget {
+  const AddressTextFormField({
+    Key? key,
+    required TextEditingController addressController,
+  })  : _addressController = addressController,
+        super(key: key);
+
+  final TextEditingController _addressController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      validator: (val) =>
+          val == null || val.isEmpty ? "Mohon untuk mengisi form ini" : null,
+      controller: _addressController,
+      keyboardType: TextInputType.streetAddress,
+      style: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+    );
+  }
+}
+
+class AgeTextFormField extends StatelessWidget {
+  const AgeTextFormField({
+    Key? key,
+    required TextEditingController ageController,
+  })  : _ageController = ageController,
+        super(key: key);
+
+  final TextEditingController _ageController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      validator: (val) => val == null || int.parse(_ageController.text) < 0
+          ? "Umur yang dimasukkan tidak valid"
+          : null,
+      controller: _ageController,
+      keyboardType: TextInputType.number,
+      style: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+    );
+  }
+}
+
+class NameTextFormField extends StatelessWidget {
+  const NameTextFormField({
+    Key? key,
+    required TextEditingController nameController,
+  })  : _nameController = nameController,
+        super(key: key);
+
+  final TextEditingController _nameController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      validator: (val) => val == null || val.length > 12
+          ? "Jumlah karakter yang dimasukkan harus 1 ~ 16 karakter"
+          : null,
+      controller: _nameController,
+      keyboardType: TextInputType.name,
+      style: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+    );
+  }
+}
+
+class TextFormFieldLabel extends StatelessWidget {
+  const TextFormFieldLabel({
+    Key? key,
+    required this.label,
+  }) : super(key: key);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+      child: Text(
+        label,
+        style: textTheme.subtitle1
+            ?.apply(color: Theme.of(context).colorScheme.onBackground),
       ),
     );
   }

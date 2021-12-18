@@ -18,7 +18,10 @@ class UserProfile extends StatelessWidget {
         builder: (context, snapshot, _) {
           var currentState = snapshot.state;
           if (currentState == CurrentState.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: Center(child: CircularProgressIndicator()),
+            );
           } else if (currentState == CurrentState.isSuccsess) {
             final userData = snapshot.userData;
             return Padding(
@@ -36,8 +39,11 @@ class UserProfile extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("Hello, ${userData?.name}",
-                        style: textTheme.headline6),
+                    child: Text(
+                      "Hello, ${userData?.name}",
+                      style: textTheme.headline6?.apply(
+                          color: Theme.of(context).colorScheme.onBackground),
+                    ),
                   ),
                 ],
               ),

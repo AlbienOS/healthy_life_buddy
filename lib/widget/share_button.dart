@@ -20,9 +20,9 @@ class ShareButton extends StatelessWidget {
           width: 50,
           height: 50,
           child: IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.share,
-              color: primaryColor,
+              color: Theme.of(context).colorScheme.primary,
             ),
             onPressed: () {
               Share.share(text, subject: subjectText);
@@ -31,7 +31,7 @@ class ShareButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          color: surfaceColor,
+          color: Theme.of(context).colorScheme.surface,
         ),
       ),
     );

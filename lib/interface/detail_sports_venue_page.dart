@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,14 +7,12 @@ import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/interface/booking_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/member_sports_page.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
-import 'package:healthy_life_buddy/model/sports_venue_model.dart';
 import 'package:healthy_life_buddy/provider/detail_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/favorite_status_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/widget/back_button.dart';
 import 'package:healthy_life_buddy/widget/share_button.dart';
 import 'package:provider/provider.dart';
-import 'package:share/share.dart';
 
 class DetailSportsVenuePage extends StatelessWidget {
   static const routeName = '/DetailSportsVenuePage';
@@ -79,107 +76,18 @@ class DetailSportsVenuePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 8.0),
-                        child: SportsVenuePromotion(
+                        child: SportsVenueMembership(
                             detailSportsVenueData: sportsVenueData),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Costs Detail",
-                                    style: textTheme.headline6),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Text("Rental Costs",
-                                            style: textTheme.bodyText2),
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Text(
-                                            ': ${sportsVenueData.rentalCosts}',
-                                            style: textTheme.bodyText2),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Text("Discount",
-                                          style: textTheme.bodyText2),
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(': Dummy_Discount',
-                                          style: textTheme.bodyText2),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Text("Total",
-                                            style: textTheme.bodyText2),
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Text(': Dummy_Total',
-                                            style: textTheme.bodyText2),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: TextButton(
-                                        child: Text("Pesan",
-                                            style: textTheme.button),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) {
-                                                return BookingSportsVenuePage(
-                                                    sportsVenueData:
-                                                        sportsVenueData);
-                                              },
-                                            ),
-                                          );
-                                        },
-                                        style: TextButton.styleFrom(
-                                          backgroundColor: primaryColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        child: SportsVenueBooking(
+                            sportsVenueData: sportsVenueData),
                       ),
                     ],
                   );
                 } else {
-                  return CircularProgressIndicator();
+                  return const Center(child: CircularProgressIndicator());
                 }
               },
             ),
@@ -190,8 +98,89 @@ class DetailSportsVenuePage extends StatelessWidget {
   }
 }
 
-class SportsVenuePromotion extends StatelessWidget {
-  const SportsVenuePromotion({
+class SportsVenueBooking extends StatelessWidget {
+  const SportsVenueBooking({
+    Key? key,
+    required this.sportsVenueData,
+  }) : super(key: key);
+
+  final DetailSportsVeneu sportsVenueData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Costs Detail",
+              style: textTheme.headline6
+                  ?.apply(color: Theme.of(context).colorScheme.onSurface),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                      "Rental Costs",
+                      style: textTheme.bodyText2?.apply(
+                          color: Theme.of(context).colorScheme.onSurface),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      ': ${sportsVenueData.rentalCosts}',
+                      style: textTheme.bodyText2?.apply(
+                          color: Theme.of(context).colorScheme.onSurface),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    child: Text(
+                      "Pesan",
+                      style: textTheme.button?.apply(
+                          color: Theme.of(context).colorScheme.onPrimary),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return BookingSportsVenuePage(
+                                sportsVenueData: sportsVenueData);
+                          },
+                        ),
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SportsVenueMembership extends StatelessWidget {
+  const SportsVenueMembership({
     Key? key,
     required this.detailSportsVenueData,
   }) : super(key: key);
@@ -209,13 +198,10 @@ class SportsVenuePromotion extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
-            child: Center(
-              child: Text(
-                'BUAT MEMBER',
-                style: GoogleFonts.montserrat(
-                  fontSize: 16,
-                ),
-              ),
+            child: Text(
+              'Membership',
+              style: textTheme.headline6
+                  ?.apply(color: Theme.of(context).colorScheme.onSurface),
             ),
           ),
           Row(
@@ -226,7 +212,11 @@ class SportsVenuePromotion extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 16.0, right: 16.0, bottom: 16.0, top: 8),
                   child: TextButton(
-                    child: Text("BUAT", style: textTheme.button),
+                    child: Text(
+                      "Buat",
+                      style: textTheme.button?.apply(
+                          color: Theme.of(context).colorScheme.onPrimary),
+                    ),
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
@@ -234,7 +224,7 @@ class SportsVenuePromotion extends StatelessWidget {
                       }));
                     },
                     style: TextButton.styleFrom(
-                      backgroundColor: primaryColor,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
@@ -266,7 +256,11 @@ class SportsVenueDetail extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(detailSportsVenueData.name, style: textTheme.headline5),
+            Text(
+              detailSportsVenueData.name,
+              style: textTheme.headline5
+                  ?.apply(color: Theme.of(context).colorScheme.onSurface),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: RatingBarIndicator(
@@ -280,7 +274,11 @@ class SportsVenueDetail extends StatelessWidget {
                 direction: Axis.horizontal,
               ),
             ),
-            Text(detailSportsVenueData.description, style: textTheme.bodyText2),
+            Text(
+              detailSportsVenueData.description,
+              style: textTheme.bodyText2
+                  ?.apply(color: Theme.of(context).colorScheme.onSurface),
+            ),
           ],
         ),
       ),
@@ -331,42 +329,40 @@ class FavoriteButton extends StatelessWidget {
         vertical: 8.0,
       ),
       child: Container(
-        child: SizedBox(
-          width: 50,
-          height: 50,
-          child: Consumer<FavoriteStatusSportsVenueProvider>(
-            builder: (BuildContext context, value, Widget? child) {
-              if (value.state == CurrentState.isLoading) {
-                return IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite_border_outlined,
-                    color: primaryColor,
-                  ),
-                );
-              } else if (value.state == CurrentState.isSuccsess) {
-                final iconState = value.iconState;
-                return IconButton(
-                  icon: Icon(
-                    iconState,
-                    color: primaryColor,
-                  ),
-                  onPressed: () async {
-                    await value.setFavoriteSportsVenueStatus();
-                    Provider.of<FavoriteSportsVeneuProvider>(context,
-                            listen: false)
-                        .fetchFavoriteSportsVenueList();
-                  },
-                );
-              } else {
-                return const Text("error");
-              }
-            },
-          ),
+        width: 50,
+        height: 50,
+        child: Consumer<FavoriteStatusSportsVenueProvider>(
+          builder: (BuildContext context, value, Widget? child) {
+            if (value.state == CurrentState.isLoading) {
+              return IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.favorite_border_outlined,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              );
+            } else if (value.state == CurrentState.isSuccsess) {
+              final iconState = value.iconState;
+              return IconButton(
+                icon: Icon(
+                  iconState,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                onPressed: () async {
+                  await value.setFavoriteSportsVenueStatus();
+                  Provider.of<FavoriteSportsVeneuProvider>(context,
+                          listen: false)
+                      .fetchFavoriteSportsVenueList();
+                },
+              );
+            } else {
+              return const Text("error");
+            }
+          },
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          color: surfaceColor,
+          color: Theme.of(context).colorScheme.surface,
         ),
       ),
     );

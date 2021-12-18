@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_life_buddy/common/color_style.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({
@@ -10,9 +9,9 @@ class CustomBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: IconButton(
-        icon: const Icon(
+        icon: Icon(
           Icons.arrow_back,
-          color: onSurfaceColor,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
         onPressed: () {
           Navigator.pop(context);
@@ -22,7 +21,7 @@ class CustomBackButton extends StatelessWidget {
       height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        color: surfaceColor,
+        color: Theme.of(context).colorScheme.surface,
       ),
     );
   }
