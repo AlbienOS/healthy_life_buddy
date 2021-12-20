@@ -8,6 +8,7 @@ class Article {
   late Timestamp createAt;
   late String imageUrl;
   late int like;
+  late int dislike;
   late String title;
 
   Article.fromObject(DocumentSnapshot<Map<String, dynamic>> data) {
@@ -18,6 +19,7 @@ class Article {
     createAt = data['createAt'];
     imageUrl = data['imageUrl'];
     like = data['like'].toInt();
+    dislike = data['dislike'].toInt();
     title = data['title'];
   }
 }

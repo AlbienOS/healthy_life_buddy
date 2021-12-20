@@ -10,6 +10,8 @@ import 'package:healthy_life_buddy/interface/registration_page.dart';
 import 'package:healthy_life_buddy/interface/user_data_registration_page.dart';
 import 'package:healthy_life_buddy/interface/welcome_page.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
+import 'package:healthy_life_buddy/provider/article_provider.dart';
+import 'package:healthy_life_buddy/provider/auth_provider.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/preferences_provider.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +21,25 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    ChangeNotifierProvider<FavoriteSportsVeneuProvider>(
-      create: (context) => FavoriteSportsVeneuProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
+        ),
+        ChangeNotifierProvider<FavoriteSportsVeneuProvider>(
+          create: (context) => FavoriteSportsVeneuProvider(),
+        ),
+        ChangeNotifierProvider<PreferencesProvider>(
+          create: (context) => PreferencesProvider(
+            preferencesHelper: PreferencesHelper(
+              sharedPreferences: SharedPreferences.getInstance(),
+            ),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ArticleProvider(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
@@ -31,11 +50,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PreferencesProvider>(
-      create: (context) => PreferencesProvider(
-          preferencesHelper: PreferencesHelper(
-              sharedPreferences: SharedPreferences.getInstance())),
-      child: Consumer<PreferencesProvider>(builder: (context, provider, child) {
+    return Consumer<PreferencesProvider>(
+      builder: (context, provider, child) {
         return MaterialApp(
           title: 'HealthyLifeBuddy',
           theme: provider.themeData,
@@ -57,7 +73,7 @@ class MyApp extends StatelessWidget {
                         as DetailSportsVeneu),
           },
         );
-      }),
+      },
     );
   }
 }

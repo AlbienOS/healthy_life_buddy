@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
+import 'package:healthy_life_buddy/interface/login_page.dart';
 import 'package:healthy_life_buddy/provider/preferences_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +39,24 @@ class SettingPage extends StatelessWidget {
                             provider.enableDarkTheme(value);
                           }),
                     ],
-                  )
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        logout();
+                        Navigator.pushReplacementNamed(
+                            context, LoginPage.routeName);
+                      },
+                      child: Text(
+                        "logout",
+                        style: textTheme.button?.apply(
+                            color: Theme.of(context).colorScheme.onError),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context).colorScheme.error,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

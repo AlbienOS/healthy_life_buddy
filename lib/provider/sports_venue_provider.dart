@@ -9,16 +9,38 @@ class SportsVenueProvider with ChangeNotifier {
   }
 
   late CurrentState _state;
+  bool _searchState = false;
   List<SportsVeneu> _sportVenueList = [];
 
-  List<SportsVeneu> get sportsVenue => _sportVenueList;
   CurrentState get state => _state;
+  bool get searhState => _searchState;
+  List<SportsVeneu> get sportsVenue => _sportVenueList;
 
   fetchSportsVenueList() async {
     _state = CurrentState.isLoading;
     notifyListeners();
     try {
       final sportsVenueList = await getSportsVenue();
+      if (sportsVenueList.isNotEmpty) {
+        _state = CurrentState.hasData;
+        _sportVenueList = sportsVenueList;
+        notifyListeners();
+      } else if (sportsVenueList.isEmpty) {
+        _state = CurrentState.noData;
+        notifyListeners();
+      }
+    } catch (e) {
+      _state = CurrentState.isError;
+      notifyListeners();
+    }
+  }
+
+  searchSportsVenueData(String name) async {
+    _searchState = true;
+    _state = CurrentState.isLoading;
+    notifyListeners();
+    try {
+      final sportsVenueList = await getSearchedSportsVeneu(name);
       if (sportsVenueList.isNotEmpty) {
         _state = CurrentState.hasData;
         _sportVenueList = sportsVenueList;

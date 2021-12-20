@@ -3,18 +3,15 @@ import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/model/favorite_sports_venue_data_model.dart';
 import 'package:healthy_life_buddy/model/favorite_sports_venue_model.dart';
 
-Future<void> addFavorite(String sportsVenueId) {
-  final favorite_sports_venues = FirebaseFirestore.instance
+Future<void> addFavorite(String sportsVenueId) async {
+  final favoriteSportsVenues = FirebaseFirestore.instance
       .collection('users')
       .doc(auth.currentUser!.uid)
       .collection('favorite_sports_venues')
       .doc(sportsVenueId);
-  return favorite_sports_venues
-      .set({
-        'sportsVenueId': sportsVenueId,
-      })
-      .then((value) => print("favorite added"))
-      .catchError((error) => print("Failed to add favorite : $error"));
+  return await favoriteSportsVenues.set({
+    'sportsVenueId': sportsVenueId,
+  });
 }
 
 Future<List<FavoriteSportsVenue>> getFavoriteSportsVenueId(
@@ -28,7 +25,6 @@ Future<List<FavoriteSportsVenue>> getFavoriteSportsVenueId(
   _favoriteSportsVenueList = snapshot.docs
       .map((data) => FavoriteSportsVenue.fromObject(data))
       .toList();
-  print('data lenght : ${_favoriteSportsVenueList.length}');
   return _favoriteSportsVenueList;
 }
 
@@ -51,19 +47,13 @@ Future<bool> getFavoriteStatus(String sportsVenueId) async {
       .doc(sportsVenueId)
       .get();
 
-  print(snapshot.exists);
-  print(snapshot.id);
   return snapshot.exists;
 }
 
-Future<void> deleteFavorite(String sportsVenueId) {
-  CollectionReference favorite_sports_venues = FirebaseFirestore.instance
+Future<void> deleteFavorite(String sportsVenueId) async {
+  CollectionReference favoriteSportsVenues = FirebaseFirestore.instance
       .collection('users')
       .doc(auth.currentUser!.uid)
       .collection('favorite_sports_venues');
-  return favorite_sports_venues
-      .doc(sportsVenueId)
-      .delete()
-      .then((value) => print("user deleted"))
-      .catchError((error) => print("Failed to delete favorite: $error"));
+  return await favoriteSportsVenues.doc(sportsVenueId).delete();
 }

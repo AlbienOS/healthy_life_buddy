@@ -30,7 +30,6 @@ class FavoriteStatusSportsVenueProvider with ChangeNotifier {
       notifyListeners();
     } catch (e) {
       _state = CurrentState.isError;
-      print(e.toString());
     }
   }
 
@@ -49,10 +48,8 @@ class FavoriteStatusSportsVenueProvider with ChangeNotifier {
       notifyListeners();
     } catch (e) {
       _state = CurrentState.isError;
-      print(e.toString());
+
       notifyListeners();
     }
   }
 }
-
-class _state {}

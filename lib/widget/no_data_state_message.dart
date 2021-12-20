@@ -13,7 +13,7 @@ class NoDataStateMessage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Maaf, data masih kosong.",
+            "Maaf, data tidak tersedia.",
             style: textTheme.subtitle1
                 ?.apply(color: Theme.of(context).colorScheme.onBackground),
           ),

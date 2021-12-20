@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/common/state.dart';
-import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/model/user_model.dart';
 
 class AuthProvider with ChangeNotifier {

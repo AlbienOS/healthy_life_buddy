@@ -1,7 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
-import 'package:healthy_life_buddy/helper/navigation_helper.dart';
 import 'package:healthy_life_buddy/interface/login_page.dart';
 import 'package:healthy_life_buddy/interface/user_data_registration_page.dart';
 import 'package:healthy_life_buddy/widget/app_headline.dart';
@@ -198,13 +198,23 @@ class RegistrationButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
-                final authUser = await registration(
-                    _emailController.text, _passwordController.text);
-                if (authUser != null) {
-                  Navigator.pushReplacementNamed(
-                      context, UserDataRegistrationPage.routeName);
+                try {
+                  final authUser = await registration(
+                      _emailController.text, _passwordController.text);
+                  if (authUser != null) {
+                    Navigator.pushReplacementNamed(
+                        context, UserDataRegistrationPage.routeName);
+                  }
+                } on FirebaseAuthException catch (e) {
+                  if (e.code == 'weak-password') {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Password terlalu lemah")));
+                  } else if (e.code == 'email-already-in-use') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Email telah terdaftar")));
+                  }
                 }
-              } else {}
+              }
             },
             child: Text("Daftar",
                 style: textTheme.button

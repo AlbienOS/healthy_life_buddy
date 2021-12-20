@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_life_buddy/api/auth_api.dart';
-import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
@@ -95,6 +93,7 @@ class ListOfFavoriteSportsVenues extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0,
+                                    vertical: 8.0,
                                   ),
                                   child: Text(
                                     favoriteSportsVenueData[i].name,

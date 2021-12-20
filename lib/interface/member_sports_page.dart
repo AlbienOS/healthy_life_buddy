@@ -6,18 +6,17 @@ import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:intl/intl.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 
-class MemberPage extends StatefulWidget{
+class MemberPage extends StatefulWidget {
   static const routeName = '/MemberSportsPage';
   @override
   State<MemberPage> createState() => _MemberPageState();
-
-
 }
 
 class _MemberPageState extends State<MemberPage> {
-  CollectionReference member = FirebaseFirestore
-      .instance
-      .collection('users').doc(auth.currentUser!.uid).collection('member');
+  CollectionReference member = FirebaseFirestore.instance
+      .collection('users')
+      .doc(auth.currentUser!.uid)
+      .collection('member');
 
   int changePrice = 0;
 
@@ -93,12 +92,12 @@ class _MemberPageState extends State<MemberPage> {
                           child: TextField(
                             decoration: InputDecoration(
                               contentPadding:
-                              EdgeInsets.symmetric(horizontal: 8.0),
+                                  EdgeInsets.symmetric(horizontal: 8.0),
                               hintText: "Nama",
                               border: InputBorder.none,
                             ),
                             keyboardType: TextInputType.name,
-                            onSubmitted: (String res){
+                            onSubmitted: (String res) {
                               setState(() {
                                 nameResult = res;
                               });
@@ -122,12 +121,12 @@ class _MemberPageState extends State<MemberPage> {
                           child: TextField(
                             decoration: InputDecoration(
                               contentPadding:
-                              EdgeInsets.symmetric(horizontal: 8.0),
+                                  EdgeInsets.symmetric(horizontal: 8.0),
                               hintText: "Alamat",
                               border: InputBorder.none,
                             ),
                             keyboardType: TextInputType.streetAddress,
-                            onSubmitted: (String res){
+                            onSubmitted: (String res) {
                               setState(() {
                                 addressResult = res;
                               });
@@ -151,12 +150,12 @@ class _MemberPageState extends State<MemberPage> {
                           child: TextField(
                             decoration: InputDecoration(
                               contentPadding:
-                              EdgeInsets.symmetric(horizontal: 8.0),
+                                  EdgeInsets.symmetric(horizontal: 8.0),
                               hintText: "No. Telepon",
                               border: InputBorder.none,
                             ),
                             keyboardType: TextInputType.phone,
-                            onSubmitted: (String res){
+                            onSubmitted: (String res) {
                               setState(() {
                                 telephoneResult = res;
                               });
@@ -187,8 +186,8 @@ class _MemberPageState extends State<MemberPage> {
                             child: Center(
                               child: Text(
                                 getDateText(),
-                                style:
-                                GoogleFonts.montserrat(fontSize: 16, color: Colors.black),
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 16, color: Colors.black),
                               ),
                             ),
                           ),
@@ -203,11 +202,12 @@ class _MemberPageState extends State<MemberPage> {
                           ),
                           child: ElevatedButton(
                               style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  )),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              )),
                               onPressed: () {
                                 pickedDate(context);
                               },
@@ -236,11 +236,10 @@ class _MemberPageState extends State<MemberPage> {
                       width: 400,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all<
-                              RoundedRectangleBorder>(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(20.0)),
+                                borderRadius: BorderRadius.circular(20.0)),
                           ),
                         ),
                         child: Text(
@@ -251,122 +250,128 @@ class _MemberPageState extends State<MemberPage> {
                           ),
                         ),
                         onPressed: () {
-                          showDialog(context: context, builder: (context){
-                            if(nameResult.isEmpty){
-                              return AlertDialog(
-                                title: Text('Semua Kolom Harus Terisi'),
-                                actions: [
-                                  TextButton(
-                                    child: Text("Oke"),
-                                    onPressed:  () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            } else if(addressResult.isEmpty){
-                              return AlertDialog(
-                                title: Text('Semua Kolom Harus Terisi'),
-                                actions: [
-                                  TextButton(
-                                    child: Text("Oke"),
-                                    onPressed:  () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            } else if(telephoneResult.isEmpty){
-                              return AlertDialog(
-                                title: Text('Semua Kolom Harus Terisi'),
-                                actions: [
-                                  TextButton(
-                                    child: Text("Oke"),
-                                    onPressed:  () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            }else{
-                              return AlertDialog(
-                                title: Center(
-                                    child: Text('KONFIRMASI MEMBER')
-                                ),
-                                content: Container(
-                                  height: 300,
-                                  width: 400,
-                                  child:  SingleChildScrollView(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                if (nameResult.isEmpty) {
+                                  return AlertDialog(
+                                    title: Text('Semua Kolom Harus Terisi'),
+                                    actions: [
+                                      TextButton(
+                                        child: Text("Oke"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                } else if (addressResult.isEmpty) {
+                                  return AlertDialog(
+                                    title: Text('Semua Kolom Harus Terisi'),
+                                    actions: [
+                                      TextButton(
+                                        child: Text("Oke"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                } else if (telephoneResult.isEmpty) {
+                                  return AlertDialog(
+                                    title: Text('Semua Kolom Harus Terisi'),
+                                    actions: [
+                                      TextButton(
+                                        child: Text("Oke"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                } else {
+                                  return AlertDialog(
+                                    title: Center(
+                                        child: Text('KONFIRMASI MEMBER')),
+                                    content: Container(
+                                      height: 300,
+                                      width: 400,
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            Icon(Icons.person),
-                                            Text('        : ${nameResult}'),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.person),
+                                                Text('        : ${nameResult}'),
+                                              ],
+                                            ),
+                                            Divider(thickness: 2.0),
+                                            SizedBox(height: 10.0),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.add_location),
+                                                Text(
+                                                    '        : ${addressResult}'),
+                                              ],
+                                            ),
+                                            Divider(thickness: 2.0),
+                                            SizedBox(height: 10.0),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.contact_phone),
+                                                Text(
+                                                    '        : ${telephoneResult}'),
+                                              ],
+                                            ),
+                                            Divider(thickness: 2.0),
+                                            SizedBox(height: 10.0),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.date_range),
+                                                Text('        : ' +
+                                                    getDateText()),
+                                              ],
+                                            ),
+                                            Divider(thickness: 2.0),
                                           ],
                                         ),
-                                        Divider(thickness: 2.0),
-                                        SizedBox(height: 10.0),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.add_location),
-                                            Text('        : ${addressResult}'),
-                                          ],
-                                        ),
-                                        Divider(thickness: 2.0),
-                                        SizedBox(height: 10.0),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.contact_phone),
-                                            Text('        : ${telephoneResult}'),
-                                          ],
-                                        ),
-                                        Divider(thickness: 2.0),
-                                        SizedBox(height: 10.0),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.date_range),
-                                            Text('        : ' + getDateText()),
-                                          ],
-                                        ),
-                                        Divider(thickness: 2.0),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                actions: [
-                                  TextButton(
-                                    child: Text("Cancel"),
-                                    onPressed:  () {
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text("Oke"),
-                                    onPressed:  () async {
-                                      await member.add({
-                                        'name' : nameResult,
-                                        'address' : addressResult,
-                                        'telephone' : telephoneResult,
-                                        'date' : getDateText(),
-                                      }).then((value) => print('Membership Success'));
-                                      Navigator.pop(context);
-                                      final snackBar = SnackBar(
-                                        content: Text('Pembuatan Member Berhasil!'),
-                                        action: SnackBarAction(label: 'ULANGI',
-                                            onPressed: (){
-                                            }
-                                        ),
-                                      );
-                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                    },
-                                  ),
-                                ],
-
-                              );
-                            }
-                          });
+                                    actions: [
+                                      TextButton(
+                                        child: Text("Cancel"),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text("Oke"),
+                                        onPressed: () async {
+                                          await member.add({
+                                            'name': nameResult,
+                                            'address': addressResult,
+                                            'telephone': telephoneResult,
+                                            'date': getDateText(),
+                                          }).then((value) =>
+                                              print('Membership Success'));
+                                          Navigator.pop(context);
+                                          final snackBar = SnackBar(
+                                            content: Text(
+                                                'Pembuatan Member Berhasil!'),
+                                            action: SnackBarAction(
+                                                label: 'ULANGI',
+                                                onPressed: () {}),
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                }
+                              });
                         },
                       ),
                     ),
@@ -379,6 +384,7 @@ class _MemberPageState extends State<MemberPage> {
       ),
     );
   }
+
   Future pickedDate(BuildContext context) async {
     final selectedDate = DateTime.now();
     final newDate = await showDatePicker(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 
 class Headline extends StatelessWidget {

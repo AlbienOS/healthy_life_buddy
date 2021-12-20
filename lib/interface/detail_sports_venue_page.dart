@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/interface/booking_sports_venue_page.dart';
@@ -87,7 +85,10 @@ class DetailSportsVenuePage extends StatelessWidget {
                     ],
                   );
                 } else {
-                  return const Center(child: CircularProgressIndicator());
+                  return SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      child: const Center(child: CircularProgressIndicator()));
                 }
               },
             ),

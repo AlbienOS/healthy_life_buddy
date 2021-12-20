@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_life_buddy/common/color_style.dart';
+import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/model/article_model.dart';
+import 'package:healthy_life_buddy/provider/article_provider.dart';
 import 'package:healthy_life_buddy/widget/back_button.dart';
 import 'package:healthy_life_buddy/widget/share_button.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class DetailArticlePage extends StatelessWidget {
   const DetailArticlePage({Key? key, required this.articleData})
@@ -31,22 +33,71 @@ class DetailArticlePage extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.thumb_up_outlined,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surface,
-                            borderRadius: BorderRadius.circular(100)),
-                      ),
+                    Consumer<ArticleProvider>(
+                      builder: (context, snapshot, _) {
+                        final articleReviewState = snapshot.reviewState;
+                        final state = snapshot.state;
+                        return Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Container(
+                                child: IconButton(
+                                  onPressed: () async {
+                                    if (state != CurrentState.isLoading) {
+                                      await snapshot
+                                          .articleReviewLike(articleData.id);
+                                    }
+                                  },
+                                  icon: Icon(
+                                    articleReviewState == ReviewState.like
+                                        ? Icons.thumb_up
+                                        : Icons.thumb_up_outlined,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    borderRadius: BorderRadius.circular(100)),
+                              ),
+                            ),
+                            Text(snapshot.like.toString()),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Container(
+                                child: IconButton(
+                                  onPressed: () async {
+                                    if (state != CurrentState.isLoading) {
+                                      await snapshot
+                                          .articleReviewDislike(articleData.id);
+                                    }
+                                  },
+                                  icon: Icon(
+                                    articleReviewState == ReviewState.dislike
+                                        ? Icons.thumb_down
+                                        : Icons.thumb_down_outlined,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    borderRadius: BorderRadius.circular(100)),
+                              ),
+                            ),
+                            Text(snapshot.dislike.toString()),
+                          ],
+                        );
+                      },
                     ),
                     ShareButton(
                         text:

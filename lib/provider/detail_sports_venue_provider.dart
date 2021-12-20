@@ -24,7 +24,7 @@ class DetailSportsVeneueProvider with ChangeNotifier {
       _detailSportsVenue = detailSportsVenue;
       notifyListeners();
     } catch (e) {
-      print("error");
+      notifyListeners();
     }
   }
 }

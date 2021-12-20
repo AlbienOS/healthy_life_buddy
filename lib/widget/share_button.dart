@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShareButton extends StatelessWidget {

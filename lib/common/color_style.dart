@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_life_buddy/common/text_style.dart';
 
 //colors for light mode
 const primaryColor = Color.fromRGBO(57, 174, 214, 1);

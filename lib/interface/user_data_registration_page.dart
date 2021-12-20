@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
-import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/helper/navigation_helper.dart';
 import 'package:healthy_life_buddy/widget/app_headline.dart';
@@ -88,14 +87,26 @@ class _UserDataRegistrationPageState extends State<UserDataRegistrationPage> {
                               ),
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  await userDataRegistration(
-                                      _nameController.text,
-                                      int.parse(_ageController.text),
-                                      _gender.toString(),
-                                      _addressController.text,
-                                      _phoneNumberController.text);
-                                  Navigator.pushReplacementNamed(
-                                      context, Navigation.routeName);
+                                  try {
+                                    final result = await userDataRegistration(
+                                        _nameController.text,
+                                        int.parse(_ageController.text),
+                                        _gender.toString(),
+                                        _addressController.text,
+                                        _phoneNumberController.text);
+                                    if (result == "success") {
+                                      Navigator.pushReplacementNamed(
+                                          context, Navigation.routeName);
+                                    }
+                                  } catch (e) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                          "Maaf terjadi kesalah",
+                                        ),
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                               style: TextButton.styleFrom(
@@ -168,7 +179,7 @@ class PhoneNumberTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (val) =>
-          val == null || val.isEmpty ? "Mohon untuk mengisi form ini" : null,
+          val == null || val == "" ? "Mohon untuk mengisi form ini" : null,
       controller: _phoneNumberController,
       keyboardType: TextInputType.phone,
       style: const TextStyle(color: Colors.black),
@@ -196,7 +207,7 @@ class AddressTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (val) =>
-          val == null || val.isEmpty ? "Mohon untuk mengisi form ini" : null,
+          val == null || val == "" ? "Mohon untuk mengisi form ini" : null,
       controller: _addressController,
       keyboardType: TextInputType.streetAddress,
       style: const TextStyle(color: Colors.black),
@@ -223,9 +234,10 @@ class AgeTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: (val) => val == null || int.parse(_ageController.text) < 0
-          ? "Umur yang dimasukkan tidak valid"
-          : null,
+      validator: (val) =>
+          val == null || val == "" || int.parse(_ageController.text) < 0
+              ? "Umur yang dimasukkan tidak valid"
+              : null,
       controller: _ageController,
       keyboardType: TextInputType.number,
       style: const TextStyle(color: Colors.black),
@@ -252,7 +264,7 @@ class NameTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: (val) => val == null || val.length > 12
+      validator: (val) => val == null || val == "" || val.length > 12
           ? "Jumlah karakter yang dimasukkan harus 1 ~ 16 karakter"
           : null,
       controller: _nameController,
