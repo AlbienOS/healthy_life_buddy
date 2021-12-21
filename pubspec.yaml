@@ -45,6 +45,10 @@ dependencies:
   firebase_auth: ^3.3.0
   share_plus: ^3.0.4
   shared_preferences: ^2.0.11
+  flutter_local_notifications: ^9.1.5
+  rxdart: ^0.27.3
+  android_alarm_manager_plus: ^2.0.3
+
 
 dev_dependencies:
   flutter_test:

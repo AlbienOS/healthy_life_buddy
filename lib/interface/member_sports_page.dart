@@ -7,7 +7,12 @@ import 'package:intl/intl.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 
 class MemberPage extends StatefulWidget {
-  static const routeName = '/MemberSportsPage';
+  static const routeName = '/MemberPage';
+  const MemberPage({Key? key, required this.sportsVenueData})
+      : super(key: key);
+
+  final DetailSportsVeneu sportsVenueData;
+
   @override
   State<MemberPage> createState() => _MemberPageState();
 }
@@ -18,7 +23,10 @@ class _MemberPageState extends State<MemberPage> {
       .doc(auth.currentUser!.uid)
       .collection('member');
 
-  int changePrice = 0;
+  DateTimeRange? dateRange;
+
+
+  double changePrice = 0;
 
   String nameResult = '';
 
@@ -30,11 +38,32 @@ class _MemberPageState extends State<MemberPage> {
 
   TimeOfDay? time;
 
+  double fullPay() {
+      changePrice = (widget.sportsVenueData.rentalCosts.toDouble() * 15/100) * 30;
+      return changePrice;
+  }
+
   String getDateText() {
     if (dateTime == null) {
       return 'Pilih Tanggal';
     } else {
       return DateFormat('dd/MM/yyyy').format(dateTime!);
+    }
+  }
+
+  String getFrom() {
+    if (dateRange == null) {
+      return 'Dari Tanggal';
+    } else {
+      return DateFormat('MM/dd/yyyy').format(dateRange!.start);
+    }
+  }
+
+  String getUntil() {
+    if (dateRange == null) {
+      return 'Sampai Tanggal';
+    } else {
+      return DateFormat('MM/dd/yyyy').format(dateRange!.end);
     }
   }
 
@@ -90,6 +119,9 @@ class _MemberPageState extends State<MemberPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
+                            onChanged: (value){
+                              nameResult = value;
+                            },
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 8.0),
@@ -119,6 +151,9 @@ class _MemberPageState extends State<MemberPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
+                            onChanged: (value){
+                              addressResult = value;
+                            },
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 8.0),
@@ -148,6 +183,9 @@ class _MemberPageState extends State<MemberPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
+                            onChanged: (value){
+                              telephoneResult = value;
+                            },
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 8.0),
@@ -185,7 +223,7 @@ class _MemberPageState extends State<MemberPage> {
                             ),
                             child: Center(
                               child: Text(
-                                getDateText(),
+                                getFrom(),
                                 style: GoogleFonts.montserrat(
                                     fontSize: 16, color: Colors.black),
                               ),
@@ -209,7 +247,58 @@ class _MemberPageState extends State<MemberPage> {
                                 ),
                               )),
                               onPressed: () {
-                                pickedDate(context);
+                                pickedDateRange(context);
+                              },
+                              child: Icon(Icons.calendar_today)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 250,
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Container(
+                            height: 60,
+                            width: 250,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Center(
+                              child: Text(
+                                getUntil(),
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 16, color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 30),
+                        Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: primaryVariantColor,
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  )),
+                              onPressed: () {
+                                pickedDateRange(context);
                               },
                               child: Icon(Icons.calendar_today)),
                         ),
@@ -330,11 +419,33 @@ class _MemberPageState extends State<MemberPage> {
                                             Row(
                                               children: [
                                                 Icon(Icons.date_range),
-                                                Text('        : ' +
-                                                    getDateText()),
+                                                Text('Mulai  : ' +
+                                                    getFrom()),
                                               ],
                                             ),
                                             Divider(thickness: 2.0),
+                                            SizedBox(height: 10.0),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.date_range),
+                                                Text('Berakhir : ' +
+                                                    getUntil()),
+                                              ],
+                                            ),
+                                            Divider(thickness: 2.0),
+                                            SizedBox(height: 10.0),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.attach_money),
+                                                Text('Harga : ' + fullPay().toString()),
+                                              ],
+                                            ),
+                                            Divider(thickness: 2.0),
+                                            Row(
+                                              children: [
+                                                Text('*Notes : harga member sudah termasuk potongan 15%', style: TextStyle(fontSize: 10),),
+                                              ],
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -353,7 +464,7 @@ class _MemberPageState extends State<MemberPage> {
                                             'name': nameResult,
                                             'address': addressResult,
                                             'telephone': telephoneResult,
-                                            'date': getDateText(),
+                                            'date': getUntil(),
                                           }).then((value) =>
                                               print('Membership Success'));
                                           Navigator.pop(context);
@@ -385,6 +496,23 @@ class _MemberPageState extends State<MemberPage> {
     );
   }
 
+  Future pickedDateRange(BuildContext context) async {
+    final initialDateRange = DateTimeRange(
+      start: DateTime.now(),
+      end: DateTime.now().add(Duration(hours: 24 * 3)),
+    );
+    final newDateRange = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+      initialDateRange: dateRange ?? initialDateRange,
+    );
+
+    if (newDateRange == null) return;
+
+    setState(() => dateRange = newDateRange);
+  }
+
   Future pickedDate(BuildContext context) async {
     final selectedDate = DateTime.now();
     final newDate = await showDatePicker(
@@ -397,4 +525,5 @@ class _MemberPageState extends State<MemberPage> {
 
     setState(() => dateTime = newDate);
   }
+
 }

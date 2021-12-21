@@ -18,4 +18,14 @@ class SportsVeneu {
     downPayment = data['downPayment'];
     rate = data['rate'].toDouble();
   }
+
+ Map<String, dynamic> toJson() => {
+    "id" : id,
+   "name" : name,
+   "imageUrl" : imageUrl,
+   "location" : location,
+   "rentalCosts" : rentalCosts,
+   "downPayment" : downPayment,
+   "rate" : rate,
+ };
 }

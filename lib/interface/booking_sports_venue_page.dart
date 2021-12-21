@@ -5,6 +5,7 @@ import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
+import 'package:healthy_life_buddy/provider/preference_notif_provider.dart';
 import 'package:intl/intl.dart';
 
 
@@ -50,7 +51,7 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
     if (dateTime == null) {
       return 'Pilih Tanggal';
     } else {
-      return DateFormat('dd/MM/yyyy').format(dateTime!);
+      return DateFormat('yyyy-MM-dd').format(dateTime!);
     }
   }
 
@@ -569,6 +570,7 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                                     TextButton(
                                       child: Text("Oke"),
                                       onPressed:  () async {
+                                        scheduleSport(DateTime.parse(getDateText()));
                                         await booking.add({
                                           'name' : nameResult,
                                           'address' : addressResult,

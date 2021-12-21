@@ -221,7 +221,7 @@ class SportsVenueMembership extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return MemberPage();
+                        return MemberPage(sportsVenueData: detailSportsVenueData);
                       }));
                     },
                     style: TextButton.styleFrom(

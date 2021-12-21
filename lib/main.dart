@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:healthy_life_buddy/helper/navigation_helper.dart';
 import 'package:healthy_life_buddy/helper/preferences_helper.dart';
 import 'package:healthy_life_buddy/interface/booking_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/detail_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
 import 'package:healthy_life_buddy/interface/login_page.dart';
+import 'package:healthy_life_buddy/interface/member_sports_page.dart';
 import 'package:healthy_life_buddy/interface/registration_page.dart';
 import 'package:healthy_life_buddy/interface/user_data_registration_page.dart';
 import 'package:healthy_life_buddy/interface/welcome_page.dart';
@@ -17,6 +19,9 @@ import 'package:healthy_life_buddy/provider/preferences_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -71,6 +76,9 @@ class MyApp extends StatelessWidget {
                 BookingSportsVenuePage(
                     sportsVenueData: ModalRoute.of(context)?.settings.arguments
                         as DetailSportsVeneu),
+            MemberPage.routeName : (context) =>
+                MemberPage(sportsVenueData: ModalRoute.of(context)?.settings.arguments
+                as DetailSportsVeneu),
           },
         );
       },
