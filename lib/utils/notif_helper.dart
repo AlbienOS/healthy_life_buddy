@@ -67,7 +67,7 @@ class NotifHelper{
 
   void configureSelectNotificationSubject(String route){
     selectNotifSubject.stream.listen((String payload) async{
-      var data = SportsVeneu.fromObject(json.decode(payload));
+      var data = SportsVeneu.fromJson(json.decode(payload));
       var sportBook = data.name;
       Navigation.intentWithData(route, sportBook);
     });

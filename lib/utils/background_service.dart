@@ -1,7 +1,9 @@
 import 'dart:isolate';
-
 import 'dart:ui';
 
+
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:healthy_life_buddy/api/sports_venue_api.dart';
 import 'package:healthy_life_buddy/utils/notif_helper.dart';
 
@@ -10,6 +12,7 @@ import '../main.dart';
 final ReceivePort port = ReceivePort();
 
 class BackgroundService {
+
   static BackgroundService? _instance;
   static String _isolateName = 'isolate';
   static SendPort? _uiSendPort;
@@ -28,6 +31,7 @@ class BackgroundService {
   }
 
   static Future<void> callback() async {
+    await Firebase.initializeApp();
     print('Alarm fired!');
     final NotifHelper _notificationHelper = NotifHelper();
     var result = await getSportsVenue();

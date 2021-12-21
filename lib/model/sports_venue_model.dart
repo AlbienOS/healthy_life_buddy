@@ -19,13 +19,23 @@ class SportsVeneu {
     rate = data['rate'].toDouble();
   }
 
- Map<String, dynamic> toJson() => {
+  SportsVeneu.fromJson(Map<String, dynamic> map){
+    id = map['id'];
+    name = map['name'];
+    imageUrl = map['imageUrl'];
+    location = map['location'];
+    rentalCosts = map['rentalCosts'];
+    downPayment = map['downPayment'];
+    rate = map['rate'].toDouble();
+  }
+
+  Map<String, dynamic> toJson() => {
     "id" : id,
-   "name" : name,
-   "imageUrl" : imageUrl,
-   "location" : location,
-   "rentalCosts" : rentalCosts,
-   "downPayment" : downPayment,
-   "rate" : rate,
- };
+    "name" : name,
+    "imageUrl" : imageUrl,
+    "location" : location,
+    "rentalCosts" : rentalCosts,
+    "downPayment" : downPayment,
+    "rate" : rate,
+  };
 }
