@@ -83,7 +83,7 @@ class _UserDataRegistrationPageState extends State<UserDataRegistrationPage> {
                                 style: textTheme.button?.apply(
                                     color: Theme.of(context)
                                         .colorScheme
-                                        .onBackground),
+                                        .onPrimary),
                               ),
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
@@ -186,9 +186,27 @@ class PhoneNumberTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.error, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
         ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.error, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(25),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.primary, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        errorStyle: textTheme.caption
+            ?.apply(color: Theme.of(context).colorScheme.error),
       ),
     );
   }
@@ -214,9 +232,27 @@ class AddressTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.error, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
         ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.error, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(25),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.primary, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        errorStyle: textTheme.caption
+            ?.apply(color: Theme.of(context).colorScheme.error),
       ),
     );
   }
@@ -244,9 +280,27 @@ class AgeTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.error, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
         ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.error, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(25),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.primary, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        errorStyle: textTheme.caption
+            ?.apply(color: Theme.of(context).colorScheme.error),
       ),
     );
   }
@@ -273,9 +327,27 @@ class NameTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.error, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
         ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.error, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(25),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.primary, width: 2.0),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        errorStyle: textTheme.caption
+            ?.apply(color: Theme.of(context).colorScheme.error),
       ),
     );
   }

@@ -188,7 +188,7 @@ class ListOfArticles extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            snapshot.like.toString(),
+                                            snapshot.article[i].like.toString(),
                                             style: textTheme.subtitle1?.apply(
                                                 color: Theme.of(context)
                                                     .colorScheme
@@ -205,7 +205,8 @@ class ListOfArticles extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            snapshot.dislike.toString(),
+                                            snapshot.article[i].dislike
+                                                .toString(),
                                             style: textTheme.subtitle1?.apply(
                                                 color: Theme.of(context)
                                                     .colorScheme

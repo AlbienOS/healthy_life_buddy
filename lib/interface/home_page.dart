@@ -46,7 +46,6 @@ class ListOfSportsVenues extends StatefulWidget {
 
 class _ListOfSportsVenuesState extends State<ListOfSportsVenues> {
   final TextEditingController _searchController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {

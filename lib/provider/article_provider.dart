@@ -84,6 +84,7 @@ class ArticleProvider with ChangeNotifier {
       }
       await getReviewCount(articleId);
       _state = CurrentState.isSuccsess;
+      fetchArticleList();
       notifyListeners();
     } catch (e) {
       _state = CurrentState.isError;
@@ -112,6 +113,7 @@ class ArticleProvider with ChangeNotifier {
       }
       await getReviewCount(articleId);
       _state = CurrentState.isSuccsess;
+      fetchArticleList();
       notifyListeners();
     } catch (e) {
       _state = CurrentState.isError;
