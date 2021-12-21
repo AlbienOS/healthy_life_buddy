@@ -66,7 +66,12 @@ class DetailArticlePage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(100)),
                               ),
                             ),
-                            Text(snapshot.like.toString()),
+                            Text(
+                              snapshot.like.toString(),
+                              style: textTheme.subtitle1?.apply(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface),
+                            ),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
@@ -94,15 +99,23 @@ class DetailArticlePage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(100)),
                               ),
                             ),
-                            Text(snapshot.dislike.toString()),
+                            Text(
+                              snapshot.dislike.toString(),
+                              style: textTheme.subtitle1?.apply(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface),
+                            ),
                           ],
                         );
                       },
                     ),
-                    ShareButton(
-                        text:
-                            "ayo baca artikel yang sangat informatif yang berjudul ${articleData.title} yang ditulis oleh ${articleData.author}",
-                        subjectText: "ayo baca ${articleData.title}")
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: ShareButton(
+                          text:
+                              "ayo baca artikel yang sangat informatif yang berjudul ${articleData.title} yang ditulis oleh ${articleData.author}",
+                          subjectText: "ayo baca ${articleData.title}"),
+                    ),
                   ],
                 ),
               ],
@@ -199,7 +212,7 @@ class ArticleContent extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Text(
                 articleData.content,
-                style: textTheme.caption
+                style: textTheme.bodyText2
                     ?.apply(color: Theme.of(context).colorScheme.onSurface),
               ),
             ),

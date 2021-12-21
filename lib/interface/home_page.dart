@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/interface/detail_sports_venue_page.dart';

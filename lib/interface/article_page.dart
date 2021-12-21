@@ -45,7 +45,8 @@ class ListOfArticles extends StatelessWidget {
         var currentState = snapshot.state;
         if (currentState == CurrentState.isLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (currentState == CurrentState.hasData) {
+        } else if (currentState == CurrentState.hasData ||
+            currentState == CurrentState.isSuccsess) {
           return ListView.builder(
             itemCount: articleData.length,
             itemBuilder: (context, i) {
@@ -72,97 +73,151 @@ class ListOfArticles extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                      child: Column(
                         children: [
-                          Expanded(
-                            flex: 1,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Image.network(
-                                  articleData[i].imageUrl,
-                                  width: 85,
-                                  height: 85,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0),
-                                    child: Text(
-                                      articleData[i].title,
-                                      style: textTheme.headline6?.apply(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSurface),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: Image.network(
+                                      articleData[i].imageUrl,
+                                      height: 125,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                  Row(
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        child: Image.network(
-                                          articleData[i].authorImageProfileUrl,
-                                          width: 20,
-                                          height: 20,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 8.0),
+                                            vertical: 8.0),
                                         child: Text(
-                                          articleData[i].author,
-                                          style: textTheme.caption?.apply(
+                                          articleData[i].title,
+                                          style: textTheme.headline6?.apply(
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .onSurface),
                                         ),
                                       ),
-                                      Text(
-                                        DateFormat('dd-MM-yyyy')
-                                            .format(
-                                              DateTime.fromMillisecondsSinceEpoch(
-                                                  articleData[i]
-                                                      .createAt
-                                                      .millisecondsSinceEpoch),
-                                            )
-                                            .toString(),
-                                        style: textTheme.caption?.apply(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSurface),
+                                      Row(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            child: Image.network(
+                                              articleData[i]
+                                                  .authorImageProfileUrl,
+                                              width: 20,
+                                              height: 20,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Text(
+                                              articleData[i].author,
+                                              style: textTheme.caption?.apply(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurface),
+                                            ),
+                                          ),
+                                          Text(
+                                            "|",
+                                            style: textTheme.bodyText1?.apply(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Text(
+                                              DateFormat('dd-MM-yyyy')
+                                                  .format(
+                                                    DateTime.fromMillisecondsSinceEpoch(
+                                                        articleData[i]
+                                                            .createAt
+                                                            .millisecondsSinceEpoch),
+                                                  )
+                                                  .toString(),
+                                              style: textTheme.caption?.apply(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurface),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 8.0),
+                                        child: Text(
+                                          articleData[i].content,
+                                          style: textTheme.bodyText2?.apply(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSurface),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Icon(
+                                              Icons.thumb_up,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
+                                          ),
+                                          Text(
+                                            snapshot.like.toString(),
+                                            style: textTheme.subtitle1?.apply(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Icon(
+                                              Icons.thumb_down,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
+                                          ),
+                                          Text(
+                                            snapshot.dislike.toString(),
+                                            style: textTheme.subtitle1?.apply(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0),
-                                    child: Text(
-                                      articleData[i].content,
-                                      style: textTheme.caption?.apply(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSurface),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ],
                       ),

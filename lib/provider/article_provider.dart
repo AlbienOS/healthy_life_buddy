@@ -37,7 +37,6 @@ class ArticleProvider with ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      print(e.toString());
       _state = CurrentState.isError;
       notifyListeners();
     }
