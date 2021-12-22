@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +16,7 @@ import 'package:healthy_life_buddy/interface/welcome_page.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:healthy_life_buddy/provider/article_provider.dart';
 import 'package:healthy_life_buddy/provider/auth_provider.dart';
+import 'package:healthy_life_buddy/provider/booking_provider.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/preferences_provider.dart';
 import 'package:healthy_life_buddy/utils/background_service.dart';
@@ -56,6 +56,9 @@ void main() async {
               sharedPreferences: SharedPreferences.getInstance(),
             ),
           ),
+        ),
+        ChangeNotifierProvider<BookingSportsVenueProvider>(
+            create: (context) => BookingSportsVenueProvider()
         ),
         ChangeNotifierProvider(
           create: (context) => ArticleProvider(),

@@ -22,7 +22,7 @@ class FavoritePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               UserProfile(),
-              Headline(text: "Your Favorite Sports Venue"),
+              Headline(text: "Tempat Olahraga Favoritmu"),
               ListOfFavoriteSportsVenues(),
             ],
           ),

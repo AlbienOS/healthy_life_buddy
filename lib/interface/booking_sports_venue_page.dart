@@ -578,6 +578,8 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                                           'date' : getDateText(),
                                           'time' : getTimeText(),
                                           'cost' : changePrice,
+                                          'place' : widget.sportsVenueData.name,
+                                          'place id' : widget.sportsVenueData.id,
                                         }).then((value) => print('Booking Added'));
                                         Navigator.push(context, MaterialPageRoute(builder: (context){
                                           return HomePage();  

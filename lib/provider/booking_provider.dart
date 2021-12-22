@@ -3,6 +3,7 @@ import 'package:healthy_life_buddy/api/booking_sports_api.dart';
 import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/model/booking_sports_data.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
+import 'package:healthy_life_buddy/model/booking_sports_model.dart';
 
 class BookingSportsVenueProvider with ChangeNotifier {
   BookingSportsVenueProvider() {
@@ -19,23 +20,19 @@ class BookingSportsVenueProvider with ChangeNotifier {
     _state = CurrentState.isLoading;
     notifyListeners();
     try {
-      final bookingDataList =
-          await getBookingSportsModelById(auth.currentUser!.uid);
-
-      if (bookingDataList.isEmpty) {
+      final bookingDataList = await getBookingSportsModel();
+      if (bookingDataList.isNotEmpty) {
         _state = CurrentState.hasData;
-        _bookingSportsDataList = [];
-        for (var element in bookingDataList) {
-          final data = await getBookingSportsByData(element.sportsVenueId);
-          _bookingSportsDataList.add(data);
-        }
+        _bookingSportsDataList = bookingDataList;
         notifyListeners();
       } else if (bookingDataList.isEmpty) {
         _state = CurrentState.noData;
         notifyListeners();
       }
     } catch (e) {
+      print(e);
       _state = CurrentState.isError;
+
 
       notifyListeners();
     }
