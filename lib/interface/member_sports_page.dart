@@ -266,7 +266,7 @@ class _MemberPageState extends State<MemberPage> {
                                     ),
                                     actions: [
                                       TextButton(
-                                        child: Text("Cancel"),
+                                        child: Text("Batal"),
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
