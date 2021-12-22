@@ -55,7 +55,13 @@ class ListOfBookingSportsVenues extends StatelessWidget {
                         Row(
                           children: [
                             Icon(Icons.location_pin),
-                            Text(bookingSportVenues[i].place),
+                            Text(bookingSportVenues[i].sportsVenueName),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.calendar_today),
+                            Text(bookingSportVenues[i].date),
                           ],
                         ),
                         Row(
@@ -67,9 +73,10 @@ class ListOfBookingSportsVenues extends StatelessWidget {
                         Row(
                           children: [
                             Icon(Icons.attach_money),
-                            Text(bookingSportVenues[i].payment),
+                            Text(bookingSportVenues[i].paymentStatus),
+                            Text("${bookingSportVenues[i].payment}"),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
