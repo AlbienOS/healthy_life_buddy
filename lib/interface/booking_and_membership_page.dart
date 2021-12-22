@@ -14,17 +14,15 @@ class BookingAndMembershipPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                UserProfile(),
-                Headline(text: 'Pesanan Tempat Kamu'),
-                ListOfBookingSportsVenues(),
-              ],
-            ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              UserProfile(),
+              Headline(text: 'Pesanan Tempat Kamu'),
+              Expanded(child: ListOfBookingSportsVenues()),
+            ],
           ),
         ),
       ),
@@ -32,50 +30,59 @@ class BookingAndMembershipPage extends StatelessWidget {
   }
 }
 
-class ListOfBookingSportsVenues extends StatelessWidget{
+class ListOfBookingSportsVenues extends StatelessWidget {
   const ListOfBookingSportsVenues({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-   return Consumer<BookingSportsVenueProvider>(
-       builder: (context, snapshot, _){
-     final bookingSportVenues = snapshot.bookingSportsData;
-     var currentState = snapshot.state;
-     if(currentState == CurrentState.isLoading){
-       return Center(
-               child: CircularProgressIndicator()
-       );
-     }
-     else if(currentState == CurrentState.hasData){
-       return ListView.builder(
-           itemCount: bookingSportVenues.length,
-             itemBuilder: (context, i){
-              return Card(
-               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)
-               ),
-                child: Row(
-                  children: [
-                    Padding(padding: const EdgeInsets.all(16.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(bookingSportVenues[i].name),
-                      ),
+    return Consumer<BookingSportsVenueProvider>(
+      builder: (context, snapshot, _) {
+        final bookingSportVenues = snapshot.bookingSportsData;
+        var currentState = snapshot.state;
+        if (currentState == CurrentState.isLoading) {
+          return Center(child: CircularProgressIndicator());
+        } else if (currentState == CurrentState.hasData) {
+          return ListView.builder(
+              itemCount: bookingSportVenues.length,
+              itemBuilder: (context, i) {
+                return Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.location_pin),
+                            Text(bookingSportVenues[i].place),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.timer),
+                            Text(bookingSportVenues[i].time),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.attach_money),
+                            Text(bookingSportVenues[i].payment),
+                          ],
+                        )
+                      ],
                     ),
-                  ],
-                ),
-             );
-         });
-     }
-     else if(currentState == CurrentState.noData){
-       return  NoDataStateMessage();
-     }
-     else if(currentState == CurrentState.isError){
-       return ErrorStateMessage();
-     }
-     else{
-       return Container();
-     }
-    },
-   );
+                  ),
+                );
+              });
+        } else if (currentState == CurrentState.noData) {
+          return NoDataStateMessage();
+        } else if (currentState == CurrentState.isError) {
+          return ErrorStateMessage();
+        } else {
+          return Container();
+        }
+      },
+    );
   }
-
 }

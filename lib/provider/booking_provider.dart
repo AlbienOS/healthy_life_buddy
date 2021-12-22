@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/api/booking_sports_api.dart';
 import 'package:healthy_life_buddy/common/state.dart';
-import 'package:healthy_life_buddy/model/booking_sports_data.dart';
-import 'package:healthy_life_buddy/api/auth_api.dart';
-import 'package:healthy_life_buddy/model/booking_sports_model.dart';
+import 'package:healthy_life_buddy/model/booking_data_model.dart';
 
 class BookingSportsVenueProvider with ChangeNotifier {
   BookingSportsVenueProvider() {
@@ -11,16 +9,16 @@ class BookingSportsVenueProvider with ChangeNotifier {
   }
 
   late CurrentState _state;
-  List<BookingSportsData> _bookingSportsDataList = [];
+  List<BookingData> _bookingSportsDataList = [];
 
   CurrentState get state => _state;
-  List<BookingSportsData> get bookingSportsData => _bookingSportsDataList;
+  List<BookingData> get bookingSportsData => _bookingSportsDataList;
 
   fetchDataBooking() async {
     _state = CurrentState.isLoading;
     notifyListeners();
     try {
-      final bookingDataList = await getBookingSportsModel();
+      final bookingDataList = await getBookingData();
       if (bookingDataList.isNotEmpty) {
         _state = CurrentState.hasData;
         _bookingSportsDataList = bookingDataList;
@@ -32,8 +30,6 @@ class BookingSportsVenueProvider with ChangeNotifier {
     } catch (e) {
       print(e);
       _state = CurrentState.isError;
-
-
       notifyListeners();
     }
   }
