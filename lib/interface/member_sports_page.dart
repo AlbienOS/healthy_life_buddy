@@ -24,18 +24,11 @@ class _MemberPageState extends State<MemberPage> {
       .collection('member');
 
   DateTimeRange? dateRange;
-
-
   double changePrice = 0;
-
   String nameResult = '';
-
   String addressResult = '';
-
   String telephoneResult = '';
-
   DateTime? dateTime;
-
   TimeOfDay? time;
 
   double fullPay() {
@@ -109,201 +102,83 @@ class _MemberPageState extends State<MemberPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 350,
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: TextField(
-                            onChanged: (value){
-                              nameResult = value;
-                            },
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 8.0),
-                              hintText: "Nama",
-                              border: InputBorder.none,
-                            ),
-                            keyboardType: TextInputType.name,
-                            onSubmitted: (String res) {
-                              setState(() {
-                                nameResult = res;
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 350,
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: TextField(
-                            onChanged: (value){
-                              addressResult = value;
-                            },
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 8.0),
-                              hintText: "Alamat",
-                              border: InputBorder.none,
-                            ),
-                            keyboardType: TextInputType.streetAddress,
-                            onSubmitted: (String res) {
-                              setState(() {
-                                addressResult = res;
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 350,
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: TextField(
-                            onChanged: (value){
-                              telephoneResult = value;
-                            },
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 8.0),
-                              hintText: "No. Telepon",
-                              border: InputBorder.none,
-                            ),
-                            keyboardType: TextInputType.phone,
-                            onSubmitted: (String res) {
-                              setState(() {
-                                telephoneResult = res;
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 250,
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Container(
-                            height: 60,
-                            width: 250,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 150,
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(10.0),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Center(
-                              child: Text(
-                                getFrom(),
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 16, color: Colors.black),
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 30),
-                        Container(
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            color: primaryVariantColor,
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
+                              child: Center(
+                                child: Text(
+                                  getFrom(),
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: 16, color: Colors.black),
                                 ),
-                              )),
-                              onPressed: () {
-                                pickedDateRange(context);
-                              },
-                              child: Icon(Icons.calendar_today)),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 250,
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Container(
-                            height: 60,
-                            width: 250,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Center(
-                              child: Text(
-                                getUntil(),
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 16, color: Colors.black),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 30),
-                        Container(
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            color: primaryVariantColor,
-                            borderRadius: BorderRadius.circular(20.0),
+                          Icon(Icons.arrow_forward, color: Colors.black),
+
+                          Container(
+                            width: 150,
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  getUntil(),
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: 16, color: Colors.black),
+                                ),
+                              ),
+                            ),
                           ),
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  )),
-                              onPressed: () {
-                                pickedDateRange(context);
-                              },
-                              child: Icon(Icons.calendar_today)),
-                        ),
-                      ],
+                          SizedBox(width: 30),
+                        ],
+                      ),
                     ),
+                  ),
+                  Container(
+                    height: 60,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      color: primaryVariantColor,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            )),
+                        onPressed: () {
+                          pickedDateRange(context);
+                        },
+                        child: Icon(Icons.calendar_today)),
                   ),
                 ],
               )
@@ -342,44 +217,7 @@ class _MemberPageState extends State<MemberPage> {
                           showDialog(
                               context: context,
                               builder: (context) {
-                                if (nameResult.isEmpty) {
-                                  return AlertDialog(
-                                    title: Text('Semua Kolom Harus Terisi'),
-                                    actions: [
-                                      TextButton(
-                                        child: Text("Oke"),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                } else if (addressResult.isEmpty) {
-                                  return AlertDialog(
-                                    title: Text('Semua Kolom Harus Terisi'),
-                                    actions: [
-                                      TextButton(
-                                        child: Text("Oke"),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                } else if (telephoneResult.isEmpty) {
-                                  return AlertDialog(
-                                    title: Text('Semua Kolom Harus Terisi'),
-                                    actions: [
-                                      TextButton(
-                                        child: Text("Oke"),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                } else {
-                                  return AlertDialog(
+                                return  AlertDialog(
                                     title: Center(
                                         child: Text('KONFIRMASI MEMBER')),
                                     content: Container(
@@ -390,30 +228,6 @@ class _MemberPageState extends State<MemberPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Row(
-                                              children: [
-                                                Icon(Icons.person),
-                                                Text('        : ${nameResult}'),
-                                              ],
-                                            ),
-                                            Divider(thickness: 2.0),
-                                            SizedBox(height: 10.0),
-                                            Row(
-                                              children: [
-                                                Icon(Icons.add_location),
-                                                Text(
-                                                    '        : ${addressResult}'),
-                                              ],
-                                            ),
-                                            Divider(thickness: 2.0),
-                                            SizedBox(height: 10.0),
-                                            Row(
-                                              children: [
-                                                Icon(Icons.contact_phone),
-                                                Text(
-                                                    '        : ${telephoneResult}'),
-                                              ],
-                                            ),
                                             Divider(thickness: 2.0),
                                             SizedBox(height: 10.0),
                                             Row(
@@ -461,10 +275,9 @@ class _MemberPageState extends State<MemberPage> {
                                         child: Text("Oke"),
                                         onPressed: () async {
                                           await member.add({
-                                            'name': nameResult,
-                                            'address': addressResult,
-                                            'telephone': telephoneResult,
-                                            'date': getUntil(),
+                                            'place' : widget.sportsVenueData.name,
+                                            'startDate' : getFrom(),
+                                            'endDate': getUntil(),
                                           }).then((value) =>
                                               print('Membership Success'));
                                           Navigator.pop(context);
@@ -481,7 +294,6 @@ class _MemberPageState extends State<MemberPage> {
                                       ),
                                     ],
                                   );
-                                }
                               });
                         },
                       ),
@@ -499,13 +311,15 @@ class _MemberPageState extends State<MemberPage> {
   Future pickedDateRange(BuildContext context) async {
     final initialDateRange = DateTimeRange(
       start: DateTime.now(),
-      end: DateTime.now().add(Duration(hours: 24 * 3)),
+      end: DateTime.now().add(Duration(hours: 24 * 30)),
+
     );
     final newDateRange = await showDateRangePicker(
       context: context,
       firstDate: DateTime(DateTime.now().year - 5),
       lastDate: DateTime(DateTime.now().year + 5),
       initialDateRange: dateRange ?? initialDateRange,
+
     );
 
     if (newDateRange == null) return;
