@@ -16,7 +16,6 @@ import 'package:healthy_life_buddy/interface/welcome_page.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:healthy_life_buddy/provider/article_provider.dart';
 import 'package:healthy_life_buddy/provider/auth_provider.dart';
-import 'package:healthy_life_buddy/provider/booking_provider.dart';
 import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/provider/preferences_provider.dart';
 import 'package:healthy_life_buddy/utils/background_service.dart';
@@ -74,7 +73,13 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'HealthyLifeBuddy',
           theme: provider.themeData,
-          initialRoute: LoginPage.routeName,
+          home: Consumer<AuthProvider>(builder: (context, snapshot, _) {
+            if (snapshot.userData != null) {
+              return const Navigation();
+            } else {
+              return const LoginPage();
+            }
+          }),
           routes: {
             WelcomePage.routeName: (context) => const WelcomePage(),
             LoginPage.routeName: (context) => const LoginPage(),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/provider/auth_provider.dart';
+import 'package:healthy_life_buddy/widget/error_state_message.dart';
 import 'package:provider/provider.dart';
 
 class UserProfile extends StatelessWidget {
@@ -42,7 +43,7 @@ class UserProfile extends StatelessWidget {
             ),
           );
         } else {
-          return Center(child: Text("Error"));
+          return const ErrorStateMessage();
         }
       },
     );

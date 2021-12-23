@@ -9,8 +9,20 @@ import 'package:healthy_life_buddy/widget/user_profile_widget.dart';
 import 'package:provider/provider.dart';
 import 'detail_sports_venue_page.dart';
 
-class FavoritePage extends StatelessWidget {
+class FavoritePage extends StatefulWidget {
   const FavoritePage({Key? key}) : super(key: key);
+
+  @override
+  State<FavoritePage> createState() => _FavoritePageState();
+}
+
+class _FavoritePageState extends State<FavoritePage> {
+  @override
+  void initState() {
+    Provider.of<FavoriteSportsVeneuProvider>(context, listen: false)
+        .fetchFavoriteSportsVenueList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,8 @@ import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:intl/intl.dart';
 
 class DatePicker extends StatefulWidget {
+  const DatePicker({Key? key}) : super(key: key);
+
   @override
   State<DatePicker> createState() => _DatePickerState();
 }
@@ -27,7 +29,7 @@ class _DatePickerState extends State<DatePicker> {
         children: [
           Container(
             width: 250,
-            padding: EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
@@ -48,7 +50,7 @@ class _DatePickerState extends State<DatePicker> {
               ),
             ),
           ),
-          SizedBox(width: 30),
+          const SizedBox(width: 30),
           Container(
             height: 60,
             width: 60,
@@ -66,7 +68,7 @@ class _DatePickerState extends State<DatePicker> {
                 onPressed: () {
                   pickedDate(context);
                 },
-                child: Icon(Icons.calendar_today)),
+                child: const Icon(Icons.calendar_today)),
           ),
         ],
       ),

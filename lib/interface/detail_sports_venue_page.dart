@@ -119,7 +119,7 @@ class SportsVenueBooking extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Costs Detail",
+              "Booking",
               style: textTheme.headline6
                   ?.apply(color: Theme.of(context).colorScheme.onSurface),
             ),
@@ -128,50 +128,36 @@ class SportsVenueBooking extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    flex: 1,
-                    child: Text(
-                      "Rental Costs",
-                      style: textTheme.bodyText2?.apply(
-                          color: Theme.of(context).colorScheme.onSurface),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Text(
-                      ': ${sportsVenueData.rentalCosts}',
-                      style: textTheme.bodyText2?.apply(
-                          color: Theme.of(context).colorScheme.onSurface),
+                    child: TextButton(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Pesan",
+                          style: textTheme.button?.apply(
+                              color: Theme.of(context).colorScheme.onPrimary),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return BookingSportsVenuePage(
+                                  sportsVenueData: sportsVenueData);
+                            },
+                          ),
+                        );
+                      },
+                      style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextButton(
-                    child: Text(
-                      "Pesan",
-                      style: textTheme.button?.apply(
-                          color: Theme.of(context).colorScheme.onPrimary),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return BookingSportsVenuePage(
-                                sportsVenueData: sportsVenueData);
-                          },
-                        ),
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                ),
-              ],
             ),
           ],
         ),
@@ -210,21 +196,27 @@ class SportsVenueMembership extends StatelessWidget {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 16.0, right: 16.0, bottom: 16.0, top: 8),
+                  padding: const EdgeInsets.all(16.0),
                   child: TextButton(
-                    child: Text(
-                      "Buat",
-                      style: textTheme.button?.apply(
-                          color: Theme.of(context).colorScheme.onPrimary),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Buat",
+                        style: textTheme.button?.apply(
+                            color: Theme.of(context).colorScheme.onPrimary),
+                      ),
                     ),
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return MemberPage(sportsVenueData: detailSportsVenueData);
+                        return MemberPage(
+                            sportsVenueData: detailSportsVenueData);
                       }));
                     },
                     style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
                       backgroundColor: Theme.of(context).colorScheme.primary,
                     ),
                   ),

@@ -38,18 +38,15 @@ ThemeData lightTheme = ThemeData(
 );
 
 //colors for dark mode
-// const primaryColorDarkMode = Color.fromRGBO(57, 174, 214, 1);
-const primaryColorDarkMode = Colors.amber;
-const primaryVariantColorDarkMode = Color.fromRGBO(0, 126, 164, 1);
+const primaryColorDarkMode = Color.fromRGBO(59, 118, 187, 1);
+const primaryVariantColorDarkMode = Color.fromRGBO(53, 101, 158, 1);
 const backgroundColorDarkMode = Color.fromRGBO(54, 54, 54, 1);
 const surfaceColorDarkMode = Color.fromRGBO(77, 77, 77, 1);
 const errorColorDarkMode = Color.fromRGBO(242, 49, 49, 1);
 const onPrimaryColorDarkMode = Color.fromRGBO(255, 255, 255, 1);
 const onPrimaryVariantColorDarkMode = Color.fromRGBO(255, 255, 255, 1);
-// const onBackgroundColorDarkMode = Color.fromRGBO(255, 255, 255, 1);
-const onBackgroundColorDarkMode = Color.fromRGBO(242, 49, 49, 1);
-// const onSurfaceColorDarkMode = Color.fromRGBO(255, 255, 255, 1);
-const onSurfaceColorDarkMode = Color.fromRGBO(242, 49, 49, 1);
+const onBackgroundColorDarkMode = Color.fromRGBO(255, 255, 255, 1);
+const onSurfaceColorDarkMode = Color.fromRGBO(255, 255, 255, 1);
 const onErrorColorDarkMode = Color.fromRGBO(255, 255, 255, 1);
 
 ThemeData darkTheme = ThemeData(

@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
 
 class TimePicker extends StatefulWidget {
+  const TimePicker({Key? key}) : super(key: key);
+
   @override
   State<TimePicker> createState() => _TimePickerState();
 }
@@ -29,7 +31,7 @@ class _TimePickerState extends State<TimePicker> {
         children: [
           Container(
             width: 250,
-            padding: EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
@@ -50,7 +52,7 @@ class _TimePickerState extends State<TimePicker> {
               ),
             ),
           ),
-          SizedBox(width: 30),
+          const SizedBox(width: 30),
           Container(
             height: 60,
             width: 60,
@@ -68,7 +70,7 @@ class _TimePickerState extends State<TimePicker> {
                 onPressed: () {
                   pickedTime(context);
                 },
-                child: Icon(Icons.access_time)),
+                child: const Icon(Icons.access_time)),
           ),
         ],
       ),
@@ -76,7 +78,7 @@ class _TimePickerState extends State<TimePicker> {
   }
 
   Future pickedTime(BuildContext context) async {
-    final selectedTime = TimeOfDay(hour: 11, minute: 0);
+    const selectedTime = TimeOfDay(hour: 11, minute: 0);
     final newTimePicked = await showTimePicker(
       context: context,
       initialTime: time ?? selectedTime,

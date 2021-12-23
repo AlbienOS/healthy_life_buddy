@@ -34,12 +34,22 @@ class BookingAndMembershipPage extends StatelessWidget {
                 children: [
                   const UserProfile(),
                   TabBar(
-                    tabs: const [
+                    tabs: [
                       Tab(
-                        text: "Booking",
+                        child: Text(
+                          "Booking",
+                          style: textTheme.subtitle1?.apply(
+                              color:
+                                  Theme.of(context).colorScheme.onBackground),
+                        ),
                       ),
                       Tab(
-                        text: "Member",
+                        child: Text(
+                          "Member",
+                          style: textTheme.subtitle1?.apply(
+                              color:
+                                  Theme.of(context).colorScheme.onBackground),
+                        ),
                       ),
                     ],
                     indicatorColor: Theme.of(context).colorScheme.primary,
@@ -170,9 +180,9 @@ class ListOfBookingSportsVenues extends StatelessWidget {
                 );
               });
         } else if (currentState == CurrentState.noData) {
-          return NoDataStateMessage();
+          return const NoDataStateMessage();
         } else if (currentState == CurrentState.isError) {
-          return ErrorStateMessage();
+          return const ErrorStateMessage();
         } else {
           return Container();
         }
@@ -196,6 +206,7 @@ class ListOfBookingSportsVenues extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 2.0),
           child: Text(
             content,
+            overflow: TextOverflow.ellipsis,
             style: textTheme.bodyText1
                 ?.apply(color: Theme.of(context).colorScheme.onSurface),
           ),
@@ -213,7 +224,7 @@ class ListOfMembershipSportsVenues extends StatelessWidget {
       final membershipSportVenues = snapshot.membershipData;
       var currentState = snapshot.state;
       if (currentState == CurrentState.isLoading) {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       } else if (currentState == CurrentState.hasData) {
         return ListView.builder(
             itemCount: membershipSportVenues.length,
@@ -222,26 +233,73 @@ class ListOfMembershipSportsVenues extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Row(
                     children: [
-                      Row(
-                        children: [
-                          Icon(Icons.location_pin),
-                          Text(membershipSportVenues[i].place)
-                        ],
+                      Expanded(
+                        flex: 1,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.location_pin,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                membershipSportVenues[i].place,
+                                overflow: TextOverflow.ellipsis,
+                                style: textTheme.bodyText1?.apply(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Icon(Icons.calendar_today),
-                          Text(membershipSportVenues[i].startDate)
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.calendar_today),
-                          Text(membershipSportVenues[i].endDate)
-                        ],
+                      Expanded(
+                        flex: 2,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.calendar_today,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                membershipSportVenues[i].startDate,
+                                overflow: TextOverflow.ellipsis,
+                                style: textTheme.bodyText1?.apply(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "-",
+                              overflow: TextOverflow.ellipsis,
+                              style: textTheme.bodyText1?.apply(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                membershipSportVenues[i].endDate,
+                                overflow: TextOverflow.ellipsis,
+                                style: textTheme.bodyText1?.apply(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -249,9 +307,9 @@ class ListOfMembershipSportsVenues extends StatelessWidget {
               );
             });
       } else if (currentState == CurrentState.noData) {
-        return NoDataStateMessage();
+        return const NoDataStateMessage();
       } else if (currentState == CurrentState.isError) {
-        return ErrorStateMessage();
+        return const ErrorStateMessage();
       } else {
         return Container();
       }

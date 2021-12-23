@@ -264,10 +264,16 @@ class RegistrationButton extends StatelessWidget {
                 }
               }
             },
-            child: Text("Daftar",
-                style: textTheme.button
-                    ?.apply(color: Theme.of(context).colorScheme.onPrimary)),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text("Daftar",
+                  style: textTheme.button
+                      ?.apply(color: Theme.of(context).colorScheme.onPrimary)),
+            ),
             style: TextButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0),
+              ),
               backgroundColor: Theme.of(context).colorScheme.primary,
             ),
           ),
@@ -307,13 +313,17 @@ class LoginButton extends StatelessWidget {
       child: Column(
         children: [
           Center(
-            child: Text("Sudah punya akun?",
-                textAlign: TextAlign.center, style: textTheme.subtitle1),
+            child: Text(
+              "Sudah punya akun?",
+              textAlign: TextAlign.center,
+              style: textTheme.subtitle1
+                  ?.apply(color: Theme.of(context).colorScheme.onBackground),
+            ),
           ),
           Center(
             child: InkWell(
               child: Text(
-                "Login Sekarang!",
+                "Login Sekarang",
                 textAlign: TextAlign.center,
                 style: textTheme.subtitle1?.apply(
                     color: Theme.of(context).colorScheme.primary,

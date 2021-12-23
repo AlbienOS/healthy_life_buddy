@@ -3,7 +3,9 @@ import 'package:healthy_life_buddy/common/state.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/interface/detail_article_page.dart';
 import 'package:healthy_life_buddy/provider/article_provider.dart';
+import 'package:healthy_life_buddy/widget/error_state_message.dart';
 import 'package:healthy_life_buddy/widget/headline_widget.dart';
+import 'package:healthy_life_buddy/widget/no_data_state_message.dart';
 import 'package:healthy_life_buddy/widget/user_profile_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -229,9 +231,9 @@ class ListOfArticles extends StatelessWidget {
             },
           );
         } else if (currentState == CurrentState.noData) {
-          return Text("no data");
+          return const NoDataStateMessage();
         } else {
-          return Text("error");
+          return const ErrorStateMessage();
         }
       },
     );

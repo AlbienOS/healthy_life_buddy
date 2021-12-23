@@ -48,7 +48,6 @@ setLikeData(String articleId) async {
       "like": snapshot.data()!["like"].toInt() + 1,
     },
   );
-  print("${snapshot.data()!["like"].toInt()}");
 }
 
 removeLikeData(String articleId) async {
@@ -61,7 +60,6 @@ removeLikeData(String articleId) async {
       "like": snapshot.data()!["like"].toInt() - 1,
     },
   );
-  print("${snapshot.data()!["like"].toInt()}");
 }
 
 setDislikeData(String articleId) async {

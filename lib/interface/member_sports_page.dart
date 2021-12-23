@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:healthy_life_buddy/common/color_style.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/helper/navigation_helper.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
@@ -242,7 +241,7 @@ class _MemberPageState extends State<MemberPage> {
                                           );
                                           Navigator.pushReplacementNamed(
                                               context, Navigation.routeName);
-                                          final snackBar = SnackBar(
+                                          const snackBar = SnackBar(
                                             content: Text(
                                                 'Pembuatan Member Berhasil!'),
                                           );
@@ -332,7 +331,7 @@ class _MemberPageState extends State<MemberPage> {
   Future pickedDateRange(BuildContext context) async {
     final initialDateRange = DateTimeRange(
       start: DateTime.now(),
-      end: DateTime.now().add(Duration(hours: 24 * 30)),
+      end: DateTime.now().add(const Duration(hours: 24 * 30)),
     );
     final newDateRange = await showDateRangePicker(
       context: context,

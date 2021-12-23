@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/helper/navigation_helper.dart';
 import 'package:healthy_life_buddy/interface/registration_page.dart';
+import 'package:healthy_life_buddy/provider/auth_provider.dart';
 import 'package:healthy_life_buddy/widget/app_headline.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/LoginPage';
@@ -81,8 +82,9 @@ class LoginButton extends StatelessWidget {
           width: 150,
           child: ElevatedButton(
             onPressed: () async {
-              final loginResult =
-                  await login(_emailController.text, _passwordController.text);
+              final loginResult = await Provider.of<AuthProvider>(context,
+                      listen: false)
+                  .loginUser(_emailController.text, _passwordController.text);
               if (loginResult != null) {
                 Navigator.pushReplacementNamed(context, Navigation.routeName);
               } else {
@@ -95,12 +97,18 @@ class LoginButton extends StatelessWidget {
                 );
               }
             },
-            child: Text(
-              "Login",
-              style: textTheme.button
-                  ?.apply(color: Theme.of(context).colorScheme.onPrimary),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                "Login",
+                style: textTheme.button
+                    ?.apply(color: Theme.of(context).colorScheme.onPrimary),
+              ),
             ),
             style: TextButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0),
+              ),
               backgroundColor: Theme.of(context).colorScheme.primary,
             ),
           ),

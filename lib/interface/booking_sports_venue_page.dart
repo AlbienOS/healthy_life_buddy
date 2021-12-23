@@ -75,9 +75,9 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                 children: [
                   Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: const CustomBackButton(),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: CustomBackButton(),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -375,7 +375,7 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                                               Navigator.pushReplacementNamed(
                                                   context,
                                                   Navigation.routeName);
-                                              final snackBar = SnackBar(
+                                              const snackBar = SnackBar(
                                                 content:
                                                     Text('Pemesanan Berhasil!'),
                                               );
@@ -485,7 +485,7 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
   }
 
   Future pickedTime(BuildContext context) async {
-    final selectedTime = TimeOfDay(hour: 11, minute: 0);
+    const selectedTime = TimeOfDay(hour: 8, minute: 0);
     final newTimePicked = await showTimePicker(
       context: context,
       initialTime: time ?? selectedTime,

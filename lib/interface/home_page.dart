@@ -68,7 +68,9 @@ class _ListOfSportsVenuesState extends State<ListOfSportsVenues> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 searchTextField(context, snapshot),
-                snapshot.searhState ? Container() : Headline(text: "Discover"),
+                snapshot.searhState
+                    ? Container()
+                    : const Headline(text: "Discover"),
                 Expanded(
                   child: ListView.builder(
                     itemCount: sportsVenueData.length,
@@ -234,10 +236,10 @@ class _ListOfSportsVenuesState extends State<ListOfSportsVenues> {
         controller: _searchController,
         style: const TextStyle(color: Colors.black),
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           hintText: "search...",
-          hintStyle: textTheme.subtitle1
-              ?.apply(color: Theme.of(context).colorScheme.onSurface),
+          hintStyle: textTheme.subtitle1?.apply(color: Colors.black),
           filled: true,
           fillColor: Colors.white,
           enabledBorder: OutlineInputBorder(

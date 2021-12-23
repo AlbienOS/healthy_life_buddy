@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 import 'package:healthy_life_buddy/common/state.dart';
@@ -9,7 +10,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   late CurrentState _state;
-  late UserData? _userData;
+  UserData? _userData;
 
   UserData? get userData => _userData;
   CurrentState get state => _state;
@@ -27,5 +28,24 @@ class AuthProvider with ChangeNotifier {
       _state = CurrentState.isError;
       notifyListeners();
     }
+  }
+
+  Future<User?> loginUser(String email, String password) async {
+    final result = await login(email, password);
+    fetchUserData();
+    return result;
+  }
+
+  Future<String> registrationUser(String name, int age, String gender,
+      String address, String phoneNumber) async {
+    final result = await userDataRegistration(
+      name,
+      age,
+      gender,
+      address,
+      phoneNumber,
+    );
+    fetchUserData();
+    return result;
   }
 }

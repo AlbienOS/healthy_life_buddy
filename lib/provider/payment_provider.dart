@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class PaymentProvider with ChangeNotifier {
   String? _paymentStatus;
-  Color _buttonColor = Colors.pink;
+  final Color _buttonColor = Colors.pink;
   int _payment = 0;
 
   String? get paymentStatus => _paymentStatus;

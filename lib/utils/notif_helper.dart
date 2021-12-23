@@ -1,6 +1,4 @@
-
 import 'dart:convert';
-
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:healthy_life_buddy/common/navigation_notif.dart';
@@ -9,10 +7,10 @@ import 'package:rxdart/rxdart.dart';
 
 final selectNotifSubject = BehaviorSubject<String>();
 
-class NotifHelper{
+class NotifHelper {
   static NotifHelper? _instance;
 
-  NotifHelper._internal(){
+  NotifHelper._internal() {
     _instance = this;
   }
   factory NotifHelper() => _instance ?? NotifHelper._internal();
@@ -20,9 +18,9 @@ class NotifHelper{
   Future<void> initNotifications(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     var initializationSettingsAndroid =
-    AndroidInitializationSettings('app_icon');
+        const AndroidInitializationSettings('app_icon');
 
-    var initializationSettingsIOS = IOSInitializationSettings(
+    var initializationSettingsIOS = const IOSInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
@@ -33,15 +31,16 @@ class NotifHelper{
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (String? payload) async {
-          if (payload != null) {
-            print('notification payload: ' + payload);
-          }
-          selectNotifSubject.add(payload ?? 'empty payload');
-        });
+      if (payload != null) {
+        print('notification payload: ' + payload);
+      }
+      selectNotifSubject.add(payload ?? 'empty payload');
+    });
   }
+
   Future<void> showNotif(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
-      SportsVeneu sport) async{
+      SportsVeneu sport) async {
     var _channelId = "1";
     var _channelName = "HealthyLifeBuddy";
     var _channelDescription = "Jangan Lupa Datang ke ${sport.name}";
@@ -52,26 +51,26 @@ class NotifHelper{
         importance: Importance.max,
         priority: Priority.high,
         ticker: 'ticker',
-        styleInformation: DefaultStyleInformation(true, true));
+        styleInformation: const DefaultStyleInformation(true, true));
 
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
 
     var titleNotification = "<b>PENGINGAT PESANAN</b>";
     var titleBooking = sport.name;
 
-    await flutterLocalNotificationsPlugin.show(0, titleNotification, titleBooking,
-        platformChannelSpecifics, payload: json.encode(sport.toJson()));
+    await flutterLocalNotificationsPlugin.show(
+        0, titleNotification, titleBooking, platformChannelSpecifics,
+        payload: json.encode(sport.toJson()));
   }
 
-  void configureSelectNotificationSubject(String route){
-    selectNotifSubject.stream.listen((String payload) async{
+  void configureSelectNotificationSubject(String route) {
+    selectNotifSubject.stream.listen((String payload) async {
       var data = SportsVeneu.fromJson(json.decode(payload));
       var sportBook = data.name;
       Navigation.intentWithData(route, sportBook);
     });
   }
-
-
 }
