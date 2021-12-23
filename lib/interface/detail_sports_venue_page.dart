@@ -272,6 +272,49 @@ class SportsVenueDetail extends StatelessWidget {
               style: textTheme.bodyText2
                   ?.apply(color: Theme.of(context).colorScheme.onSurface),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.date_range,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            detailSportsVenueData.openDays,
+                            style: textTheme.bodyText2?.apply(
+                                color: Theme.of(context).colorScheme.onSurface),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.watch_later,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            detailSportsVenueData.openTime,
+                            style: textTheme.bodyText2?.apply(
+                                color: Theme.of(context).colorScheme.onSurface),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

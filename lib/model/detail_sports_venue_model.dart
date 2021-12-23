@@ -10,7 +10,6 @@ class DetailSportsVeneu {
   late String openTime;
   late int rentalCosts;
   late int downPayment;
-  late String discountInfo;
   late double rate;
 
   DetailSportsVeneu.fromObject(DocumentSnapshot<Map<String, dynamic>> data) {
@@ -23,7 +22,6 @@ class DetailSportsVeneu {
     openTime = data['openTime'];
     rentalCosts = data['rentalCosts'];
     downPayment = data['downPayment'];
-    discountInfo = data['discountInfo'];
     rate = data['rate'].toDouble();
   }
 }
