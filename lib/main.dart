@@ -24,20 +24,18 @@ import 'package:healthy_life_buddy/utils/notif_helper.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
 
   final NotifHelper _notifHelper = NotifHelper();
   final BackgroundService _service = BackgroundService();
 
   _service.initializeIsolate();
 
-  if(Platform.isAndroid){
+  if (Platform.isAndroid) {
     await AndroidAlarmManager.initialize();
   }
   await _notifHelper.initNotifications(flutterLocalNotificationsPlugin);
@@ -56,9 +54,6 @@ void main() async {
               sharedPreferences: SharedPreferences.getInstance(),
             ),
           ),
-        ),
-        ChangeNotifierProvider<BookingSportsVenueProvider>(
-            create: (context) => BookingSportsVenueProvider()
         ),
         ChangeNotifierProvider(
           create: (context) => ArticleProvider(),
@@ -95,9 +90,9 @@ class MyApp extends StatelessWidget {
                 BookingSportsVenuePage(
                     sportsVenueData: ModalRoute.of(context)?.settings.arguments
                         as DetailSportsVeneu),
-            MemberPage.routeName : (context) =>
-                MemberPage(sportsVenueData: ModalRoute.of(context)?.settings.arguments
-                as DetailSportsVeneu),
+            MemberPage.routeName: (context) => MemberPage(
+                sportsVenueData: ModalRoute.of(context)?.settings.arguments
+                    as DetailSportsVeneu),
           },
         );
       },
