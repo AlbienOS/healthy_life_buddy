@@ -4,6 +4,7 @@ import 'package:healthy_life_buddy/interface/booking_and_membership_page.dart';
 import 'package:healthy_life_buddy/interface/favorite_sports_venue_page.dart';
 import 'package:healthy_life_buddy/interface/home_page.dart';
 import 'package:healthy_life_buddy/interface/setting_page.dart';
+import 'package:healthy_life_buddy/utils/notif_helper.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -14,6 +15,8 @@ class Navigation extends StatefulWidget {
 }
 
 class _NavigationState extends State<Navigation> {
+  final NotifHelper _notifHelper = NotifHelper();
+
   List<Widget> listPage = [
     const HomePage(),
     const FavoritePage(),
@@ -62,5 +65,17 @@ class _NavigationState extends State<Navigation> {
         },
       ),
     );
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    _notifHelper.configureSelectNotificationSubject(Navigation.routeName);
+  }
+
+  @override
+  void dispose(){
+    selectNotifSubject.close();
+    super.dispose();
   }
 }

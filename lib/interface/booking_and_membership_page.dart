@@ -11,6 +11,7 @@ import 'package:healthy_life_buddy/widget/user_profile_widget.dart';
 import 'package:provider/provider.dart';
 
 class BookingAndMembershipPage extends StatelessWidget {
+  static const routeName = '/BookingMember';
   const BookingAndMembershipPage({Key? key}) : super(key: key);
 
   @override
