@@ -7,6 +7,7 @@ Future<List<BookingData>> getBookingData() async {
       .collection('users')
       .doc(auth.currentUser!.uid)
       .collection('booking')
+      .orderBy("date", descending: true)
       .get();
   List<BookingData> _bookingList = [];
   _bookingList =

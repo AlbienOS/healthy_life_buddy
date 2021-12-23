@@ -361,7 +361,8 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                                                 'date': getDateText(),
                                                 'time': getTimeText(),
                                                 'payment': snapshot.payment,
-                                                'paymentStatus': "Full Payment",
+                                                'paymentStatus':
+                                                    snapshot.paymentStatus,
                                                 'userId': auth.currentUser!.uid,
                                               }).then((value) =>
                                                   print('Booking Added'));

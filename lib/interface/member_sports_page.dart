@@ -8,8 +8,7 @@ import 'package:healthy_life_buddy/api/auth_api.dart';
 
 class MemberPage extends StatefulWidget {
   static const routeName = '/MemberPage';
-  const MemberPage({Key? key, required this.sportsVenueData})
-      : super(key: key);
+  const MemberPage({Key? key, required this.sportsVenueData}) : super(key: key);
 
   final DetailSportsVeneu sportsVenueData;
 
@@ -24,6 +23,7 @@ class _MemberPageState extends State<MemberPage> {
       .collection('member');
 
   DateTimeRange? dateRange;
+
   double changePrice = 0;
   String nameResult = '';
   String addressResult = '';
@@ -32,8 +32,9 @@ class _MemberPageState extends State<MemberPage> {
   TimeOfDay? time;
 
   double fullPay() {
-      changePrice = (widget.sportsVenueData.rentalCosts.toDouble() * 15/100) * 30;
-      return changePrice;
+    changePrice =
+        (widget.sportsVenueData.rentalCosts.toDouble() * 15 / 100) * 30;
+    return changePrice;
   }
 
   String getDateText() {
@@ -102,6 +103,7 @@ class _MemberPageState extends State<MemberPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(16.0),
+
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Row(
@@ -110,6 +112,7 @@ class _MemberPageState extends State<MemberPage> {
                           Container(
                             width: 150,
                             padding: EdgeInsets.symmetric(vertical: 8.0),
+
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -155,6 +158,8 @@ class _MemberPageState extends State<MemberPage> {
                               ),
                             ),
                           ),
+
+
                           SizedBox(width: 30),
                         ],
                       ),
@@ -166,6 +171,7 @@ class _MemberPageState extends State<MemberPage> {
                     decoration: BoxDecoration(
                       color: primaryVariantColor,
                       borderRadius: BorderRadius.circular(20.0),
+
                     ),
                     child: ElevatedButton(
                         style: ButtonStyle(
@@ -233,8 +239,7 @@ class _MemberPageState extends State<MemberPage> {
                                             Row(
                                               children: [
                                                 Icon(Icons.date_range),
-                                                Text('Mulai  : ' +
-                                                    getFrom()),
+                                                Text('Mulai  : ' + getFrom()),
                                               ],
                                             ),
                                             Divider(thickness: 2.0),
@@ -242,8 +247,8 @@ class _MemberPageState extends State<MemberPage> {
                                             Row(
                                               children: [
                                                 Icon(Icons.date_range),
-                                                Text('Berakhir : ' +
-                                                    getUntil()),
+                                                Text(
+                                                    'Berakhir : ' + getUntil()),
                                               ],
                                             ),
                                             Divider(thickness: 2.0),
@@ -251,13 +256,18 @@ class _MemberPageState extends State<MemberPage> {
                                             Row(
                                               children: [
                                                 Icon(Icons.attach_money),
-                                                Text('Harga : ' + fullPay().toString()),
+                                                Text('Harga : ' +
+                                                    fullPay().toString()),
                                               ],
                                             ),
                                             Divider(thickness: 2.0),
                                             Row(
                                               children: [
-                                                Text('*Notes : harga member sudah termasuk potongan 15%', style: TextStyle(fontSize: 10),),
+                                                Text(
+                                                  '*Notes : harga member sudah termasuk potongan 15%',
+                                                  style:
+                                                      TextStyle(fontSize: 10),
+                                                ),
                                               ],
                                             ),
                                           ],
@@ -339,5 +349,4 @@ class _MemberPageState extends State<MemberPage> {
 
     setState(() => dateTime = newDate);
   }
-
 }
