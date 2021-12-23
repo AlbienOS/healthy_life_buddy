@@ -28,7 +28,6 @@ class BookingSportsVenueProvider with ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      print(e);
       _state = CurrentState.isError;
       notifyListeners();
     }

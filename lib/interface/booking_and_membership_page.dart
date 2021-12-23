@@ -15,8 +15,15 @@ class BookingAndMembershipPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<BookingSportsVenueProvider>(
-      create: (context) => BookingSportsVenueProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<BookingSportsVenueProvider>(
+          create: (context) => BookingSportsVenueProvider(),
+        ),
+        ChangeNotifierProvider<MembershipProvider>(
+          create: (context) => MembershipProvider(),
+        ),
+      ],
       child: Scaffold(
         body: DefaultTabController(
           length: 2,
@@ -40,29 +47,25 @@ class BookingAndMembershipPage extends StatelessWidget {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8.0),
-                                child: Headline(text: 'Daftar Pemesanan Anda'),
-                              ),
-                              Expanded(child: ListOfBookingSportsVenues()),
-                            ],
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8.0),
+                              child: Headline(text: 'Daftar Pemesanan Anda'),
+                            ),
+                            Expanded(child: ListOfBookingSportsVenues()),
+                          ],
                         ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8.0),
-                                child: Headline(text: 'Daftar Member Anda'),
-                              ),
-                              Expanded(child: ListOfBookingSportsVenues()),
-                            ],
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8.0),
+                              child: Headline(text: 'Daftar Member Anda'),
+                            ),
+                            Expanded(child: ListOfMembershipSportsVenues()),
+                          ],
                         ),
                       ],
                     ),
@@ -231,15 +234,15 @@ class ListOfMembershipSportsVenues extends StatelessWidget {
                       Row(
                         children: [
                           Icon(Icons.calendar_today),
-                          Text(membershipSportVenues[i].endDate)
+                          Text(membershipSportVenues[i].startDate)
                         ],
                       ),
                       Row(
                         children: [
-                          Icon(Icons.attach_money),
-                          Text(membershipSportVenues[i].payment.toString()),
+                          Icon(Icons.calendar_today),
+                          Text(membershipSportVenues[i].endDate)
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),

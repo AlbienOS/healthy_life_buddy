@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:healthy_life_buddy/common/color_style.dart';
+import 'package:healthy_life_buddy/common/text_style.dart';
+import 'package:healthy_life_buddy/helper/navigation_helper.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
+import 'package:healthy_life_buddy/widget/back_button.dart';
 import 'package:intl/intl.dart';
 import 'package:healthy_life_buddy/api/auth_api.dart';
 
@@ -25,9 +28,6 @@ class _MemberPageState extends State<MemberPage> {
   DateTimeRange? dateRange;
 
   double changePrice = 0;
-  String nameResult = '';
-  String addressResult = '';
-  String telephoneResult = '';
   DateTime? dateTime;
   TimeOfDay? time;
 
@@ -49,7 +49,7 @@ class _MemberPageState extends State<MemberPage> {
     if (dateRange == null) {
       return 'Dari Tanggal';
     } else {
-      return DateFormat('MM/dd/yyyy').format(dateRange!.start);
+      return DateFormat('dd/MM/yyyy').format(dateRange!.start);
     }
   }
 
@@ -57,7 +57,7 @@ class _MemberPageState extends State<MemberPage> {
     if (dateRange == null) {
       return 'Sampai Tanggal';
     } else {
-      return DateFormat('MM/dd/yyyy').format(dateRange!.end);
+      return DateFormat('dd/MM/yyyy').format(dateRange!.end);
     }
   }
 
@@ -66,237 +66,185 @@ class _MemberPageState extends State<MemberPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Column(
-            children: [
-              SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Text(
-                          'MEMBER TEMPAT OLAHRAGA',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 150,
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Container(
-                              height: 50,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  getFrom(),
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 16, color: Colors.black),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Icon(Icons.arrow_forward, color: Colors.black),
-
-                          Container(
-                            width: 150,
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Container(
-                              height: 50,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  getUntil(),
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 16, color: Colors.black),
-                                ),
-                              ),
-                            ),
-                          ),
-
-
-                          SizedBox(width: 30),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 60,
-                    width: 350,
-                    decoration: BoxDecoration(
-                      color: primaryVariantColor,
-                      borderRadius: BorderRadius.circular(20.0),
-
-                    ),
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            )),
-                        onPressed: () {
-                          pickedDateRange(context);
-                        },
-                        child: Icon(Icons.calendar_today)),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: SizedBox(
-        height: 50,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Container(
-                      height: 50,
-                      width: 400,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
+                    const CustomBackButton(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        'Membership Tempat Olahraga',
+                        style: textTheme.subtitle1?.apply(
+                            color: Theme.of(context).colorScheme.onBackground),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: textField(
+                              context,
+                              getFrom(),
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          'MEMBER',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                          Expanded(
+                            flex: 1,
+                            child: Icon(Icons.arrow_forward,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground),
                           ),
+                          Expanded(
+                            flex: 5,
+                            child: textField(
+                              context,
+                              getUntil(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                ),
+                              )),
+                              onPressed: () {
+                                pickedDateRange(context);
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child: Icon(Icons.calendar_today),
+                              )),
                         ),
-                        onPressed: () {
-                          showDialog(
+                      ],
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25.0)),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              'Bayar',
+                              style: GoogleFonts.montserrat(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            showDialog(
                               context: context,
                               builder: (context) {
-                                return  AlertDialog(
+                                if (dateRange == null) {
+                                  return alertDialogMessage(context);
+                                } else {
+                                  return AlertDialog(
                                     title: Center(
-                                        child: Text('KONFIRMASI MEMBER')),
-                                    content: Container(
-                                      height: 300,
-                                      width: 400,
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Divider(thickness: 2.0),
-                                            SizedBox(height: 10.0),
-                                            Row(
-                                              children: [
-                                                Icon(Icons.date_range),
-                                                Text('Mulai  : ' + getFrom()),
-                                              ],
+                                      child: Text(
+                                        'Konfirmasi',
+                                        style: textTheme.headline5?.apply(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurface),
+                                      ),
+                                    ),
+                                    content: SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          confirmationDialogMessage(
+                                            Icons.date_range,
+                                            getFrom(),
+                                          ),
+                                          confirmationDialogMessage(
+                                            Icons.date_range,
+                                            getUntil(),
+                                          ),
+                                          confirmationDialogMessage(
+                                            Icons.attach_money,
+                                            fullPay().toInt().toString(),
+                                          ),
+                                          Center(
+                                            child: Text(
+                                              '*Notes : harga member sudah termasuk potongan 15%',
+                                              style: textTheme.caption?.apply(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface,
+                                              ),
                                             ),
-                                            Divider(thickness: 2.0),
-                                            SizedBox(height: 10.0),
-                                            Row(
-                                              children: [
-                                                Icon(Icons.date_range),
-                                                Text(
-                                                    'Berakhir : ' + getUntil()),
-                                              ],
-                                            ),
-                                            Divider(thickness: 2.0),
-                                            SizedBox(height: 10.0),
-                                            Row(
-                                              children: [
-                                                Icon(Icons.attach_money),
-                                                Text('Harga : ' +
-                                                    fullPay().toString()),
-                                              ],
-                                            ),
-                                            Divider(thickness: 2.0),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  '*Notes : harga member sudah termasuk potongan 15%',
-                                                  style:
-                                                      TextStyle(fontSize: 10),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     actions: [
                                       TextButton(
-                                        child: Text("Batal"),
+                                        child: Text(
+                                          "Batal",
+                                          style: textTheme.button?.apply(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSurface),
+                                        ),
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
                                       ),
                                       TextButton(
-                                        child: Text("Oke"),
+                                        child: Text(
+                                          "Oke",
+                                          style: textTheme.button?.apply(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSurface),
+                                        ),
                                         onPressed: () async {
-                                          await member.add({
-                                            'place' : widget.sportsVenueData.name,
-                                            'startDate' : getFrom(),
-                                            'endDate': getUntil(),
-                                          }).then((value) =>
-                                              print('Membership Success'));
-                                          Navigator.pop(context);
+                                          await member
+                                              .doc(widget.sportsVenueData.id)
+                                              .set(
+                                            {
+                                              'place':
+                                                  widget.sportsVenueData.name,
+                                              'startDate': getFrom(),
+                                              'endDate': getUntil(),
+                                              'payment': fullPay().toInt(),
+                                            },
+                                          );
+                                          Navigator.pushReplacementNamed(
+                                              context, Navigation.routeName);
                                           final snackBar = SnackBar(
                                             content: Text(
                                                 'Pembuatan Member Berhasil!'),
-                                            action: SnackBarAction(
-                                                label: 'ULANGI',
-                                                onPressed: () {}),
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
@@ -304,16 +252,79 @@ class _MemberPageState extends State<MemberPage> {
                                       ),
                                     ],
                                   );
-                              });
-                        },
+                                }
+                              },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                )
+                    ],
+                  ),
+                ),
               ],
-            )
-          ],
+            ),
+          ),
         ),
+      ),
+    );
+  }
+
+  AlertDialog alertDialogMessage(BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        'Semua Kolom Harus Terisi',
+        style: textTheme.subtitle1
+            ?.apply(color: Theme.of(context).colorScheme.onSurface),
+      ),
+      actions: [
+        TextButton(
+          child: Text(
+            "Oke",
+            style: textTheme.subtitle1
+                ?.apply(color: Theme.of(context).colorScheme.primary),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
+
+  Row confirmationDialogMessage(IconData iconName, String content) {
+    return Row(
+      children: [
+        Expanded(
+            child:
+                Icon(iconName, color: Theme.of(context).colorScheme.primary)),
+        Expanded(
+          flex: 3,
+          child: Text(
+            content,
+            style: textTheme.bodyText1?.apply(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Container textField(BuildContext context, String content) {
+    return Container(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            content,
+            style: textTheme.headline6
+                ?.apply(color: Theme.of(context).colorScheme.onSurface),
+          ),
+        ),
+      ),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(25),
       ),
     );
   }
@@ -322,14 +333,12 @@ class _MemberPageState extends State<MemberPage> {
     final initialDateRange = DateTimeRange(
       start: DateTime.now(),
       end: DateTime.now().add(Duration(hours: 24 * 30)),
-
     );
     final newDateRange = await showDateRangePicker(
       context: context,
       firstDate: DateTime(DateTime.now().year - 5),
       lastDate: DateTime(DateTime.now().year + 5),
       initialDateRange: dateRange ?? initialDateRange,
-
     );
 
     if (newDateRange == null) return;

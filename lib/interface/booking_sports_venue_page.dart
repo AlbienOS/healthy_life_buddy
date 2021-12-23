@@ -6,6 +6,7 @@ import 'package:healthy_life_buddy/helper/navigation_helper.dart';
 import 'package:healthy_life_buddy/model/detail_sports_venue_model.dart';
 import 'package:healthy_life_buddy/provider/payment_provider.dart';
 import 'package:healthy_life_buddy/provider/preference_notif_provider.dart';
+import 'package:healthy_life_buddy/widget/back_button.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -74,7 +75,10 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                 children: [
                   Row(
                     children: [
-                      BackButton(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: const CustomBackButton(),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
@@ -332,7 +336,7 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                                         actions: [
                                           TextButton(
                                             child: Text(
-                                              "Cancel",
+                                              "Batal",
                                               style: textTheme.button?.apply(
                                                   color: Theme.of(context)
                                                       .colorScheme
@@ -353,19 +357,21 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                                             onPressed: () async {
                                               scheduleSport(DateTime.parse(
                                                   getDateText()));
-                                              await booking.add({
-                                                'sportsVenueId':
-                                                    widget.sportsVenueData.id,
-                                                'sportsVenueName':
-                                                    widget.sportsVenueData.name,
-                                                'date': getDateText(),
-                                                'time': getTimeText(),
-                                                'payment': snapshot.payment,
-                                                'paymentStatus':
-                                                    snapshot.paymentStatus,
-                                                'userId': auth.currentUser!.uid,
-                                              }).then((value) =>
-                                                  print('Booking Added'));
+                                              await booking.add(
+                                                {
+                                                  'sportsVenueId':
+                                                      widget.sportsVenueData.id,
+                                                  'sportsVenueName': widget
+                                                      .sportsVenueData.name,
+                                                  'date': getDateText(),
+                                                  'time': getTimeText(),
+                                                  'payment': snapshot.payment,
+                                                  'paymentStatus':
+                                                      snapshot.paymentStatus,
+                                                  'userId':
+                                                      auth.currentUser!.uid,
+                                                },
+                                              );
                                               Navigator.pushReplacementNamed(
                                                   context,
                                                   Navigation.routeName);
