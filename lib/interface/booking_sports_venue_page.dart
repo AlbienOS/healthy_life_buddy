@@ -177,6 +177,10 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                                               "Full Payment"
                                           ? Colors.blue
                                           : Colors.grey,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(25.0),
+                                      ),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
@@ -207,6 +211,10 @@ class _BookingSportsVenuePageState extends State<BookingSportsVenuePage> {
                                               "Down Payment"
                                           ? Colors.blue
                                           : Colors.grey,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(25.0),
+                                      ),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
