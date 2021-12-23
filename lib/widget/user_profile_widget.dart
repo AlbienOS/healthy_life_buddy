@@ -25,14 +25,10 @@ class UserProfile extends StatelessWidget {
             padding: const EdgeInsets.only(top: 24.0, bottom: 8.0),
             child: Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.network(
-                    'https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-                    width: 45,
-                    height: 45,
-                    fit: BoxFit.cover,
-                  ),
+                Icon(
+                  Icons.account_circle,
+                  size: 36.0,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -41,7 +37,7 @@ class UserProfile extends StatelessWidget {
                     style: textTheme.headline6?.apply(
                         color: Theme.of(context).colorScheme.onBackground),
                   ),
-                ),
+                )
               ],
             ),
           );
