@@ -1,7 +1,7 @@
 
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:healthy_life_buddy/common/navigation_notif.dart';
 import 'package:healthy_life_buddy/model/sports_venue_model.dart';
@@ -44,7 +44,7 @@ class NotifHelper{
       SportsVeneu sport) async{
     var _channelId = "1";
     var _channelName = "HealthyLifeBuddy";
-    var _channelDescription = "Jangan Lupa Datang yaa";
+    var _channelDescription = "Jangan Lupa Datang ke ${sport.name}";
 
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         _channelId, _channelName,
