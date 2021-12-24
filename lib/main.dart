@@ -73,6 +73,7 @@ class MyApp extends StatelessWidget {
       builder: (context, provider, child) {
         return MaterialApp(
           title: 'HealthyLifeBuddy',
+          debugShowCheckedModeBanner: false,
           theme: provider.themeData,
           home: Consumer<AuthProvider>(builder: (context, snapshot, _) {
             if (snapshot.userData != null) {

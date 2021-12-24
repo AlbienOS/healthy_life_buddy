@@ -245,15 +245,17 @@ class ListOfMembershipSportsVenues extends StatelessWidget {
                               Icons.location_pin,
                               color: Theme.of(context).colorScheme.primary,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(
-                                membershipSportVenues[i].place,
-                                overflow: TextOverflow.ellipsis,
-                                style: textTheme.bodyText1?.apply(
-                                  color:
-                                      Theme.of(context).colorScheme.onSurface,
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(
+                                  membershipSportVenues[i].place,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: textTheme.bodyText1?.apply(
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
+                                  ),
                                 ),
                               ),
                             )

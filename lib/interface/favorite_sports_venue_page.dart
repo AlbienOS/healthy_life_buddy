@@ -18,13 +18,6 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   @override
-  void initState() {
-    Provider.of<FavoriteSportsVeneuProvider>(context, listen: false)
-        .fetchFavoriteSportsVenueList();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(

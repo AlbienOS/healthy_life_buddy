@@ -3,6 +3,7 @@ import 'package:healthy_life_buddy/common/text_style.dart';
 import 'package:healthy_life_buddy/helper/navigation_helper.dart';
 import 'package:healthy_life_buddy/interface/registration_page.dart';
 import 'package:healthy_life_buddy/provider/auth_provider.dart';
+import 'package:healthy_life_buddy/provider/favorite_sports_venue_provider.dart';
 import 'package:healthy_life_buddy/widget/app_headline.dart';
 import 'package:provider/provider.dart';
 
@@ -86,6 +87,8 @@ class LoginButton extends StatelessWidget {
                       listen: false)
                   .loginUser(_emailController.text, _passwordController.text);
               if (loginResult != null) {
+                Provider.of<FavoriteSportsVeneuProvider>(context, listen: false)
+                    .fetchFavoriteSportsVenueList();
                 Navigator.pushReplacementNamed(context, Navigation.routeName);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
