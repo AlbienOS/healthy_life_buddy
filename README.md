@@ -1,6 +1,18 @@
 # Healthy Life Buddy
 Healthy Life Buddy merupakan sebuah aplikasi yang dibentuk untuk capstone project Dicoding yang berlatar belakang keresahan kami terkait kesehatan diri dimana kami merasa masih banyak orang yang belum mempraktikan gaya hidup sehat & berolahraga dalam hidupnya sehari-hari. Oleh sebab itu Healthy Life Buddy menawarkan fitur pencarian tempat olahraga dan pengguna dapat langsung melakukan booking atau membuat member dari aplikasi ini. Selain itu Healthy Life Buddy juga memiliki fitur artikel yang membahas tentang gaya hidup sehat dan olahraga.
 
+## Cara Clone Repo ke Komputer Anda
+- Langkah pertama, jalankan perintah 
+```
+git clone https://github.com/AlbienOS/healthy_life_buddy.git
+```
+- Kemudian jalankan perintah
+``` 
+flutter pub get
+```
+- Setelah itu aplikasi siap di run di komputer anda
+
+
 ## Fitur
 Adapun fitur yang ada di aplikasi ini:
 - Booking
@@ -30,6 +42,7 @@ Adapun resources yang kami gunakan dalam pengembangan aplikasi adalah:
 - [Pub.dev](https://pub.dev/),
 - [Stackoverflow](https://stackoverflow.com/),
 - [Dicoding](https://www.dicoding.com/),
+- [Create app launcher icon](https://romannurik.github.io/AndroidAssetStudio/index.html),
 
 ## Library
 Adapun library yang kami gunakan dalam pengembangan aplikasi adalah:
